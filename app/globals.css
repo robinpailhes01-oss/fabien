@@ -2,31 +2,33 @@
 
 /* ============================================================
    DESIGN SYSTEM — Personal brand Fabien
-   Luxe minimaliste : noir profond / crème / or champagne
+   Hôtel de luxe : ivoire lumineux / encre / or
    ============================================================ */
 
 :root {
-  --noir: #0a0a0a;
-  --noir-soft: #121110;
-  --cream: #f5f2ec;
-  --cream-dim: #cfc9bd;
-  --gold: #c9a86a;
-  --gold-light: #e4cf9f;
-  --gold-deep: #9b7e45;
+  --paper: #f6f3ed;
+  --paper-soft: #ece6da;
+  --ink: #1a1714;
+  --ink-soft: #38322b;
+  --muted: #7a6f61;
+  --gold: #a87f3e;
+  --gold-soft: #c2a163;
+  --gold-deep: #6f5526;
 
-  --background: var(--noir);
-  --foreground: var(--cream);
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-noir: var(--noir);
-  --color-noir-soft: var(--noir-soft);
-  --color-cream: var(--cream);
-  --color-cream-dim: var(--cream-dim);
+  --color-paper: var(--paper);
+  --color-paper-soft: var(--paper-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
   --color-gold: var(--gold);
-  --color-gold-light: var(--gold-light);
+  --color-gold-soft: var(--gold-soft);
   --color-gold-deep: var(--gold-deep);
 
   --font-display: var(--font-cormorant);
@@ -45,8 +47,8 @@ html::-webkit-scrollbar {
 }
 
 body {
-  background: var(--noir);
-  color: var(--cream);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -71,34 +73,35 @@ html.lenis body {
 }
 
 .eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.42em;
+  font-size: 0.7rem;
+  letter-spacing: 0.45em;
   text-transform: uppercase;
   color: var(--gold);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .text-gradient-gold {
   background: linear-gradient(
     100deg,
     var(--gold-deep) 0%,
-    var(--gold-light) 45%,
-    var(--cream) 70%,
-    var(--gold-light) 100%
+    var(--gold) 45%,
+    var(--gold-soft) 70%,
+    var(--gold) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* ---- Film grain overlay ---- */
+/* ---- Film grain overlay (subtle on light) ---- */
 .grain::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 80;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -106,7 +109,7 @@ html.lenis body {
 .hairline {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 /* ---- Reveal base (JS adds .is-in) ---- */
@@ -131,19 +134,7 @@ html.lenis body {
   }
 }
 
-/* ---- Marquee ---- */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.marquee-track {
-  animation: marquee 32s linear infinite;
-}
-
+/* ---- Scroll cue ---- */
 @keyframes scrollcue {
   0% {
     transform: translateY(-100%);
@@ -159,7 +150,7 @@ html.lenis body {
 /* ---- Link underline ---- */
 .link-gold {
   position: relative;
-  color: var(--cream);
+  color: var(--ink);
   transition: color 0.4s ease;
 }
 .link-gold::after {
@@ -175,7 +166,7 @@ html.lenis body {
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .link-gold:hover {
-  color: var(--gold-light);
+  color: var(--gold);
 }
 .link-gold:hover::after {
   transform: scaleX(1);

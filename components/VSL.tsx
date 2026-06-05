@@ -9,7 +9,7 @@ export default function VSL() {
           <h2 className="mx-auto mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.05] tracking-tight">
             Découvrez l&apos;histoire derrière chaque marque
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-sm font-light leading-relaxed text-cream-dim">
+          <p className="mx-auto mt-6 max-w-xl text-sm font-light leading-relaxed text-muted">
             Quelques minutes pour comprendre la philosophie de Fabien et ce qui
             relie ses projets.
           </p>
@@ -18,7 +18,7 @@ export default function VSL() {
         <Reveal delay={120} className="mt-14">
           {/* Replace this block with the real VSL embed (YouTube / Vimeo / mux) */}
           <div
-            className="group relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/20 bg-noir-soft"
+            className="group relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/20 bg-paper-soft"
             data-vsl-placeholder
           >
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,168,106,0.12),transparent_70%)]" />
@@ -28,7 +28,7 @@ export default function VSL() {
 
             <button
               aria-label="Lire la vidéo"
-              className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-noir/40 backdrop-blur-sm transition-all duration-500 group-hover:scale-110 group-hover:border-gold group-hover:bg-gold/10"
+              className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-paper/40 backdrop-blur-sm transition-all duration-500 group-hover:scale-110 group-hover:border-gold group-hover:bg-gold/10"
             >
               <span className="absolute inset-0 animate-ping rounded-full border border-gold/30" />
               <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
@@ -36,7 +36,7 @@ export default function VSL() {
               </svg>
             </button>
 
-            <span className="absolute bottom-5 left-6 text-xs uppercase tracking-[0.25em] text-cream-dim">
+            <span className="absolute bottom-5 left-6 text-xs uppercase tracking-[0.25em] text-muted">
               VSL — bientôt disponible
             </span>
           </div>

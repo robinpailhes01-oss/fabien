@@ -24,7 +24,7 @@ export default function About() {
           </Reveal>
 
           <Reveal delay={120} className="flex items-end">
-            <p className="text-base font-light leading-relaxed text-cream-dim">
+            <p className="text-base font-light leading-relaxed text-muted">
               Fabien construit des marques qui ont une âme. Du champagne au
               prêt-à-porter, des lieux les plus romantiques au monde au conseil
               stratégique, chaque projet partage la même obsession :
@@ -47,7 +47,7 @@ export default function About() {
               <span className="font-display text-6xl font-light text-gold sm:text-7xl">
                 {s.value}
               </span>
-              <span className="mt-3 text-xs uppercase tracking-[0.25em] text-cream-dim">
+              <span className="mt-3 text-xs uppercase tracking-[0.25em] text-muted">
                 {s.label}
               </span>
             </div>

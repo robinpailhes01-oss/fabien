@@ -5,7 +5,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 
-const COUNT = 110;
+const COUNT = 80;
 
 type Bubble = {
   x: number;
@@ -21,7 +21,7 @@ type Bubble = {
 
 const X_RANGE = 9;
 const Y_BOTTOM = -7.5;
-const Y_TOP = 7.5;
+const Y_TOP = 2;
 
 /* A field of golden champagne bubbles rising in the dark,
    gently pushed aside as the cursor passes through them. */
@@ -50,8 +50,8 @@ function Bubbles() {
 
   // Per-bubble gold tint, set once.
   const colors = useMemo(() => {
-    const a = new THREE.Color("#d9bf86");
-    const b = new THREE.Color("#f3e7c8");
+    const a = new THREE.Color("#c79a45");
+    const b = new THREE.Color("#9a6f2a");
     const arr = new Float32Array(COUNT * 3);
     const c = new THREE.Color();
     for (let i = 0; i < COUNT; i++) {
@@ -119,12 +119,10 @@ function Bubbles() {
         args={[colors, 3]}
       />
       <meshStandardMaterial
-        roughness={0.2}
-        metalness={0.15}
+        roughness={0.35}
+        metalness={0.25}
         transparent
-        opacity={0.42}
-        emissive="#c9a86a"
-        emissiveIntensity={0.18}
+        opacity={0.58}
         depthWrite={false}
         toneMapped={false}
       />
@@ -151,19 +149,18 @@ export default function Hero3D() {
       gl={{ antialias: true, alpha: true }}
       dpr={[1, 2]}
     >
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[4, 8, 6]} intensity={2.6} color="#fff4dc" />
-      <directionalLight position={[-6, 2, -2]} intensity={1.1} color="#c9a86a" />
-      <pointLight position={[0, -2, 5]} intensity={2.4} color="#e4cf9f" />
+      <ambientLight intensity={0.7} />
+      <directionalLight position={[3, 6, 4]} intensity={1.5} color="#ffffff" />
+      <directionalLight position={[-4, -2, 2]} intensity={0.6} color="#a87f3e" />
 
       <Bubbles />
       <Sparkles
-        count={40}
-        scale={[14, 12, 6]}
-        size={1.8}
-        speed={0.18}
-        opacity={0.4}
-        color="#f3e7c8"
+        count={28}
+        scale={[14, 10, 6]}
+        size={1.4}
+        speed={0.16}
+        opacity={0.3}
+        color="#a87f3e"
       />
       <ParallaxRig />
     </Canvas>

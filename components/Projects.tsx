@@ -33,7 +33,7 @@ export default function Projects() {
               <span className="text-gradient-gold"> Fabien</span>
             </h2>
           </div>
-          <p className="max-w-xs text-sm font-light leading-relaxed text-cream-dim">
+          <p className="max-w-xs text-sm font-light leading-relaxed text-muted">
             Cinq marques, cinq mondes. Chacune pensée comme une signature.
           </p>
         </Reveal>
@@ -49,7 +49,7 @@ export default function Projects() {
               <Reveal key={p.index}>
                 <Wrapper
                   {...linkProps}
-                  className="group relative block border-t border-cream/10 py-9 transition-colors duration-500 last:border-b hover:border-gold/40"
+                  className="group relative block border-t border-ink/10 py-9 transition-colors duration-500 last:border-b hover:border-gold/40"
                 >
                   {/* Hover wash */}
                   <span className="pointer-events-none absolute inset-0 -z-0 origin-bottom scale-y-0 bg-gradient-to-r from-gold/[0.06] to-transparent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
@@ -60,23 +60,23 @@ export default function Projects() {
                     </span>
 
                     <div className="md:col-span-4">
-                      <h3 className="font-display text-3xl font-light tracking-tight text-cream transition-colors duration-500 group-hover:text-gold-light sm:text-4xl">
+                      <h3 className="font-display text-3xl font-light tracking-tight text-ink transition-colors duration-500 group-hover:text-gold sm:text-4xl">
                         {p.name}
                       </h3>
-                      <span className="mt-1 block text-xs uppercase tracking-[0.22em] text-cream-dim">
+                      <span className="mt-1 block text-xs uppercase tracking-[0.22em] text-muted">
                         {p.category}
                       </span>
                     </div>
 
-                    <p className="text-sm font-light leading-relaxed text-cream-dim md:col-span-5">
+                    <p className="text-sm font-light leading-relaxed text-muted md:col-span-5">
                       {p.description}
                     </p>
 
                     <div className="flex items-center justify-between gap-4 md:col-span-2 md:justify-end">
-                      <span className="text-xs text-cream-dim md:hidden">
+                      <span className="text-xs text-muted md:hidden">
                         {p.year}
                       </span>
-                      <span className="flex items-center gap-2 text-cream transition-colors duration-500 group-hover:text-gold">
+                      <span className="flex items-center gap-2 text-ink transition-colors duration-500 group-hover:text-gold">
                         {p.href ? (
                           <>
                             <span className="text-xs uppercase tracking-[0.2em]">
@@ -85,24 +85,12 @@ export default function Projects() {
                             <Arrow />
                           </>
                         ) : (
-                          <span className="text-xs uppercase tracking-[0.2em] text-cream-dim">
+                          <span className="text-xs uppercase tracking-[0.2em] text-muted">
                             Bientôt
                           </span>
                         )}
                       </span>
                     </div>
-                  </div>
-
-                  {/* tags */}
-                  <div className="relative z-10 mt-4 flex flex-wrap gap-2 md:ml-[8.33%]">
-                    {p.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-cream/10 px-3 py-1 text-[0.65rem] uppercase tracking-[0.15em] text-cream-dim"
-                      >
-                        {t}
-                      </span>
-                    ))}
                   </div>
                 </Wrapper>
               </Reveal>

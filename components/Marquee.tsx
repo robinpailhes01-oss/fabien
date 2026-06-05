@@ -10,7 +10,7 @@ export default function Marquee() {
         <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center">
           {words.map((w, i) => (
             <li key={w} className="flex items-center gap-8">
-              <span className="text-xs font-light uppercase tracking-[0.35em] text-cream-dim">
+              <span className="text-xs font-light uppercase tracking-[0.35em] text-muted">
                 {w}
               </span>
               {i < words.length - 1 && (
