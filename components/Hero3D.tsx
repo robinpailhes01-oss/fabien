@@ -4,6 +4,7 @@ import { useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
+import type { Theme } from "./ThemeProvider";
 
 const COUNT = 80;
 
@@ -23,9 +24,46 @@ const X_RANGE = 9;
 const Y_BOTTOM = -7.5;
 const Y_TOP = 2;
 
-/* A field of golden champagne bubbles rising in the dark,
+type Palette = {
+  colorA: string;
+  colorB: string;
+  opacity: number;
+  metalness: number;
+  roughness: number;
+  emissive: string;
+  emissiveIntensity: number;
+  sparkleColor: string;
+  sparkleOpacity: number;
+};
+
+const PALETTE: Record<Theme, Palette> = {
+  light: {
+    colorA: "#c79a45",
+    colorB: "#9a6f2a",
+    opacity: 0.58,
+    metalness: 0.25,
+    roughness: 0.35,
+    emissive: "#000000",
+    emissiveIntensity: 0,
+    sparkleColor: "#a87f3e",
+    sparkleOpacity: 0.3,
+  },
+  dark: {
+    colorA: "#d9bf86",
+    colorB: "#f3e7c8",
+    opacity: 0.5,
+    metalness: 0.35,
+    roughness: 0.12,
+    emissive: "#8a6d33",
+    emissiveIntensity: 0.3,
+    sparkleColor: "#f3e7c8",
+    sparkleOpacity: 0.5,
+  },
+};
+
+/* A field of golden champagne bubbles rising from below,
    gently pushed aside as the cursor passes through them. */
-function Bubbles() {
+function Bubbles({ palette }: { palette: Palette }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const pointer = useRef(new THREE.Vector2(0, -100));
@@ -48,10 +86,10 @@ function Bubbles() {
     });
   }, []);
 
-  // Per-bubble gold tint, set once.
+  // Per-bubble gold tint.
   const colors = useMemo(() => {
-    const a = new THREE.Color("#c79a45");
-    const b = new THREE.Color("#9a6f2a");
+    const a = new THREE.Color(palette.colorA);
+    const b = new THREE.Color(palette.colorB);
     const arr = new Float32Array(COUNT * 3);
     const c = new THREE.Color();
     for (let i = 0; i < COUNT; i++) {
@@ -61,7 +99,7 @@ function Bubbles() {
       arr[i * 3 + 2] = c.b;
     }
     return arr;
-  }, []);
+  }, [palette.colorA, palette.colorB]);
 
   useFrame((state, delta) => {
     if (!mesh.current) return;
@@ -114,15 +152,14 @@ function Bubbles() {
       frustumCulled={false}
     >
       <sphereGeometry args={[1, 20, 20]} />
-      <instancedBufferAttribute
-        attach="instanceColor"
-        args={[colors, 3]}
-      />
+      <instancedBufferAttribute attach="instanceColor" args={[colors, 3]} />
       <meshStandardMaterial
-        roughness={0.35}
-        metalness={0.25}
+        roughness={palette.roughness}
+        metalness={palette.metalness}
         transparent
-        opacity={0.58}
+        opacity={palette.opacity}
+        emissive={palette.emissive}
+        emissiveIntensity={palette.emissiveIntensity}
         depthWrite={false}
         toneMapped={false}
       />
@@ -142,25 +179,39 @@ function ParallaxRig() {
   return null;
 }
 
-export default function Hero3D() {
+export default function Hero3D({ theme = "light" }: { theme?: Theme }) {
+  const palette = PALETTE[theme];
+  const isDark = theme === "dark";
+
   return (
     <Canvas
       camera={{ position: [0, 0, 9], fov: 42 }}
       gl={{ antialias: true, alpha: true }}
       dpr={[1, 2]}
     >
-      <ambientLight intensity={0.7} />
-      <directionalLight position={[3, 6, 4]} intensity={1.5} color="#ffffff" />
-      <directionalLight position={[-4, -2, 2]} intensity={0.6} color="#a87f3e" />
+      <ambientLight intensity={isDark ? 0.45 : 0.7} />
+      <directionalLight
+        position={[3, 6, 4]}
+        intensity={isDark ? 2.4 : 1.5}
+        color={isDark ? "#fff4dc" : "#ffffff"}
+      />
+      <directionalLight
+        position={[-4, -2, 2]}
+        intensity={isDark ? 1 : 0.6}
+        color={isDark ? "#c9a86a" : "#a87f3e"}
+      />
+      {isDark && (
+        <pointLight position={[0, -2, 5]} intensity={2} color="#e4cf9f" />
+      )}
 
-      <Bubbles />
+      <Bubbles palette={palette} />
       <Sparkles
-        count={28}
+        count={isDark ? 40 : 28}
         scale={[14, 10, 6]}
-        size={1.4}
+        size={isDark ? 1.8 : 1.4}
         speed={0.16}
-        opacity={0.3}
-        color="#a87f3e"
+        opacity={palette.sparkleOpacity}
+        color={palette.sparkleColor}
       />
       <ParallaxRig />
     </Canvas>

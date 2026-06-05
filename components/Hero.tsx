@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import { useTheme } from "./ThemeProvider";
 
 const Hero3D = dynamic(() => import("./Hero3D"), {
   ssr: false,
@@ -11,6 +12,7 @@ const Hero3D = dynamic(() => import("./Hero3D"), {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function Hero() {
+  const { theme } = useTheme();
   return (
     <section
       id="accueil"
@@ -18,12 +20,12 @@ export default function Hero() {
     >
       {/* 3D layer */}
       <div className="absolute inset-0 z-0">
-        <Hero3D />
+        <Hero3D key={theme} theme={theme} />
       </div>
 
       {/* Vignette / gradient to keep text legible */}
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_50%_42%_at_center,rgba(246,243,237,0.72)_0%,rgba(246,243,237,0.25)_45%,transparent_72%)]" />
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(to_bottom,rgba(246,243,237,0.6)_0%,transparent_22%,transparent_70%,rgba(246,243,237,0.9)_100%)]" />
+      <div className="hero-veil-radial pointer-events-none absolute inset-0 z-10" />
+      <div className="hero-veil-linear pointer-events-none absolute inset-0 z-10" />
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center px-6 text-center">

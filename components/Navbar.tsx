@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { label: "À propos", href: "#apropos" },
@@ -53,19 +54,24 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden rounded-full border border-gold/50 px-5 py-2 text-xs font-medium uppercase tracking-[0.2em] text-gold transition-colors duration-400 hover:bg-gold hover:text-ink md:inline-block"
-        >
-          Collaborer
-        </a>
+        <div className="hidden items-center gap-4 md:flex">
+          <ThemeToggle />
+          <a
+            href="#contact"
+            className="rounded-full border border-gold/50 px-5 py-2 text-xs font-medium uppercase tracking-[0.2em] text-gold transition-colors duration-400 hover:bg-gold hover:text-ink"
+          >
+            Collaborer
+          </a>
+        </div>
 
-        {/* Mobile toggle */}
-        <button
-          aria-label="Menu"
-          onClick={() => setOpen((v) => !v)}
-          className="flex flex-col gap-1.5 md:hidden"
-        >
+        {/* Mobile controls */}
+        <div className="flex items-center gap-3 md:hidden">
+          <ThemeToggle />
+          <button
+            aria-label="Menu"
+            onClick={() => setOpen((v) => !v)}
+            className="flex flex-col gap-1.5"
+          >
           <span
             className={`h-px w-6 bg-ink transition-transform duration-300 ${open ? "translate-y-[7px] rotate-45" : ""}`}
           />
@@ -75,7 +81,8 @@ export default function Navbar() {
           <span
             className={`h-px w-6 bg-ink transition-transform duration-300 ${open ? "-translate-y-[7px] -rotate-45" : ""}`}
           />
-        </button>
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
