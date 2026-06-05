@@ -6,7 +6,7 @@ import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 import type { Theme } from "./ThemeProvider";
 
-const COUNT = 80;
+const COUNT = 90;
 
 type Bubble = {
   x: number;
@@ -109,7 +109,7 @@ function Bubbles({ palette }: { palette: Palette }) {
     // Pointer -> world coordinates on the z=0 plane.
     const px = (state.pointer.x * viewport.width) / 2;
     const py = (state.pointer.y * viewport.height) / 2;
-    pointer.current.lerp(new THREE.Vector2(px, py), 0.08);
+    pointer.current.lerp(new THREE.Vector2(px, py), 0.06);
 
     for (let i = 0; i < COUNT; i++) {
       const b = bubbles[i];
@@ -137,8 +137,10 @@ function Bubbles({ palette }: { palette: Palette }) {
         y += (dy / dist) * force;
       }
 
+      // Gentle organic breathing.
+      const breathe = 1 + Math.sin(t * 0.8 + b.phase) * 0.06;
       dummy.position.set(x, y, b.z);
-      dummy.scale.setScalar(b.r);
+      dummy.scale.setScalar(b.r * breathe);
       dummy.updateMatrix();
       mesh.current.setMatrixAt(i, dummy.matrix);
     }
@@ -151,7 +153,7 @@ function Bubbles({ palette }: { palette: Palette }) {
       args={[undefined, undefined, COUNT]}
       frustumCulled={false}
     >
-      <sphereGeometry args={[1, 20, 20]} />
+      <sphereGeometry args={[1, 32, 32]} />
       <instancedBufferAttribute attach="instanceColor" args={[colors, 3]} />
       <meshStandardMaterial
         roughness={palette.roughness}

@@ -1,7 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 
 const Hero3D = dynamic(() => import("./Hero3D"), {
@@ -13,22 +14,37 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function Hero() {
   const { theme } = useTheme();
+  const ref = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  // Content drifts up and fades; the 3D layer drifts slower (depth).
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const layerY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+
   return (
     <section
+      ref={ref}
       id="accueil"
       className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
     >
       {/* 3D layer */}
-      <div className="absolute inset-0 z-0">
+      <motion.div style={{ y: layerY }} className="absolute inset-0 z-0">
         <Hero3D key={theme} theme={theme} />
-      </div>
+      </motion.div>
 
       {/* Vignette / gradient to keep text legible */}
       <div className="hero-veil-radial pointer-events-none absolute inset-0 z-10" />
       <div className="hero-veil-linear pointer-events-none absolute inset-0 z-10" />
 
       {/* Content */}
-      <div className="relative z-20 flex flex-col items-center px-6 text-center">
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-20 flex flex-col items-center px-6 text-center"
+      >
         <motion.span
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -80,7 +96,7 @@ export default function Hero() {
             Collaborer
           </a>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll cue */}
       <motion.div

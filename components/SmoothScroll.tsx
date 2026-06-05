@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
+const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
 export default function SmoothScroll({
   children,
 }: {
@@ -17,10 +19,11 @@ export default function SmoothScroll({
     }
 
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.085, // continuous buttery smoothing
+      wheelMultiplier: 1,
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      syncTouch: true,
+      touchMultiplier: 1.6,
     });
 
     let raf = 0;
@@ -30,7 +33,7 @@ export default function SmoothScroll({
     };
     raf = requestAnimationFrame(loop);
 
-    // Anchor links -> smooth scroll
+    // Anchor links -> smooth scroll, offset for the fixed navbar.
     const onClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement)?.closest(
         'a[href^="#"]',
@@ -41,7 +44,11 @@ export default function SmoothScroll({
       const el = document.querySelector(id);
       if (el) {
         e.preventDefault();
-        lenis.scrollTo(el as HTMLElement, { offset: 0 });
+        lenis.scrollTo(el as HTMLElement, {
+          offset: -88,
+          duration: 1.5,
+          easing: easeOutExpo,
+        });
       }
     };
     document.addEventListener("click", onClick);
