@@ -22,7 +22,8 @@ export default function Hero() {
       </div>
 
       {/* Vignette / gradient to keep text legible */}
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(10,10,10,0.55)_75%,rgba(10,10,10,0.9)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_50%_45%_at_center,rgba(10,10,10,0.55)_0%,rgba(10,10,10,0.2)_45%,transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(to_bottom,rgba(10,10,10,0.4)_0%,transparent_25%,transparent_75%,rgba(10,10,10,0.85)_100%)]" />
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center px-6 text-center">
@@ -30,12 +31,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease }}
-          className="eyebrow mb-7"
+          className="mb-9 text-[0.66rem] font-light uppercase tracking-[0.55em] text-gold/90"
         >
           Multi-entrepreneur
         </motion.span>
 
-        <h1 className="font-display text-[clamp(3.5rem,14vw,11rem)] font-light leading-[0.9] tracking-tight">
+        <h1 className="font-display text-[clamp(3.2rem,13vw,10rem)] font-light leading-[0.92] tracking-[-0.01em]">
           <motion.span
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -50,29 +51,29 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.75, ease }}
-          className="mt-8 max-w-xl text-balance text-base font-light leading-relaxed text-cream-dim sm:text-lg"
+          className="mt-10 max-w-lg text-balance text-sm font-light leading-loose tracking-wide text-cream-dim sm:text-base"
         >
-          Bâtisseur de marques d&apos;exception. Du champagne à la mode, de la
-          romance au conseil — un seul fil conducteur :{" "}
-          <span className="text-gradient-gold">l&apos;élégance qui marque.</span>
+          Bâtisseur de marques d&apos;exception — du champagne à la mode, de la
+          romance au conseil. Un seul fil conducteur :{" "}
+          <span className="text-gold-light">l&apos;élégance qui marque.</span>
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.95, ease }}
-          className="mt-12 flex flex-col items-center gap-4 sm:flex-row"
+          className="mt-14 flex flex-col items-center gap-6 sm:flex-row sm:gap-10"
         >
           <a
             href="#projets"
-            className="group relative overflow-hidden rounded-full border border-gold/60 px-8 py-3.5 text-sm font-medium tracking-wide text-cream transition-colors duration-500 hover:text-noir"
+            className="group relative overflow-hidden rounded-full border border-gold/40 px-9 py-3.5 text-[0.7rem] font-light uppercase tracking-[0.28em] text-cream transition-colors duration-500 hover:text-noir"
           >
             <span className="relative z-10">Découvrir ses projets</span>
             <span className="absolute inset-0 -z-0 origin-left scale-x-0 bg-gold transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
           </a>
           <a
             href="#contact"
-            className="link-gold px-2 py-2 text-sm font-medium tracking-wide"
+            className="link-gold text-[0.7rem] font-light uppercase tracking-[0.28em]"
           >
             Collaborer
           </a>

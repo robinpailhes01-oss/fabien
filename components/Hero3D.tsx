@@ -5,7 +5,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Sparkles } from "@react-three/drei";
 import * as THREE from "three";
 
-const COUNT = 320;
+const COUNT = 110;
 
 type Bubble = {
   x: number;
@@ -38,11 +38,11 @@ function Bubbles() {
         x: baseX,
         baseX,
         y: THREE.MathUtils.randFloat(Y_BOTTOM, Y_TOP),
-        z: THREE.MathUtils.randFloat(-4, 2.5),
-        r: THREE.MathUtils.randFloat(0.025, 0.16),
-        speed: THREE.MathUtils.randFloat(0.35, 1.25),
-        swayAmp: THREE.MathUtils.randFloat(0.15, 0.7),
-        swayFreq: THREE.MathUtils.randFloat(0.4, 1.1),
+        z: THREE.MathUtils.randFloat(-4, 2),
+        r: THREE.MathUtils.randFloat(0.018, 0.085),
+        speed: THREE.MathUtils.randFloat(0.18, 0.55),
+        swayAmp: THREE.MathUtils.randFloat(0.1, 0.45),
+        swayFreq: THREE.MathUtils.randFloat(0.3, 0.8),
         phase: Math.random() * Math.PI * 2,
       };
     });
@@ -50,8 +50,8 @@ function Bubbles() {
 
   // Per-bubble gold tint, set once.
   const colors = useMemo(() => {
-    const a = new THREE.Color("#c9a86a");
-    const b = new THREE.Color("#e4cf9f");
+    const a = new THREE.Color("#d9bf86");
+    const b = new THREE.Color("#f3e7c8");
     const arr = new Float32Array(COUNT * 3);
     const c = new THREE.Color();
     for (let i = 0; i < COUNT; i++) {
@@ -92,9 +92,9 @@ function Bubbles() {
       const dx = x - pointer.current.x;
       const dy = y - pointer.current.y;
       const dist = Math.hypot(dx, dy);
-      const radius = 2.6;
+      const radius = 2.2;
       if (dist < radius && dist > 0.0001) {
-        const force = (1 - dist / radius) ** 2 * 1.6;
+        const force = (1 - dist / radius) ** 2 * 1.1;
         x += (dx / dist) * force;
         y += (dy / dist) * force;
       }
@@ -119,12 +119,12 @@ function Bubbles() {
         args={[colors, 3]}
       />
       <meshStandardMaterial
-        roughness={0.08}
-        metalness={0.35}
+        roughness={0.2}
+        metalness={0.15}
         transparent
-        opacity={0.7}
-        emissive="#8a6d33"
-        emissiveIntensity={0.35}
+        opacity={0.42}
+        emissive="#c9a86a"
+        emissiveIntensity={0.18}
         depthWrite={false}
         toneMapped={false}
       />
@@ -158,12 +158,12 @@ export default function Hero3D() {
 
       <Bubbles />
       <Sparkles
-        count={70}
+        count={40}
         scale={[14, 12, 6]}
-        size={2.6}
-        speed={0.3}
-        opacity={0.6}
-        color="#f3e4bf"
+        size={1.8}
+        speed={0.18}
+        opacity={0.4}
+        color="#f3e7c8"
       />
       <ParallaxRig />
     </Canvas>
