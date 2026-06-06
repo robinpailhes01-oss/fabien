@@ -1,11 +1,12 @@
+import Image from "next/image";
 import Reveal from "./Reveal";
 import { projects } from "./projects-data";
 
 function Arrow() {
   return (
     <svg
-      width="20"
-      height="20"
+      width="18"
+      height="18"
       viewBox="0 0 24 24"
       fill="none"
       className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1 group-hover:-translate-y-1"
@@ -23,74 +24,83 @@ function Arrow() {
 
 export default function Projects() {
   return (
-    <section id="projets" className="relative px-6 py-28 sm:py-40">
+    <section id="realisations" className="relative px-6 py-28 sm:py-40">
       <div className="mx-auto max-w-7xl">
-        <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <span className="eyebrow">Mes projets</span>
-            <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-light leading-[1] tracking-tight">
-              L&apos;écosystème
-              <span className="text-gradient-gold"> Fabien</span>
-            </h2>
-          </div>
-          <p className="max-w-xs text-sm font-light leading-relaxed text-muted">
-            Cinq marques, cinq mondes. Chacune pensée comme une signature.
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow">Réalisations</span>
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-light leading-[1] tracking-tight">
+            Cinq marques.
+            <span className="text-gradient-gold"> Une seule méthode.</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-md text-sm font-light leading-relaxed text-muted">
+            La preuve que la croissance, je la construis — je ne la théorise pas.
           </p>
         </Reveal>
 
-        <div className="mt-16 flex flex-col">
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p) => {
-            const Wrapper = p.href ? "a" : "div";
-            const linkProps = p.href
-              ? { href: p.href, target: "_blank", rel: "noopener noreferrer" }
+            const isLink = Boolean(p.href);
+            const external = p.href?.startsWith("http");
+            const Wrapper = isLink ? "a" : "div";
+            const linkProps = isLink
+              ? {
+                  href: p.href as string,
+                  ...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {}),
+                }
               : {};
 
             return (
               <Reveal key={p.index}>
                 <Wrapper
                   {...linkProps}
-                  className="group relative block border-t border-ink/10 py-9 transition-colors duration-500 last:border-b hover:border-gold/40"
+                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 bg-paper-soft transition-colors duration-500 hover:border-gold/40"
                 >
-                  {/* Hover wash */}
-                  <span className="pointer-events-none absolute inset-0 -z-0 origin-bottom scale-y-0 bg-gradient-to-r from-gold/[0.06] to-transparent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
-
-                  <div className="relative z-10 grid grid-cols-1 items-start gap-5 md:grid-cols-12 md:items-center">
-                    <span className="font-display text-sm text-gold md:col-span-1">
+                  {/* Image */}
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image
+                      src={p.image}
+                      alt={p.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
+                    <span className="absolute left-5 top-5 font-display text-sm text-paper/90">
                       {p.index}
                     </span>
+                    <span className="absolute right-5 top-5 text-[0.62rem] uppercase tracking-[0.2em] text-paper/70">
+                      {p.year}
+                    </span>
 
-                    <div className="md:col-span-4">
-                      <h3 className="font-display text-3xl font-light tracking-tight text-ink transition-colors duration-500 group-hover:text-gold sm:text-4xl">
-                        {p.name}
-                      </h3>
-                      <span className="mt-1 block text-xs uppercase tracking-[0.22em] text-muted">
-                        {p.category}
-                      </span>
-                    </div>
-
-                    <p className="text-sm font-light leading-relaxed text-muted md:col-span-5">
-                      {p.description}
-                    </p>
-
-                    <div className="flex items-center justify-between gap-4 md:col-span-2 md:justify-end">
-                      <span className="text-xs text-muted md:hidden">
-                        {p.year}
-                      </span>
-                      <span className="flex items-center gap-2 text-ink transition-colors duration-500 group-hover:text-gold">
-                        {p.href ? (
-                          <>
-                            <span className="text-xs uppercase tracking-[0.2em]">
-                              Visiter
-                            </span>
-                            <Arrow />
-                          </>
+                    {/* Bottom label over image */}
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
+                      <div>
+                        <h3 className="font-display text-2xl font-light leading-none text-paper">
+                          {p.name}
+                        </h3>
+                        <span className="mt-1.5 block text-[0.65rem] uppercase tracking-[0.2em] text-paper/75">
+                          {p.category}
+                        </span>
+                      </div>
+                      <span className="flex items-center gap-1.5 text-paper transition-colors duration-500 group-hover:text-gold-soft">
+                        {isLink ? (
+                          <Arrow />
                         ) : (
-                          <span className="text-xs uppercase tracking-[0.2em] text-muted">
+                          <span className="text-[0.6rem] uppercase tracking-[0.2em] text-paper/70">
                             Bientôt
                           </span>
                         )}
                       </span>
                     </div>
+                  </div>
+
+                  {/* Proof line */}
+                  <div className="flex flex-1 flex-col justify-between gap-4 p-6">
+                    <p className="text-sm font-light leading-relaxed text-muted">
+                      {p.proof}
+                    </p>
                   </div>
                 </Wrapper>
               </Reveal>

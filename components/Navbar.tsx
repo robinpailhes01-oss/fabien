@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
+import { BOOKING_URL, CTA_LABEL_SHORT } from "./site-config";
 
 const links = [
-  { label: "À propos", href: "#apropos" },
-  { label: "Projets", href: "#projets" },
-  { label: "Vision", href: "#vsl" },
-  { label: "Contact", href: "#contact" },
+  { label: "LS Consulting", href: "#offre" },
+  { label: "Méthode", href: "#methode" },
+  { label: "Réalisations", href: "#realisations" },
+  { label: "Témoignages", href: "#temoignages" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export default function Navbar() {
@@ -57,10 +59,12 @@ export default function Navbar() {
         <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle />
           <a
-            href="#contact"
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full border border-gold/50 px-5 py-2 text-xs font-medium uppercase tracking-[0.2em] text-gold transition-colors duration-400 hover:bg-gold hover:text-ink"
           >
-            Collaborer
+            {CTA_LABEL_SHORT}
           </a>
         </div>
 

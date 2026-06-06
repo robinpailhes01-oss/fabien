@@ -1,6 +1,11 @@
 import Reveal from "./Reveal";
 
-const words = ["Champagne", "Mode", "Romance", "Média", "Conseil"];
+const words = [
+  "5 marques fondées",
+  "De l'idée au scale",
+  "Made in France",
+  "Stratégie · Acquisition · Digital",
+];
 
 export default function Marquee() {
   return (

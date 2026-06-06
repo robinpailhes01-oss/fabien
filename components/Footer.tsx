@@ -6,11 +6,12 @@ export default function Footer() {
         <a href="#accueil" className="font-display text-2xl tracking-wide">
           Fabien<span className="text-gold">.</span>
         </a>
-        <p className="text-xs uppercase tracking-[0.2em] text-muted">
-          © {year} Fabien — Tous droits réservés
+        <p className="max-w-md text-center text-xs font-light leading-relaxed tracking-wide text-muted sm:text-left">
+          Fondateur de 5 marques d&apos;exception. Aujourd&apos;hui, je construis
+          la vôtre. <span className="text-gold">· LS Consulting</span>
         </p>
-        <p className="text-xs tracking-wide text-muted">
-          Conçu avec <span className="text-gold">élégance</span>
+        <p className="text-xs uppercase tracking-[0.2em] text-muted">
+          © {year} Fabien
         </p>
       </div>
     </footer>

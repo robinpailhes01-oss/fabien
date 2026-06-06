@@ -18,14 +18,14 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Fabien — Multi-entrepreneur",
+  title: "Fabien — LS Consulting · Stratégie & croissance pour entrepreneurs",
   description:
-    "Fabien, multi-entrepreneur français. Fondateur de Maison Perla (champagne), Layonn (mode), Love Explorers (plateforme de lieux d'exception), Visionr Podcast et LS Consulting.",
+    "J'ai bâti 5 marques d'exception. Avec LS Consulting, j'accompagne les fondateurs de marques et startups : stratégie business, acquisition client et développement digital. Réservez votre appel stratégique.",
   metadataBase: new URL("https://fabien.com"),
   openGraph: {
-    title: "Fabien — Multi-entrepreneur",
+    title: "Fabien — LS Consulting",
     description:
-      "L'univers d'un multi-entrepreneur : champagne, mode, romance, média et conseil.",
+      "Stratégie business, acquisition client, développement digital. La méthode qui a lancé 5 marques de prestige, au service de votre croissance.",
     type: "website",
     locale: "fr_FR",
   },

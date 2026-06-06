@@ -5,13 +5,14 @@ export default function VSL() {
     <section id="vsl" className="relative px-6 py-28 sm:py-40">
       <div className="mx-auto max-w-5xl text-center">
         <Reveal>
-          <span className="eyebrow">La vision</span>
+          <span className="eyebrow">À regarder</span>
           <h2 className="mx-auto mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.05] tracking-tight">
-            Découvrez l&apos;histoire derrière chaque marque
+            La méthode derrière 5 marques, en quelques minutes.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-sm font-light leading-relaxed text-muted">
-            Quelques minutes pour comprendre la philosophie de Fabien et ce qui
-            relie ses projets.
+            Comment je construis une marque désirable, j&apos;installe une
+            acquisition prévisible et je transforme le digital en chiffre
+            d&apos;affaires — et comment l&apos;appliquer à la vôtre.
           </p>
         </Reveal>
 
@@ -36,8 +37,9 @@ export default function VSL() {
               </svg>
             </button>
 
-            <span className="absolute bottom-5 left-6 text-xs uppercase tracking-[0.25em] text-muted">
-              VSL — bientôt disponible
+            <span className="absolute bottom-5 left-6 right-6 text-xs font-light tracking-wide text-muted">
+              Quelques minutes pour comprendre ce que LS Consulting peut changer
+              pour votre marque.
             </span>
           </div>
         </Reveal>
