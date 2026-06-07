@@ -32,9 +32,6 @@ export default function Projects() {
             Cinq marques.
             <span className="text-gradient-gold"> Une seule méthode.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-md text-sm font-light leading-relaxed text-muted">
-            La preuve que la croissance, je la construis — je ne la théorise pas.
-          </p>
         </Reveal>
 
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -94,13 +91,6 @@ export default function Projects() {
                         )}
                       </span>
                     </div>
-                  </div>
-
-                  {/* Proof line */}
-                  <div className="flex flex-1 flex-col justify-between gap-4 p-6">
-                    <p className="text-sm font-light leading-relaxed text-muted">
-                      {p.proof}
-                    </p>
                   </div>
                 </Wrapper>
               </Reveal>

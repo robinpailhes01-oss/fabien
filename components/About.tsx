@@ -22,15 +22,10 @@ export default function About() {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="mt-8 max-w-xl text-base font-light leading-relaxed text-muted">
+            <p className="mt-8 max-w-md text-base font-light leading-relaxed text-muted">
               La plupart des consultants vendent des slides. Moi, j&apos;ai
-              construit. Cinq marques nées d&apos;une feuille blanche : une maison
-              de champagne de prestige, une marque de mode made in France, une
-              plateforme de lieux d&apos;exception, un studio média. Chaque
-              positionnement, chaque tunnel d&apos;acquisition, chaque euro de
-              croissance : pensé, testé, prouvé sur le terrain. Aujourd&apos;hui,
-              je mets cette expérience au service d&apos;une seule chose : faire
-              scaler votre marque.
+              construit cinq marques de zéro. Cette expérience, je la mets au
+              service d&apos;une seule chose : faire scaler la vôtre.
             </p>
           </Reveal>
 

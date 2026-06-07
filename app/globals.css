@@ -21,15 +21,15 @@
 }
 
 [data-theme="dark"] {
-  --paper: #0a0a0a;
-  --paper-soft: #141210;
-  --ink: #f5f2ec;
-  --ink-soft: #cfc9bd;
-  --muted: #9a9281;
+  --paper: #080807;
+  --paper-soft: #100e0c;
+  --ink: #f3efe6;
+  --ink-soft: #d2ccbd;
+  --muted: #908775;
   --gold: #c9a86a;
   --gold-soft: #e4cf9f;
   --gold-deep: #9b7e45;
-  --veil: 10, 10, 10; /* noir, for hero gradients */
+  --veil: 8, 8, 7; /* noir, for hero gradients */
 }
 
 @theme inline {
@@ -194,6 +194,57 @@ html.lenis body {
 }
 .animate-scrollcue {
   animation: scrollcue 1.8s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+
+/* ---- Hero premium glow (replaces the 3D bubbles) ---- */
+@keyframes heroGlow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translate3d(-50%, 0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translate3d(-50%, -2%, 0) scale(1.08);
+  }
+}
+.hero-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -18%;
+  width: min(120vw, 1100px);
+  height: min(120vw, 1100px);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(201, 168, 106, 0.28) 0%,
+    rgba(201, 168, 106, 0.12) 32%,
+    transparent 62%
+  );
+  filter: blur(20px);
+  animation: heroGlow 9s ease-in-out infinite;
+}
+.hero-glow--top {
+  bottom: auto;
+  top: -28%;
+  width: min(90vw, 760px);
+  height: min(90vw, 760px);
+  opacity: 0.5;
+  animation-duration: 12s;
+  animation-direction: reverse;
+  background: radial-gradient(
+    circle,
+    rgba(228, 207, 159, 0.16) 0%,
+    transparent 60%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow,
+  .hero-glow--top {
+    animation: none;
+  }
 }
 
 /* ---- Link underline ---- */

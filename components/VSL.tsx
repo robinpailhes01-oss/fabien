@@ -9,10 +9,8 @@ export default function VSL() {
           <h2 className="mx-auto mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.05] tracking-tight">
             La méthode derrière 5 marques, en quelques minutes.
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-sm font-light leading-relaxed text-muted">
-            Comment je construis une marque désirable, j&apos;installe une
-            acquisition prévisible et je transforme le digital en chiffre
-            d&apos;affaires — et comment l&apos;appliquer à la vôtre.
+          <p className="mx-auto mt-6 max-w-md text-sm font-light leading-relaxed text-muted">
+            Ma méthode, et comment l&apos;appliquer à votre marque.
           </p>
         </Reveal>
 

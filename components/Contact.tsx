@@ -19,9 +19,9 @@ export default function Contact() {
         </Reveal>
 
         <Reveal delay={160}>
-          <p className="mx-auto mt-8 max-w-lg text-base font-light leading-relaxed text-muted">
-            Un appel, une vision claire de votre potentiel de croissance et des
-            prochaines étapes. Sans détour, sans blabla.
+          <p className="mx-auto mt-8 max-w-sm text-base font-light leading-relaxed text-muted">
+            Un appel. Une vision claire de votre potentiel. Les prochaines
+            étapes.
           </p>
         </Reveal>
 

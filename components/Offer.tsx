@@ -101,10 +101,8 @@ export default function Offer() {
             LS Consulting — votre croissance,
             <span className="text-gradient-gold"> structurée.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-base font-light leading-relaxed text-muted">
-            Un accompagnement sur mesure pour les fondateurs qui veulent une
-            marque désirable, des clients prévisibles et un digital qui
-            convertit. Trois leviers, une seule direction : le scale.
+          <p className="mx-auto mt-6 max-w-md text-base font-light leading-relaxed text-muted">
+            Trois leviers, une seule direction : le scale.
           </p>
         </Reveal>
 
@@ -120,14 +118,6 @@ export default function Offer() {
                 <p className="mt-3 text-sm font-light leading-relaxed text-muted">
                   {p.promise}
                 </p>
-                <ul className="mt-6 flex flex-col gap-3 border-t border-ink/10 pt-6">
-                  {p.points.map((pt) => (
-                    <li key={pt} className="flex gap-3 text-sm text-ink-soft">
-                      <Check />
-                      <span className="font-light">{pt}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </Reveal>
           ))}
