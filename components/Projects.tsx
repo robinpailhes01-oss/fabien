@@ -52,7 +52,7 @@ export default function Projects() {
               <Reveal key={p.index}>
                 <Wrapper
                   {...linkProps}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 bg-paper-soft transition-colors duration-500 hover:border-gold/40"
+                  className="card-lift group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 bg-paper-soft"
                 >
                   {/* Image */}
                   <div className="relative aspect-[4/5] overflow-hidden">

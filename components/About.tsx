@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
+import CountUp from "./CountUp";
 
 const stats = [
   { value: "5", label: "Marques fondées de zéro" },
@@ -40,7 +41,7 @@ export default function About() {
                 className="reveal flex flex-col items-start"
               >
                 <span className="font-display text-5xl font-light text-gold sm:text-6xl">
-                  {s.value}
+                  <CountUp value={s.value} />
                 </span>
                 <span className="mt-3 text-[0.7rem] uppercase leading-snug tracking-[0.18em] text-muted">
                   {s.label}

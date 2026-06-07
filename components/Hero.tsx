@@ -1,7 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import { BOOKING_URL, CTA_LABEL } from "./site-config";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -17,16 +23,28 @@ export default function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const glowY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
+  // Glow gently follows the cursor.
+  const px: MotionValue<number> = useSpring(0, { stiffness: 50, damping: 20 });
+  const py: MotionValue<number> = useSpring(0, { stiffness: 50, damping: 20 });
+  const onMove = (e: React.MouseEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set(((e.clientX - r.left) / r.width - 0.5) * 50);
+    py.set(((e.clientY - r.top) / r.height - 0.5) * 36);
+  };
+
   return (
     <section
       ref={ref}
       id="accueil"
+      onMouseMove={onMove}
       className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
     >
       {/* Premium gold glow (replaces the 3D bubbles) */}
       <motion.div style={{ y: glowY }} className="absolute inset-0 z-0">
-        <span className="hero-glow" />
-        <span className="hero-glow hero-glow--top" />
+        <motion.div style={{ x: px, y: py }} className="absolute inset-0">
+          <span className="hero-glow" />
+          <span className="hero-glow hero-glow--top" />
+        </motion.div>
       </motion.div>
 
       {/* Vignette */}

@@ -107,10 +107,10 @@ export default function Offer() {
         </Reveal>
 
         {/* Pillars */}
-        <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 md:grid-cols-3">
+        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
           {pillars.map((p) => (
             <Reveal key={p.n} className="h-full">
-              <div className="flex h-full flex-col bg-paper p-8 sm:p-10">
+              <div className="card-lift flex h-full flex-col rounded-2xl border border-ink/10 bg-paper p-8 sm:p-10">
                 <span className="font-display text-2xl text-gold">{p.n}</span>
                 <h3 className="mt-4 font-display text-2xl font-light tracking-tight">
                   {p.title}
