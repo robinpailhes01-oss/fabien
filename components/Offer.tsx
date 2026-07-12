@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import RevealText from "./RevealText";
 import { BOOKING_URL, CTA_LABEL } from "./site-config";
 
 const pillars = [
@@ -97,9 +98,9 @@ export default function Offer() {
       <div className="mx-auto max-w-7xl">
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">L&apos;accompagnement</span>
-          <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-light leading-[1.02] tracking-tight">
-            LS Consulting — votre croissance,
-            <span className="text-gradient-gold"> structurée.</span>
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-light leading-[1.08] tracking-tight">
+            <RevealText text="LS Consulting — votre croissance," />{" "}
+            <RevealText text="structurée." accent />
           </h2>
           <p className="mx-auto mt-6 max-w-md text-base font-light leading-relaxed text-muted">
             Trois leviers, une seule direction : le scale.

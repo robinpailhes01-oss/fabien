@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import Magnetic from "./Magnetic";
+import RevealText from "./RevealText";
 import { BOOKING_URL, CTA_LABEL, CONTACT_EMAIL } from "./site-config";
 
 export default function Contact() {
@@ -11,10 +12,12 @@ export default function Contact() {
         </Reveal>
 
         <Reveal delay={80}>
-          <h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(2.4rem,7vw,5.5rem)] font-light leading-[1] tracking-tight">
-            Votre marque mérite de scaler.
-            <span className="block text-gradient-gold">
-              Commençons maintenant.
+          <h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(2.4rem,7vw,5.5rem)] font-light leading-[1.05] tracking-tight">
+            <span className="block">
+              <RevealText text="Votre marque mérite de scaler." />
+            </span>
+            <span className="block">
+              <RevealText text="Commençons maintenant." accent />
             </span>
           </h2>
         </Reveal>

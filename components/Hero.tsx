@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { BOOKING_URL, CTA_LABEL } from "./site-config";
 import Magnetic from "./Magnetic";
+import RevealText from "./RevealText";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -65,23 +66,13 @@ export default function Hero() {
           Fabien · LS Consulting
         </motion.span>
 
-        <h1 className="font-display text-[clamp(2.6rem,8vw,6.5rem)] font-light leading-[1] tracking-[-0.01em]">
-          <motion.span
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.35, ease }}
-            className="block"
-          >
-            J&apos;ai bâti 5 marques.
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.52, ease }}
-            className="block text-gradient-gold"
-          >
-            Construisons la vôtre.
-          </motion.span>
+        <h1 className="font-display text-[clamp(2.6rem,8vw,6.5rem)] font-light leading-[1.02] tracking-[-0.01em]">
+          <span className="block">
+            <RevealText text="J'ai bâti 5 marques." />
+          </span>
+          <span className="block">
+            <RevealText text="Construisons la vôtre." accent />
+          </span>
         </h1>
 
         <motion.p

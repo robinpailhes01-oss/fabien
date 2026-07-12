@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import RevealImage from "./RevealImage";
+import RevealText from "./RevealText";
 import { projects } from "./projects-data";
 
 function Arrow() {
@@ -28,9 +29,9 @@ export default function Projects() {
       <div className="mx-auto max-w-7xl">
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">Réalisations</span>
-          <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-light leading-[1] tracking-tight">
-            Cinq marques.
-            <span className="text-gradient-gold"> Une seule méthode.</span>
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-light leading-[1.08] tracking-tight">
+            <RevealText text="Cinq marques." />{" "}
+            <RevealText text="Une seule méthode." accent />
           </h2>
         </Reveal>
 
@@ -61,7 +62,7 @@ export default function Projects() {
                       alt={p.name}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="absolute inset-0"
-                      imgClassName="transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+                      imgClassName="grayscale-[0.4] transition-[transform,filter] duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
                     />
                     <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
                     <span className="absolute left-5 top-5 z-10 font-display text-sm text-paper/90">

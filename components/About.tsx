@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import RevealImage from "./RevealImage";
+import RevealText from "./RevealText";
 import CountUp from "./CountUp";
 
 const stats = [
@@ -16,9 +17,9 @@ export default function About() {
         <div>
           <Reveal>
             <span className="eyebrow">À propos</span>
-            <h2 className="mt-5 font-display text-[clamp(2rem,5vw,4rem)] font-light leading-[1.04] tracking-tight">
-              Je ne théorise pas la croissance.
-              <span className="text-gradient-gold"> Je l&apos;exécute.</span>
+            <h2 className="mt-5 font-display text-[clamp(2rem,5vw,4rem)] font-light leading-[1.08] tracking-tight">
+              <RevealText text="Je ne théorise pas la croissance." />{" "}
+              <RevealText text="Je l'exécute." accent />
             </h2>
           </Reveal>
 
@@ -55,12 +56,15 @@ export default function About() {
         <Reveal delay={120}>
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-ink/10">
             <RevealImage
-              src="/images/authority.jpg"
-              alt="L'ambition derrière LS Consulting"
+              src="/images/fabien.jpg"
+              alt="Fabien, fondateur de LS Consulting"
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="absolute inset-0"
             />
-            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink/30 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink/25 via-transparent to-transparent" />
+            <span className="absolute bottom-5 left-5 z-[2] text-xs uppercase tracking-[0.22em] text-paper mix-blend-difference">
+              Fabien · Fondateur
+            </span>
           </div>
         </Reveal>
       </div>
