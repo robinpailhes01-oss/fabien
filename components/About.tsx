@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Reveal from "./Reveal";
+import RevealImage from "./RevealImage";
 import CountUp from "./CountUp";
 
 const stats = [
@@ -54,14 +54,13 @@ export default function About() {
         {/* Image */}
         <Reveal delay={120}>
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-ink/10">
-            <Image
+            <RevealImage
               src="/images/authority.jpg"
               alt="L'ambition derrière LS Consulting"
-              fill
               sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover"
+              className="absolute inset-0"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/30 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink/30 to-transparent" />
           </div>
         </Reveal>
       </div>

@@ -1,31 +1,34 @@
-import Reveal from "./Reveal";
-
 const words = [
-  "5 marques fondées",
-  "De l'idée au scale",
-  "Made in France",
-  "Stratégie · Acquisition · Digital",
+  "Stratégie business",
+  "Acquisition client",
+  "Développement digital",
+  "Positionnement de marque",
+  "Croissance",
+  "Exécution",
 ];
+
+function Track() {
+  return (
+    <div className="marquee-track flex shrink-0 items-center gap-10 pr-10">
+      {words.map((w, i) => (
+        <span key={i} className="flex items-center gap-10 whitespace-nowrap">
+          <span className="font-display text-3xl font-light text-ink-soft sm:text-5xl">
+            {w}
+          </span>
+          <span className="text-gold">✦</span>
+        </span>
+      ))}
+    </div>
+  );
+}
 
 export default function Marquee() {
   return (
-    <Reveal className="px-6 py-20">
-      <div className="mx-auto flex max-w-4xl flex-col items-center gap-8">
-        <div className="hairline w-24" />
-        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center">
-          {words.map((w, i) => (
-            <li key={w} className="flex items-center gap-8">
-              <span className="text-xs font-light uppercase tracking-[0.35em] text-muted">
-                {w}
-              </span>
-              {i < words.length - 1 && (
-                <span className="text-[0.5rem] text-gold/60">✦</span>
-              )}
-            </li>
-          ))}
-        </ul>
-        <div className="hairline w-24" />
+    <section className="relative border-y border-ink/10 py-8 sm:py-10">
+      <div className="marquee-mask flex overflow-hidden">
+        <Track />
+        <Track />
       </div>
-    </Reveal>
+    </section>
   );
 }

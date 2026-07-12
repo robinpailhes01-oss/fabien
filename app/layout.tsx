@@ -3,6 +3,8 @@ import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import Loader from "@/components/Loader";
+import Cursor from "@/components/Cursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -51,6 +53,8 @@ export default function RootLayout({
       </head>
       <body className="grain min-h-full">
         <ThemeProvider>
+          <Loader />
+          <Cursor />
           <SmoothScroll>{children}</SmoothScroll>
         </ThemeProvider>
       </body>

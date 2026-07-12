@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import Magnetic from "./Magnetic";
 import { BOOKING_URL, CTA_LABEL, CONTACT_EMAIL } from "./site-config";
 
 export default function Contact() {
@@ -27,17 +28,19 @@ export default function Contact() {
 
         <Reveal delay={220}>
           <div className="mt-12 flex flex-col items-center gap-7">
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-full bg-gold px-10 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-ink transition-colors duration-500"
-            >
-              <span className="relative z-10 transition-colors duration-500 group-hover:text-paper">
-                {CTA_LABEL}
-              </span>
-              <span className="absolute inset-0 origin-left scale-x-0 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
-            </a>
+            <Magnetic strength={0.4}>
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block overflow-hidden rounded-full bg-gold px-10 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-ink transition-colors duration-500"
+              >
+                <span className="relative z-10 transition-colors duration-500 group-hover:text-paper">
+                  {CTA_LABEL}
+                </span>
+                <span className="absolute inset-0 origin-left scale-x-0 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+              </a>
+            </Magnetic>
 
             <p className="text-[0.7rem] uppercase tracking-[0.22em] text-muted">
               Appel offert · Sans engagement · Réponse claire sur votre potentiel

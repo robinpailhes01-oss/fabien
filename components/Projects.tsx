@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Reveal from "./Reveal";
+import RevealImage from "./RevealImage";
 import { projects } from "./projects-data";
 
 function Arrow() {
@@ -56,23 +56,23 @@ export default function Projects() {
                 >
                   {/* Image */}
                   <div className="relative aspect-[4/5] overflow-hidden">
-                    <Image
+                    <RevealImage
                       src={p.image}
                       alt={p.name}
-                      fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+                      className="absolute inset-0"
+                      imgClassName="transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
-                    <span className="absolute left-5 top-5 font-display text-sm text-paper/90">
+                    <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
+                    <span className="absolute left-5 top-5 z-10 font-display text-sm text-paper/90">
                       {p.index}
                     </span>
-                    <span className="absolute right-5 top-5 text-[0.62rem] uppercase tracking-[0.2em] text-paper/70">
+                    <span className="absolute right-5 top-5 z-10 text-[0.62rem] uppercase tracking-[0.2em] text-paper/70">
                       {p.year}
                     </span>
 
                     {/* Bottom label over image */}
-                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
+                    <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between p-5">
                       <div>
                         <h3 className="font-display text-2xl font-light leading-none text-paper">
                           {p.name}

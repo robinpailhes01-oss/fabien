@@ -9,6 +9,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { BOOKING_URL, CTA_LABEL } from "./site-config";
+import Magnetic from "./Magnetic";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -99,15 +100,17 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.95, ease }}
           className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:gap-9"
         >
-          <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative overflow-hidden rounded-full border border-gold/40 px-9 py-3.5 text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink transition-colors duration-500"
-          >
-            <span className="relative z-10">{CTA_LABEL}</span>
-            <span className="absolute inset-0 -z-0 origin-left scale-x-0 bg-gold transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
-          </a>
+          <Magnetic>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block overflow-hidden rounded-full border border-gold/40 px-9 py-3.5 text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink transition-colors duration-500"
+            >
+              <span className="relative z-10">{CTA_LABEL}</span>
+              <span className="absolute inset-0 -z-0 origin-left scale-x-0 bg-gold transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+            </a>
+          </Magnetic>
           <a
             href="#methode"
             className="link-gold text-[0.7rem] font-light uppercase tracking-[0.24em]"
