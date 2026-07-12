@@ -11,8 +11,8 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="apropos" className="relative px-6 py-28 sm:py-40">
-      <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
+    <section id="apropos" className="relative px-6 py-20 sm:py-40">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
         {/* Text */}
         <div>
           <Reveal>
@@ -33,7 +33,7 @@ export default function About() {
 
           <Reveal
             stagger
-            className="mt-12 grid grid-cols-3 gap-6 border-t border-ink/10 pt-10"
+            className="mt-10 grid grid-cols-3 gap-6 border-t border-ink/10 pt-8"
           >
             {stats.map((s) => (
               <div
@@ -60,9 +60,10 @@ export default function About() {
               alt="Fabien, fondateur de LS Consulting"
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="absolute inset-0"
+              priority
             />
-            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink/25 via-transparent to-transparent" />
-            <span className="absolute bottom-5 left-5 z-[2] text-xs uppercase tracking-[0.22em] text-paper mix-blend-difference">
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
+            <span className="absolute bottom-4 left-4 z-[2] rounded-full border border-paper/15 bg-ink/70 px-3.5 py-1.5 text-[0.6rem] uppercase tracking-[0.22em] text-paper backdrop-blur-md">
               Fabien · Fondateur
             </span>
           </div>

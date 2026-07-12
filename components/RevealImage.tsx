@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function RevealImage({
@@ -10,28 +10,48 @@ export default function RevealImage({
   sizes,
   className = "",
   imgClassName = "",
+  priority = false,
 }: {
   src: string;
   alt: string;
   sizes?: string;
   className?: string;
   imgClassName?: string;
+  priority?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-7%", "7%"]);
 
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <motion.div
+    <div
       ref={ref}
-      className={`overflow-hidden ${className}`}
-      initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
-      whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
-      viewport={{ once: true, margin: "-12%" }}
-      transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+      className={`overflow-hidden transition-[opacity,clip-path] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${className}`}
+      style={{
+        opacity: shown ? 1 : 0,
+        clipPath: shown ? "inset(0% 0 0 0)" : "inset(18% 0 0 0)",
+      }}
     >
       <motion.div style={{ y }} className="absolute inset-[-7%]">
         <Image
@@ -39,9 +59,10 @@ export default function RevealImage({
           alt={alt}
           fill
           sizes={sizes}
+          priority={priority}
           className={`object-cover ${imgClassName}`}
         />
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
