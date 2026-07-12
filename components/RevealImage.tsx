@@ -27,7 +27,7 @@ export default function RevealImage({
   return (
     <motion.div
       ref={ref}
-      className={`relative overflow-hidden ${className}`}
+      className={`overflow-hidden ${className}`}
       initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
       whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
       viewport={{ once: true, margin: "-12%" }}
