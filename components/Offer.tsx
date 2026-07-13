@@ -50,6 +50,39 @@ const notForYou = [
   "Les projets sans réelle volonté d'investir dans leur croissance",
 ];
 
+function PillarIcon({ i }: { i: number }) {
+  const p = {
+    width: 22,
+    height: 22,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.4,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+  if (i === 0)
+    return (
+      <svg {...p}>
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="3.5" />
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+      </svg>
+    );
+  if (i === 1)
+    return (
+      <svg {...p}>
+        <path d="M3 4h18l-7 8v6l-4 2v-8L3 4z" />
+      </svg>
+    );
+  return (
+    <svg {...p}>
+      <rect x="3" y="4.5" width="18" height="12.5" rx="2" />
+      <path d="M8 21h8M12 17v4" />
+    </svg>
+  );
+}
+
 function Check() {
   return (
     <svg
@@ -109,11 +142,16 @@ export default function Offer() {
 
         {/* Pillars */}
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {pillars.map((p) => (
+          {pillars.map((p, idx) => (
             <Reveal key={p.n} className="h-full">
-              <div className="card-lift flex h-full flex-col rounded-2xl border border-ink/10 bg-paper p-8 sm:p-10">
-                <span className="font-display text-2xl text-gold">{p.n}</span>
-                <h3 className="mt-4 font-display text-2xl font-light tracking-tight">
+              <div className="card-lift panel panel--glow flex h-full flex-col rounded-2xl p-8 sm:p-10">
+                <div className="flex items-center justify-between">
+                  <span className="icon-badge">
+                    <PillarIcon i={idx} />
+                  </span>
+                  <span className="tag-badge">Pilier {p.n}</span>
+                </div>
+                <h3 className="mt-6 font-display text-2xl font-light tracking-tight">
                   {p.title}
                 </h3>
                 <p className="mt-3 text-sm font-light leading-relaxed text-muted">
@@ -126,7 +164,7 @@ export default function Offer() {
 
         {/* For / not for */}
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <Reveal className="rounded-2xl border border-gold/30 bg-paper p-8 sm:p-10">
+          <Reveal className="panel panel--glow rounded-2xl p-8 sm:p-10">
             <h3 className="text-xs uppercase tracking-[0.25em] text-gold">
               Pour qui c&apos;est
             </h3>
@@ -139,7 +177,7 @@ export default function Offer() {
               ))}
             </ul>
           </Reveal>
-          <Reveal className="rounded-2xl border border-ink/10 bg-paper p-8 sm:p-10">
+          <Reveal className="panel rounded-2xl p-8 sm:p-10">
             <h3 className="text-xs uppercase tracking-[0.25em] text-muted">
               Pour qui ce n&apos;est pas
             </h3>

@@ -72,21 +72,21 @@ export default function Projects() {
                       {p.year}
                     </span>
 
-                    {/* Bottom label over image */}
-                    <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between p-5">
+                    {/* Bottom floating label panel */}
+                    <div className="absolute inset-x-4 bottom-4 z-10 flex items-center justify-between gap-3 rounded-xl border border-paper/10 bg-ink/55 px-4 py-3 backdrop-blur-md">
                       <div>
-                        <h3 className="font-display text-2xl font-light leading-none text-paper">
+                        <h3 className="font-display text-xl font-light leading-none text-paper sm:text-2xl">
                           {p.name}
                         </h3>
-                        <span className="mt-1.5 block text-[0.65rem] uppercase tracking-[0.2em] text-paper/75">
+                        <span className="mt-1.5 block text-[0.62rem] uppercase tracking-[0.2em] text-paper/70">
                           {p.category}
                         </span>
                       </div>
-                      <span className="flex items-center gap-1.5 text-paper transition-colors duration-500 group-hover:text-gold-soft">
+                      <span className="flex shrink-0 items-center gap-1.5 text-paper transition-colors duration-500 group-hover:text-gold-soft">
                         {isLink ? (
                           <Arrow />
                         ) : (
-                          <span className="text-[0.6rem] uppercase tracking-[0.2em] text-paper/70">
+                          <span className="text-[0.58rem] uppercase tracking-[0.2em] text-paper/70">
                             Bientôt
                           </span>
                         )}

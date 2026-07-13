@@ -8,6 +8,7 @@
 :root {
   --paper: #f6f3ed;
   --paper-soft: #ece6da;
+  --panel: #f1ece1;
   --ink: #1a1714;
   --ink-soft: #38322b;
   --muted: #7a6f61;
@@ -21,15 +22,16 @@
 }
 
 [data-theme="dark"] {
-  --paper: #080807;
-  --paper-soft: #100e0c;
+  --paper: #0b0a08;
+  --paper-soft: #17140f;
+  --panel: #141109;
   --ink: #f3efe6;
   --ink-soft: #d2ccbd;
-  --muted: #908775;
+  --muted: #948b78;
   --gold: #c9a86a;
   --gold-soft: #e4cf9f;
   --gold-deep: #9b7e45;
-  --veil: 8, 8, 7; /* noir, for hero gradients */
+  --veil: 11, 10, 8; /* noir, for hero gradients */
 }
 
 @theme inline {
@@ -64,12 +66,89 @@ html::-webkit-scrollbar {
 }
 
 body {
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image: radial-gradient(
+    130% 55% at 50% -5%,
+    rgba(201, 168, 106, 0.06),
+    transparent 60%
+  );
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+/* ---- Elevated panel (depth vs flat black) ---- */
+.panel {
+  position: relative;
+  background:
+    radial-gradient(
+      115% 80% at 0% 0%,
+      rgba(201, 168, 106, 0.07),
+      transparent 55%
+    ),
+    linear-gradient(180deg, var(--panel), var(--paper-soft));
+  border: 1px solid rgba(201, 168, 106, 0.14);
+  overflow: hidden;
+}
+.panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.55;
+}
+.panel--glow::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 60%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(201, 168, 106, 0.12),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ---- Glowing icon badge ---- */
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.85rem;
+  color: var(--gold);
+  background: linear-gradient(
+    180deg,
+    rgba(201, 168, 106, 0.14),
+    rgba(201, 168, 106, 0.02)
+  );
+  border: 1px solid rgba(201, 168, 106, 0.28);
+  box-shadow: 0 0 26px -8px rgba(201, 168, 106, 0.5);
+}
+
+/* ---- Small tag / step badge ---- */
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(201, 168, 106, 0.25);
+  background: rgba(201, 168, 106, 0.06);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
 }
 
 /* Smooth theme cross-fade (Tailwind utilities override where present) */

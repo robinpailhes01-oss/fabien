@@ -40,7 +40,7 @@ export default function Testimonials() {
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
           {testimonials.map((t, i) => (
             <Reveal key={i} delay={i * 80}>
-              <figure className="card-lift flex h-full flex-col rounded-2xl border border-ink/10 bg-paper p-8 sm:p-9">
+              <figure className="card-lift panel flex h-full flex-col rounded-2xl p-8 sm:p-9">
                 <span className="font-display text-5xl leading-none text-gold/50">
                   &ldquo;
                 </span>
