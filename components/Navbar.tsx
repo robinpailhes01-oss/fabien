@@ -6,11 +6,11 @@ import ThemeToggle from "./ThemeToggle";
 import { BOOKING_URL, CTA_LABEL_SHORT } from "./site-config";
 
 const links = [
-  { label: "LS Consulting", href: "#offre" },
+  { label: "Offres", href: "#offres" },
   { label: "Méthode", href: "#methode" },
-  { label: "Réalisations", href: "#realisations" },
-  { label: "Témoignages", href: "#temoignages" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Univers", href: "#realisations" },
+  { label: "Ressources", href: "#ressources" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {

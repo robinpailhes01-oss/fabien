@@ -3,8 +3,6 @@ import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Loader from "@/components/Loader";
-import Cursor from "@/components/Cursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -20,14 +18,14 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Fabien — LS Consulting · Stratégie & croissance pour entrepreneurs",
+  title: "Fabien — LS Consulting · Stratégie & croissance de marque",
   description:
-    "J'ai bâti 5 marques d'exception. Avec LS Consulting, j'accompagne les fondateurs de marques et startups : stratégie business, acquisition client et développement digital. Réservez votre appel stratégique.",
+    "21 ans d'expérience, 6 marques bâties. Avec LS Consulting, Fabien accompagne les entrepreneurs : clarity session, accompagnement et audit d'entreprise complet. Réservez votre appel.",
   metadataBase: new URL("https://fabien.com"),
   openGraph: {
     title: "Fabien — LS Consulting",
     description:
-      "Stratégie business, acquisition client, développement digital. La méthode qui a lancé 5 marques de prestige, au service de votre croissance.",
+      "21 ans d'expérience. La méthode qui a bâti 6 marques, au service de votre croissance.",
     type: "website",
     locale: "fr_FR",
   },
@@ -47,14 +45,12 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='light';}})();`,
           }}
         />
       </head>
-      <body className="grain min-h-full">
+      <body className="min-h-full">
         <ThemeProvider>
-          <Loader />
-          <Cursor />
           <SmoothScroll>{children}</SmoothScroll>
         </ThemeProvider>
       </body>

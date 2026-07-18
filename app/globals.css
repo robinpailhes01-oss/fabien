@@ -6,16 +6,20 @@
    ============================================================ */
 
 :root {
-  --paper: #f6f3ed;
-  --paper-soft: #ece6da;
-  --panel: #f1ece1;
-  --ink: #1a1714;
-  --ink-soft: #38322b;
-  --muted: #7a6f61;
-  --gold: #a87f3e;
-  --gold-soft: #c2a163;
-  --gold-deep: #6f5526;
-  --veil: 246, 243, 237; /* paper, for hero gradients */
+  --paper: #f8f5ef;
+  --paper-soft: #f1ece2;
+  --panel: #fffdf9;
+  --ink: #1b1712;
+  --ink-soft: #4a4238;
+  --muted: #8a8072;
+  --gold: #a9823f;
+  --gold-soft: #c9a86a;
+  --gold-deep: #7c5c26;
+  --veil: 248, 245, 239; /* paper, for hero gradients */
+
+  --panel-border: rgba(27, 23, 18, 0.07);
+  --panel-shadow: 0 26px 60px -36px rgba(70, 52, 22, 0.3);
+  --hairline: rgba(27, 23, 18, 0.1);
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -24,7 +28,7 @@
 [data-theme="dark"] {
   --paper: #0b0a08;
   --paper-soft: #17140f;
-  --panel: #141109;
+  --panel: #17130d;
   --ink: #f3efe6;
   --ink-soft: #d2ccbd;
   --muted: #948b78;
@@ -32,6 +36,10 @@
   --gold-soft: #e4cf9f;
   --gold-deep: #9b7e45;
   --veil: 11, 10, 8; /* noir, for hero gradients */
+
+  --panel-border: rgba(201, 168, 106, 0.14);
+  --panel-shadow: 0 22px 50px -30px rgba(0, 0, 0, 0.65);
+  --hairline: rgba(255, 255, 255, 0.09);
 }
 
 @theme inline {
@@ -68,8 +76,8 @@ html::-webkit-scrollbar {
 body {
   background-color: var(--paper);
   background-image: radial-gradient(
-    130% 55% at 50% -5%,
-    rgba(201, 168, 106, 0.06),
+    120% 50% at 50% -8%,
+    rgba(201, 168, 106, 0.1),
     transparent 60%
   );
   background-attachment: fixed;
@@ -80,28 +88,23 @@ body {
   overflow-x: hidden;
 }
 
-/* ---- Elevated panel (depth vs flat black) ---- */
+/* ---- Elevated panel (soft, airy card) ---- */
 .panel {
   position: relative;
-  background:
-    radial-gradient(
-      115% 80% at 0% 0%,
-      rgba(201, 168, 106, 0.07),
-      transparent 55%
-    ),
-    linear-gradient(180deg, var(--panel), var(--paper-soft));
-  border: 1px solid rgba(201, 168, 106, 0.14);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
   overflow: hidden;
 }
 .panel::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 12%;
-  right: 12%;
+  left: 14%;
+  right: 14%;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0.55;
+  opacity: 0.4;
 }
 .panel--glow::after {
   content: "";

@@ -16,7 +16,7 @@ const ThemeCtx = createContext<{ theme: Theme; toggle: () => void }>({
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
 
   // Sync from the value the inline script already applied (no FOUC),
   // falling back to localStorage if the dataset wasn't set.
@@ -24,9 +24,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     let current = document.documentElement.dataset.theme as Theme | undefined;
     if (!current) {
       try {
-        current = (localStorage.getItem("theme") as Theme) || "dark";
+        current = (localStorage.getItem("theme") as Theme) || "light";
       } catch {
-        current = "dark";
+        current = "light";
       }
       document.documentElement.dataset.theme = current;
     }

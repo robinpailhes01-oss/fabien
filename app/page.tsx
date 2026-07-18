@@ -2,15 +2,15 @@ import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import StickyCTA from "@/components/StickyCTA";
 import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
+import Clients from "@/components/Clients";
+import VSL from "@/components/VSL";
 import Problem from "@/components/Problem";
 import About from "@/components/About";
 import Offer from "@/components/Offer";
 import Process from "@/components/Process";
 import Projects from "@/components/Projects";
-import VSL from "@/components/VSL";
 import Testimonials from "@/components/Testimonials";
-import Faq from "@/components/Faq";
+import Ebooks from "@/components/Ebooks";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -21,15 +21,15 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee />
+        <Clients />
+        <VSL />
         <Problem />
         <About />
         <Offer />
         <Process />
         <Projects />
-        <VSL />
         <Testimonials />
-        <Faq />
+        <Ebooks />
         <Contact />
       </main>
       <Footer />

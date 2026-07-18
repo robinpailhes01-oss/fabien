@@ -4,9 +4,9 @@ import RevealText from "./RevealText";
 import CountUp from "./CountUp";
 
 const stats = [
-  { value: "5", label: "Marques fondées de zéro" },
-  { value: "4", label: "Secteurs maîtrisés" },
-  { value: "100%", label: "Bâti, pas sous-traité" },
+  { value: "21", label: "Ans d'expérience" },
+  { value: "6", label: "Marques bâties" },
+  { value: "100%", label: "Terrain, pas théorie" },
 ];
 
 export default function About() {
@@ -25,9 +25,10 @@ export default function About() {
 
           <Reveal delay={100}>
             <p className="mt-8 max-w-md text-base font-light leading-relaxed text-muted">
-              La plupart des consultants vendent des slides. Moi, j&apos;ai
-              construit cinq marques de zéro. Cette expérience, je la mets au
-              service d&apos;une seule chose : faire scaler la vôtre.
+              21 ans chez Gifi, l&apos;un des plus grands groupes de distribution
+              français. Puis six marques bâties de zéro. Je ne vends pas des
+              slides — je mets deux décennies de terrain au service d&apos;une
+              seule chose : faire scaler la vôtre.
             </p>
           </Reveal>
 

@@ -68,7 +68,7 @@ export default function Hero() {
 
         <h1 className="font-display text-[clamp(2.6rem,8vw,6.5rem)] font-light leading-[1.02] tracking-[-0.01em]">
           <span className="block">
-            <RevealText text="J'ai bâti 5 marques." />
+            <RevealText text="21 ans à bâtir des marques." />
           </span>
           <span className="block">
             <RevealText text="Construisons la vôtre." accent />
@@ -79,10 +79,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.75, ease }}
-          className="mt-9 max-w-md text-sm font-light leading-relaxed tracking-wide text-muted"
+          className="mt-9 max-w-lg text-sm font-light leading-relaxed tracking-wide text-muted"
         >
-          Stratégie, acquisition, digital — votre marque en machine de
-          croissance.
+          De la clarity session à l&apos;accompagnement complet — la méthode qui
+          a bâti six marques, au service de votre croissance.
         </motion.p>
 
         <motion.div
@@ -109,6 +109,16 @@ export default function Hero() {
             La méthode
           </a>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.15, ease }}
+          className="mt-10 text-[0.68rem] uppercase tracking-[0.22em] text-muted"
+        >
+          21 ans chez Gifi <span className="text-gold/60">·</span> 6 marques
+          bâties <span className="text-gold/60">·</span> Montpellier
+        </motion.p>
       </motion.div>
 
       {/* Scroll cue */}

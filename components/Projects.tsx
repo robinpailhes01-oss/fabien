@@ -28,9 +28,9 @@ export default function Projects() {
     <section id="realisations" className="relative px-6 py-28 sm:py-40">
       <div className="mx-auto max-w-7xl">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Réalisations</span>
+          <span className="eyebrow">Mes univers de marque</span>
           <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-light leading-[1.08] tracking-tight">
-            <RevealText text="Cinq marques." />{" "}
+            <RevealText text="Six marques bâties." />{" "}
             <RevealText text="Une seule méthode." accent />
           </h2>
         </Reveal>
