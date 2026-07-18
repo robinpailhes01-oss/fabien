@@ -22,13 +22,6 @@ export default function Contact() {
           </h2>
         </Reveal>
 
-        <Reveal delay={160}>
-          <p className="mx-auto mt-8 max-w-sm text-base font-light leading-relaxed text-muted">
-            Un appel. Une vision claire de votre potentiel. Les prochaines
-            étapes.
-          </p>
-        </Reveal>
-
         <Reveal delay={220}>
           <div className="mt-12 flex flex-col items-center gap-7">
             <Magnetic strength={0.4}>
@@ -36,12 +29,9 @@ export default function Contact() {
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block overflow-hidden rounded-full bg-gold px-10 py-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-ink transition-colors duration-500"
+                className="btn-gold px-10 py-4 text-sm"
               >
-                <span className="relative z-10 transition-colors duration-500 group-hover:text-paper">
-                  {CTA_LABEL}
-                </span>
-                <span className="absolute inset-0 origin-left scale-x-0 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+                {CTA_LABEL}
               </a>
             </Magnetic>
 

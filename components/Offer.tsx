@@ -16,7 +16,7 @@ const offers: Offer[] = [
   {
     n: "01",
     name: "Clarity Session",
-    tagline: "Une heure pour y voir clair et repartir avec un cap net.",
+    tagline: "Une heure. Un cap net.",
     format: "En visio · 60 min",
     points: [
       "Diagnostic express de votre situation",
@@ -28,7 +28,7 @@ const offers: Offer[] = [
   {
     n: "02",
     name: "Accompagnement",
-    tagline: "Un partenariat dans la durée pour exécuter et scaler.",
+    tagline: "On exécute ensemble, dans la durée.",
     format: "Sur 3 à 6 mois",
     points: [
       "Stratégie, acquisition & développement digital",
@@ -41,7 +41,7 @@ const offers: Offer[] = [
   {
     n: "03",
     name: "Audit complet",
-    tagline: "Un audit 360° en présentiel, avec plan d'action livré.",
+    tagline: "Une journée chez vous. Un plan d'action livré.",
     format: "Présentiel · 1 journée",
     points: [
       "Immersion dans votre entreprise",
@@ -82,10 +82,6 @@ export default function Offer() {
             <RevealText text="Trois façons" />{" "}
             <RevealText text="d'avancer avec moi." accent />
           </h2>
-          <p className="mx-auto mt-6 max-w-md text-base font-light leading-relaxed text-muted">
-            Du déclic ponctuel à l&apos;accompagnement complet — choisissez le
-            niveau qui vous ressemble.
-          </p>
         </Reveal>
 
         <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -125,10 +121,10 @@ export default function Offer() {
                   href={BOOKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group mt-8 flex items-center justify-center rounded-full px-6 py-3.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] transition-colors duration-500 ${
+                  className={`mt-8 flex items-center justify-center px-6 py-3.5 text-sm ${
                     o.featured
-                      ? "bg-gold text-ink hover:bg-gold-soft"
-                      : "border border-gold/40 text-ink hover:bg-gold hover:text-ink"
+                      ? "btn-gold"
+                      : "rounded-full border border-gold/40 font-medium text-ink transition-colors duration-500 hover:bg-gold hover:text-white"
                   }`}
                 >
                   {o.cta}

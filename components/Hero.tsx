@@ -66,47 +66,41 @@ export default function Hero() {
           Fabien · LS Consulting
         </motion.span>
 
-        <h1 className="font-display text-[clamp(2.6rem,8vw,6.5rem)] font-light leading-[1.02] tracking-[-0.01em]">
-          <span className="block">
-            <RevealText text="21 ans à bâtir des marques." />
-          </span>
-          <span className="block">
-            <RevealText text="Construisons la vôtre." accent />
-          </span>
+        <h1 className="mx-auto max-w-4xl font-display text-[clamp(2.3rem,6vw,4.6rem)] leading-[1.06]">
+          <RevealText text="Le consulting qui fait passer votre marque" />{" "}
+          <RevealText text="au niveau supérieur." accent />
         </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.75, ease }}
-          className="mt-9 max-w-lg text-sm font-light leading-relaxed tracking-wide text-muted"
+          className="mt-7 max-w-md text-base font-light leading-relaxed text-muted"
         >
-          De la clarity session à l&apos;accompagnement complet — la méthode qui
-          a bâti six marques, au service de votre croissance.
+          21 ans de terrain. 6 marques bâties. Une méthode.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.95, ease }}
-          className="mt-12 flex flex-col items-center gap-6 sm:flex-row sm:gap-9"
+          className="mt-10 flex flex-col items-center gap-5 sm:flex-row sm:gap-8"
         >
           <Magnetic>
             <a
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative block overflow-hidden rounded-full border border-gold/40 px-9 py-3.5 text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink transition-colors duration-500"
+              className="btn-gold px-9 py-4 text-sm"
             >
-              <span className="relative z-10">{CTA_LABEL}</span>
-              <span className="absolute inset-0 -z-0 origin-left scale-x-0 bg-gold transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+              {CTA_LABEL}
             </a>
           </Magnetic>
           <a
-            href="#methode"
-            className="link-gold text-[0.7rem] font-light uppercase tracking-[0.24em]"
+            href="#offres"
+            className="link-gold text-sm font-medium"
           >
-            La méthode
+            Découvrir les offres
           </a>
         </motion.div>
 

@@ -42,7 +42,7 @@ export default function StickyCTA() {
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="whitespace-nowrap rounded-full bg-gold px-5 py-2.5 text-[0.6rem] font-medium uppercase tracking-[0.18em] text-ink transition-colors duration-400 hover:bg-gold-soft"
+                className="btn-gold whitespace-nowrap px-5 py-2.5 text-xs"
               >
                 {CTA_LABEL_SHORT}
               </a>

@@ -7,11 +7,8 @@ export default function VSL() {
         <Reveal>
           <span className="eyebrow">À regarder</span>
           <h2 className="mx-auto mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.05] tracking-tight">
-            La méthode derrière 5 marques, en quelques minutes.
+            La méthode, en quelques minutes.
           </h2>
-          <p className="mx-auto mt-6 max-w-md text-sm font-light leading-relaxed text-muted">
-            Ma méthode, et comment l&apos;appliquer à votre marque.
-          </p>
         </Reveal>
 
         <Reveal delay={120} className="mt-14">
@@ -36,8 +33,7 @@ export default function VSL() {
             </button>
 
             <span className="absolute bottom-5 left-6 right-6 text-xs font-light tracking-wide text-muted">
-              Quelques minutes pour comprendre ce que LS Consulting peut changer
-              pour votre marque.
+              VSL — bientôt disponible.
             </span>
           </div>
         </Reveal>

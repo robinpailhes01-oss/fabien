@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="border-t border-[color:var(--hairline)] px-6 py-16">
       <div className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
-          <a href="#accueil" className="font-display text-2xl tracking-wide">
+          <a href="#accueil" className="font-logo text-2xl font-medium tracking-wide">
             Fabien<span className="text-gold">.</span>
           </a>
           <p className="mt-4 max-w-sm text-sm font-light leading-relaxed text-muted">

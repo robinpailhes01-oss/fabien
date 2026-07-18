@@ -4,19 +4,19 @@ import Reveal from "./Reveal";
 const testimonials = [
   {
     quote:
-      "En trois mois, notre positionnement est devenu enfin clair et nos ventes ont suivi. Fabien voit ce que les autres ne voient pas.",
+      "En trois mois, un positionnement clair — et les ventes ont suivi.",
     name: "[Prénom Nom]",
     role: "Fondatrice, [Marque mode]",
   },
   {
     quote:
-      "On est passés d'une acquisition aléatoire à un tunnel qui tourne tout seul. Le meilleur investissement de l'année.",
+      "D'une acquisition aléatoire à un tunnel qui tourne seul.",
     name: "[Prénom Nom]",
     role: "CEO, [Startup SaaS]",
   },
   {
     quote:
-      "Une marque premium crédible et un site qui convertit vraiment. L'exécution est au rendez-vous, pas que les idées.",
+      "Une marque crédible, un site qui convertit. Et surtout : l'exécution.",
     name: "[Prénom Nom]",
     role: "Cofondateur, [Marque lifestyle]",
   },

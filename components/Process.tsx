@@ -7,22 +7,22 @@ const steps = [
   {
     n: "01",
     title: "Appel stratégique",
-    text: "On clarifie votre situation, vos objectifs et le potentiel réel de votre marque.",
+    text: "On clarifie votre situation et votre potentiel.",
   },
   {
     n: "02",
     title: "Diagnostic & plan",
-    text: "J'audite stratégie, acquisition et digital, puis je trace la feuille de route prioritaire.",
+    text: "J'audite, puis je trace la feuille de route.",
   },
   {
     n: "03",
     title: "Exécution",
-    text: "On implémente ensemble : positionnement, canaux, tunnels, écosystème digital.",
+    text: "On implémente ensemble, étape par étape.",
   },
   {
     n: "04",
     title: "Scale",
-    text: "On optimise ce qui marche, on coupe le reste, et on accélère la croissance.",
+    text: "On optimise ce qui marche, on accélère.",
   },
 ];
 

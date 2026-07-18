@@ -195,8 +195,38 @@ html.lenis body {
 }
 
 /* ---- Typographic helpers ---- */
+/* Mindeo-style headlines: bold modern sans, tight tracking.
+   !important beats Tailwind font-light left on existing headings. */
 .font-display {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 800 !important;
+  letter-spacing: -0.035em;
+}
+
+/* Serif kept only for the logo wordmark */
+.font-logo {
   font-family: var(--font-cormorant), Georgia, serif;
+}
+
+/* Filled gold pill button (Mindeo-style primary CTA) */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 14px 34px -14px rgba(169, 130, 63, 0.55);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease,
+    filter 0.4s ease;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 20px 44px -14px rgba(169, 130, 63, 0.65);
 }
 
 .eyebrow {

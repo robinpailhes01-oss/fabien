@@ -6,17 +6,17 @@ const ebooks = [
   {
     tag: "Marque",
     title: "Bâtir une marque désirable",
-    desc: "Les 5 piliers qui transforment une entreprise en marque que l'on choisit.",
+    desc: "Les 5 piliers d'une marque que l'on choisit.",
   },
   {
     tag: "Croissance",
     title: "De 0 à 6 marques",
-    desc: "Le système que j'applique pour lancer, structurer et faire scaler.",
+    desc: "Mon système pour lancer et scaler.",
   },
   {
     tag: "Acquisition",
     title: "L'acquisition qui convertit",
-    desc: "Attirer les bons clients, de façon régulière et rentable.",
+    desc: "Attirer les bons clients, en rentable.",
   },
 ];
 
@@ -31,8 +31,7 @@ export default function Ebooks() {
             <RevealText text="offerts." accent />
           </h2>
           <p className="mx-auto mt-6 max-w-md text-base font-light leading-relaxed text-muted">
-            Des guides concrets, tirés de 21 ans de terrain. À télécharger
-            librement.
+            Des guides concrets, tirés du terrain.
           </p>
         </Reveal>
 

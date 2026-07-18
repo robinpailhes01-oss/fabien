@@ -1,64 +1,78 @@
 import Reveal from "./Reveal";
 import RevealText from "./RevealText";
 
-const pains = [
+const features = [
   {
-    n: "01",
-    title: "Une offre solide, mais invisible",
-    text: "Vous avez quelque chose de rare entre les mains — et pourtant personne ne le connaît vraiment.",
+    title: "Clarté",
+    text: "Un cap net, des priorités évidentes.",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    ),
   },
   {
-    n: "02",
-    title: "Beaucoup d'actions, aucune direction",
-    text: "Vous multipliez posts, pubs et idées sans stratégie qui les relie ni les fasse converger.",
+    title: "Exécution",
+    text: "Étape par étape, sur le terrain.",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M5 13l4 4L19 7"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
   },
   {
-    n: "03",
-    title: "Un plafond que vous ne savez pas percer",
-    text: "Vous sentez que vous pourriez aller 10× plus loin — sans savoir par où commencer.",
+    title: "Croissance",
+    text: "Des résultats suivis et mesurés.",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M4 17l5-5 4 4 7-8"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M15 8h5v5"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
   },
 ];
 
 export default function Problem() {
   return (
-    <section id="constat" className="relative px-6 py-28 sm:py-40">
-      <div className="mx-auto max-w-5xl">
-        <Reveal className="max-w-3xl">
-          <span className="eyebrow">Le constat</span>
-          <h2 className="mt-5 font-display text-[clamp(2rem,5.5vw,4rem)] font-light leading-[1.1] tracking-tight">
-            <RevealText text="Une marque désirable qui ne scale pas," />{" "}
-            <RevealText text="c'est une fortune qui dort." accent />
+    <section id="constat" className="relative px-6 py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <h2 className="font-display text-[clamp(1.9rem,4.5vw,3.2rem)] leading-[1.1]">
+            <RevealText text="Une méthode simple." />{" "}
+            <RevealText text="Des résultats concrets." accent />
           </h2>
         </Reveal>
 
-        <div className="mt-16 flex flex-col">
-          {pains.map((p, i) => (
-            <Reveal key={p.n} delay={i * 80}>
-              <div className="group flex items-start gap-6 border-t border-ink/10 py-8 last:border-b sm:gap-10">
-                <span className="font-display text-2xl text-gold/70 sm:text-3xl">
-                  {p.n}
-                </span>
-                <div className="flex-1">
-                  <h3 className="font-display text-xl font-light tracking-tight sm:text-2xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 max-w-xl text-sm font-light leading-relaxed text-muted">
-                    {p.text}
-                  </p>
-                </div>
+        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {features.map((f, i) => (
+            <Reveal key={f.title} delay={i * 80}>
+              <div className="card-lift panel flex h-full flex-col items-center rounded-3xl p-9 text-center">
+                <span className="icon-badge">{f.icon}</span>
+                <h3 className="mt-5 font-display text-xl">{f.title}</h3>
+                <p className="mt-2 text-sm font-light text-muted">{f.text}</p>
               </div>
             </Reveal>
           ))}
         </div>
-
-        <Reveal delay={120}>
-          <p className="mt-14 max-w-2xl font-display text-2xl font-light leading-snug tracking-tight sm:text-3xl">
-            Ce n&apos;est pas un problème de talent.{" "}
-            <span className="text-gradient-gold">
-              C&apos;est un problème de structure.
-            </span>
-          </p>
-        </Reveal>
       </div>
     </section>
   );

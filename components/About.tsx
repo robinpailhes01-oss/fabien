@@ -25,10 +25,8 @@ export default function About() {
 
           <Reveal delay={100}>
             <p className="mt-8 max-w-md text-base font-light leading-relaxed text-muted">
-              21 ans chez Gifi, l&apos;un des plus grands groupes de distribution
-              français. Puis six marques bâties de zéro. Je ne vends pas des
-              slides — je mets deux décennies de terrain au service d&apos;une
-              seule chose : faire scaler la vôtre.
+              21 ans chez Gifi. Six marques bâties de zéro. Aujourd&apos;hui, je
+              construis la vôtre.
             </p>
           </Reveal>
 
