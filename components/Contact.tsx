@@ -45,9 +45,35 @@ export default function Contact() {
               </a>
             </Magnetic>
 
-            <p className="text-[0.7rem] uppercase tracking-[0.22em] text-muted">
-              Appel offert · Sans engagement · Réponse claire sur votre potentiel
-            </p>
+            <ul className="flex flex-col items-center gap-3 sm:flex-row sm:gap-8">
+              {[
+                "Appel offert",
+                "Sans engagement",
+                "Réponse claire sur votre potentiel",
+              ].map((t) => (
+                <li
+                  key={t}
+                  className="flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-muted"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="text-gold"
+                  >
+                    <path
+                      d="M5 12.5l4 4L19 7"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {t}
+                </li>
+              ))}
+            </ul>
 
             <div className="mt-2 flex items-center gap-6 text-xs uppercase tracking-[0.2em] text-muted">
               <a href={`mailto:${CONTACT_EMAIL}`} className="link-gold">

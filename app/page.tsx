@@ -1,7 +1,9 @@
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
+import StickyCTA from "@/components/StickyCTA";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
+import Problem from "@/components/Problem";
 import About from "@/components/About";
 import Offer from "@/components/Offer";
 import Process from "@/components/Process";
@@ -20,6 +22,7 @@ export default function Home() {
       <main>
         <Hero />
         <Marquee />
+        <Problem />
         <About />
         <Offer />
         <Process />
@@ -30,6 +33,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <StickyCTA />
     </>
   );
 }
