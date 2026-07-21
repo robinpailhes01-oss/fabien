@@ -26,9 +26,11 @@ function LogoChip({ logo }: { logo: Logo }) {
           className="max-h-11 w-auto max-w-full object-contain sm:max-h-14"
         />
       ) : (
-        <span className="text-center leading-tight text-neutral-800">
-          <span className="block text-xl font-extrabold tracking-tight">LS</span>
-          <span className="block text-[0.55rem] font-medium uppercase tracking-[0.35em]">
+        <span className="flex flex-col items-center leading-none text-[#262626]">
+          <span className="font-display text-[2rem] font-black tracking-[-0.05em]">
+            LS
+          </span>
+          <span className="mt-1.5 text-[0.5rem] font-normal uppercase tracking-[0.42em]">
             Consulting
           </span>
         </span>
