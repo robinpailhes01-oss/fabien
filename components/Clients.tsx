@@ -1,9 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import Reveal from "./Reveal";
 
-type Logo = { name: string; src?: string };
+type Logo = { name: string; src?: string; fallbackWordmark?: boolean };
 
-// Brand + client logos. LS Consulting renders as a wordmark
-// until an official logo file is dropped at /public/logos/ls.png.
+// Brand + client logos.
+// LS Consulting: drop the real file at /public/logos/ls.png and it appears
+// automatically (until then, a styled "LS / CONSULTING" wordmark shows).
 const logos: Logo[] = [
   { name: "Sparta Académie", src: "/logos/sparta.png" },
   { name: "Champagne Perla", src: "/logos/perla.png" },
@@ -11,29 +15,39 @@ const logos: Logo[] = [
   { name: "Love Explorers", src: "/logos/lovexplorers.png" },
   { name: "Biwiz", src: "/logos/biwiz.svg" },
   { name: "Maison Bonnaire", src: "/logos/bonnaire.png" },
-  { name: "LS Consulting" },
+  { name: "LS Consulting", src: "/logos/ls.png", fallbackWordmark: true },
 ];
 
+function Wordmark() {
+  return (
+    <span className="flex flex-col items-center leading-none text-[#262626]">
+      <span className="font-display text-[2rem] font-black tracking-[-0.05em]">
+        LS
+      </span>
+      <span className="mt-1.5 text-[0.5rem] font-normal uppercase tracking-[0.42em]">
+        Consulting
+      </span>
+    </span>
+  );
+}
+
 function LogoChip({ logo }: { logo: Logo }) {
+  const [errored, setErrored] = useState(false);
+  const showWordmark = !logo.src || (logo.fallbackWordmark && errored);
+
   return (
     <div className="mr-6 flex h-20 w-44 shrink-0 items-center justify-center rounded-2xl border border-[color:var(--panel-border)] bg-white px-6 shadow-[0_10px_28px_-18px_rgba(70,52,22,0.25)] sm:mr-8 sm:h-24 sm:w-52">
-      {logo.src ? (
+      {showWordmark ? (
+        <Wordmark />
+      ) : (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={logo.src}
           alt={logo.name}
           loading="lazy"
+          onError={() => setErrored(true)}
           className="max-h-11 w-auto max-w-full object-contain sm:max-h-14"
         />
-      ) : (
-        <span className="flex flex-col items-center leading-none text-[#262626]">
-          <span className="font-display text-[2rem] font-black tracking-[-0.05em]">
-            LS
-          </span>
-          <span className="mt-1.5 text-[0.5rem] font-normal uppercase tracking-[0.42em]">
-            Consulting
-          </span>
-        </span>
       )}
     </div>
   );
