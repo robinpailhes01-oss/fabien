@@ -1,9 +1,19 @@
-// Centralised site configuration.
-// Replace BOOKING_URL with Fabien's real Calendly / booking link.
+// Centralised site configuration — real links & contact info.
+
+// Step 1 of the funnel: free 30-min discovery call (main CTA everywhere).
 export const BOOKING_URL =
-  "https://calendly.com/fabien-lsconsulting/appel-strategique";
+  "https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit";
 
-export const CONTACT_EMAIL = "contact@lsconsulting.fr";
+// Per-offer Calendly links.
+export const CALENDLY_CLARITY =
+  "https://calendly.com/fabienquetel_lsconsulting/rdv-clarity-session-clone";
+export const CALENDLY_BUSINESS360 =
+  "https://calendly.com/fabienquetel_lsconsulting/nouvelle-reunion";
 
-export const CTA_LABEL = "Réserver mon appel stratégique";
-export const CTA_LABEL_SHORT = "Réserver mon appel";
+export const CONTACT_EMAIL = "contact@ls-consulting.fr";
+export const CONTACT_PHONE = "06 50 71 03 65";
+
+export const VSL_YOUTUBE_ID = "K79PwZ5USZA";
+
+export const CTA_LABEL = "Réserver mon appel découverte offert";
+export const CTA_LABEL_SHORT = "Appel découverte offert";

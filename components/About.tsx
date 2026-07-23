@@ -6,7 +6,7 @@ import CountUp from "./CountUp";
 const stats = [
   { value: "21", label: "Ans d'expérience" },
   { value: "6", label: "Marques bâties" },
-  { value: "100%", label: "Terrain, pas théorie" },
+  { value: "100+", label: "Entreprises accompagnées" },
 ];
 
 export default function About() {

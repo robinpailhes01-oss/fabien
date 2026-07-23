@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { VSL_YOUTUBE_ID } from "./site-config";
 
 export default function VSL() {
   return (
@@ -12,29 +13,15 @@ export default function VSL() {
         </Reveal>
 
         <Reveal delay={120} className="mt-14">
-          {/* Replace this block with the real VSL embed (YouTube / Vimeo / mux) */}
-          <div
-            className="group relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/20 bg-paper-soft"
-            data-vsl-placeholder
-          >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,168,106,0.12),transparent_70%)]" />
-
-            {/* Soft animated sheen */}
-            <div className="pointer-events-none absolute -inset-x-1/2 inset-y-0 -skew-x-12 bg-gradient-to-r from-transparent via-gold/[0.06] to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-
-            <button
-              aria-label="Lire la vidéo"
-              className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-paper/40 backdrop-blur-sm transition-all duration-500 group-hover:scale-110 group-hover:border-gold group-hover:bg-gold/10"
-            >
-              <span className="absolute inset-0 animate-ping rounded-full border border-gold/30" />
-              <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
-                <path d="M21 13L0 25.99V0L21 13Z" fill="#c9a86a" />
-              </svg>
-            </button>
-
-            <span className="absolute bottom-5 left-6 right-6 text-xs font-light tracking-wide text-muted">
-              VSL — bientôt disponible.
-            </span>
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/20 bg-paper-soft shadow-[0_30px_70px_-40px_rgba(70,52,22,0.45)]">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${VSL_YOUTUBE_ID}?rel=0&modestbranding=1`}
+              title="LS Consulting — la méthode de Fabien Quetel"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+              className="absolute inset-0 h-full w-full"
+            />
           </div>
         </Reveal>
       </div>

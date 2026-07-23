@@ -110,8 +110,9 @@ export default function Hero() {
           transition={{ duration: 1, delay: 1.15, ease }}
           className="mt-10 text-[0.68rem] uppercase tracking-[0.22em] text-muted"
         >
-          21 ans chez Gifi <span className="text-gold/60">·</span> 6 marques
-          bâties <span className="text-gold/60">·</span> Montpellier
+          21 ans d&apos;expérience <span className="text-gold/60">·</span> +100
+          entreprises accompagnées <span className="text-gold/60">·</span>{" "}
+          Montpellier
         </motion.p>
       </motion.div>
 

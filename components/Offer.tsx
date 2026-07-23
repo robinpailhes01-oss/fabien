@@ -1,14 +1,21 @@
 import Reveal from "./Reveal";
 import RevealText from "./RevealText";
-import { BOOKING_URL } from "./site-config";
+import {
+  BOOKING_URL,
+  CALENDLY_CLARITY,
+  CALENDLY_BUSINESS360,
+} from "./site-config";
 
 type Offer = {
   n: string;
   name: string;
   tagline: string;
   format: string;
+  price: string;
+  priceNote?: string;
   points: string[];
   cta: string;
+  href: string;
   featured?: boolean;
 };
 
@@ -16,39 +23,47 @@ const offers: Offer[] = [
   {
     n: "01",
     name: "Clarity Session",
-    tagline: "Une heure. Un cap net.",
-    format: "En visio · 60 min",
+    tagline: "Prendre du recul, clarifier vos priorités.",
+    format: "2h · En présentiel",
+    price: "150 €",
+    priceNote: "TTC",
     points: [
-      "Diagnostic express de votre situation",
-      "Vos priorités et prochaines actions",
-      "Une direction claire, tout de suite",
+      "Analyse de votre business",
+      "3 à 5 priorités à fort impact",
+      "Feuille de route personnalisée",
     ],
     cta: "Réserver ma session",
+    href: CALENDLY_CLARITY,
   },
   {
     n: "02",
-    name: "Accompagnement",
-    tagline: "On exécute ensemble, dans la durée.",
-    format: "Sur 3 à 6 mois",
+    name: "Business 360°",
+    tagline: "Une immersion complète au cœur de votre entreprise.",
+    format: "2 jours · Sur site",
+    price: "650 €",
+    priceNote: "TTC",
     points: [
-      "Stratégie, acquisition & développement digital",
-      "Un partenaire à chaque étape",
-      "Des résultats suivis et mesurés",
+      "Audit 360° de votre organisation",
+      "Analyse des process, outils & performance",
+      "Plan d'actions priorisé",
     ],
-    cta: "Candidater",
+    cta: "Réserver mon audit",
+    href: CALENDLY_BUSINESS360,
     featured: true,
   },
   {
     n: "03",
-    name: "Audit complet",
-    tagline: "Une journée chez vous. Un plan d'action livré.",
-    format: "Présentiel · 1 journée",
+    name: "Accompagnement",
+    tagline: "Mettre en œuvre, piloter, accélérer vos résultats.",
+    format: "Sur mesure · 1 semaine à 3 mois+",
+    price: "Sur mesure",
     points: [
-      "Immersion dans votre entreprise",
-      "Analyse marque, stratégie & croissance",
-      "Plan d'action détaillé remis",
+      "Pilotage stratégique",
+      "Mise en place & suivi des actions",
+      "Coaching & résultats mesurables",
     ],
-    cta: "Réserver mon audit",
+    cta: "Prendre rendez-vous",
+    href: BOOKING_URL,
   },
 ];
 
@@ -94,7 +109,7 @@ export default function Offer() {
               >
                 {o.featured && (
                   <span className="absolute right-6 top-6 tag-badge">
-                    Le plus choisi
+                    Le plus complet
                   </span>
                 )}
                 <span className="font-display text-sm text-gold">{o.n}</span>
@@ -108,7 +123,16 @@ export default function Offer() {
                   {o.tagline}
                 </p>
 
-                <ul className="mt-7 flex flex-1 flex-col gap-3 border-t border-[color:var(--hairline)] pt-7">
+                <div className="mt-6 flex items-baseline gap-2">
+                  <span className="font-display text-4xl">{o.price}</span>
+                  {o.priceNote && (
+                    <span className="text-xs uppercase tracking-[0.15em] text-muted">
+                      {o.priceNote}
+                    </span>
+                  )}
+                </div>
+
+                <ul className="mt-6 flex flex-1 flex-col gap-3 border-t border-[color:var(--hairline)] pt-6">
                   {o.points.map((p) => (
                     <li key={p} className="flex gap-3 text-sm">
                       <Check />
@@ -118,7 +142,7 @@ export default function Offer() {
                 </ul>
 
                 <a
-                  href={BOOKING_URL}
+                  href={o.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`mt-8 flex items-center justify-center px-6 py-3.5 text-sm ${
@@ -133,6 +157,21 @@ export default function Offer() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-10 text-center">
+          <p className="text-sm font-light text-muted">
+            Pas encore sûr ?{" "}
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-gold font-medium"
+            >
+              Commencez par un appel découverte offert de 30 min
+            </a>{" "}
+            — sans engagement.
+          </p>
+        </Reveal>
       </div>
     </section>
   );

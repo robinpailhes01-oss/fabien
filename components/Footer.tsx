@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL } from "./site-config";
+import { CONTACT_EMAIL, CONTACT_PHONE } from "./site-config";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -38,6 +38,12 @@ export default function Footer() {
           >
             {CONTACT_EMAIL}
           </a>
+          <a
+            href={`tel:+33${CONTACT_PHONE.replaceAll(" ", "").slice(1)}`}
+            className="link-gold mt-2 block text-sm font-light"
+          >
+            {CONTACT_PHONE}
+          </a>
           <div className="mt-4 flex gap-5 text-xs uppercase tracking-[0.18em] text-muted">
             <a
               href="https://www.instagram.com/"
@@ -60,7 +66,7 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto mt-14 flex max-w-7xl flex-col items-start justify-between gap-3 border-t border-[color:var(--hairline)] pt-8 text-[0.7rem] tracking-wide text-muted sm:flex-row sm:items-center">
-        <p>© {year} Fabien — LS Consulting</p>
+        <p>© {year} Fabien Quetel — LS Consulting</p>
         <p>SARL Layonn Style Holding · SIRET 880 325 949</p>
       </div>
     </footer>
