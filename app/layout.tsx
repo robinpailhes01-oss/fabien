@@ -18,14 +18,14 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Fabien — LS Consulting · Stratégie & croissance de marque",
+  title: "LS Consulting — Conseil stratégique · Fabien Quetel",
   description:
-    "21 ans d'expérience, 6 marques bâties. Avec LS Consulting, Fabien accompagne les entrepreneurs : clarity session, accompagnement et audit d'entreprise complet. Réservez votre appel.",
+    "Le consulting qui transforme votre business en résultats durables. +20 ans d'expérience terrain, +100 entreprises accompagnées. Clarity Session, Immersion 360, accompagnement sur mesure.",
   metadataBase: new URL("https://fabien.com"),
   openGraph: {
-    title: "Fabien — LS Consulting",
+    title: "LS Consulting — Conseil stratégique",
     description:
-      "21 ans d'expérience. La méthode qui a bâti 6 marques, au service de votre croissance.",
+      "Le consulting qui transforme votre business en résultats durables.",
     type: "website",
     locale: "fr_FR",
   },

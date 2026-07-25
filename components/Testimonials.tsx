@@ -30,10 +30,10 @@ export default function Testimonials() {
     >
       <div className="mx-auto max-w-7xl">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Ils témoignent</span>
-          <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-light leading-[1] tracking-tight">
-            Des fondateurs,
-            <span className="text-gradient-gold"> des résultats.</span>
+          <span className="eyebrow">Témoignages</span>
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4rem)] font-light leading-[1] tracking-tight">
+            Des décideurs.
+            <span className="text-gradient-gold"> Des résultats.</span>
           </h2>
         </Reveal>
 

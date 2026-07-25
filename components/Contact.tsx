@@ -12,14 +12,12 @@ export default function Contact() {
         </Reveal>
 
         <Reveal delay={80}>
-          <h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(2.4rem,7vw,5.5rem)] font-light leading-[1.05] tracking-tight">
-            <span className="block">
-              <RevealText text="Votre marque mérite de scaler." />
-            </span>
-            <span className="block">
-              <RevealText text="Commençons maintenant." accent />
-            </span>
+          <h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(2rem,5vw,3.8rem)] font-light leading-[1.1] tracking-tight">
+            <RevealText text="Votre entreprise mérite une attention particulière et un investissement de chaque instant." />
           </h2>
+          <p className="mt-6 font-display text-[clamp(1.5rem,3.5vw,2.4rem)]">
+            <RevealText text="Commençons dès maintenant." accent />
+          </p>
         </Reveal>
 
         <Reveal delay={220}>

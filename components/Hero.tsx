@@ -11,8 +11,25 @@ import {
 import { BOOKING_URL, CTA_LABEL } from "./site-config";
 import Magnetic from "./Magnetic";
 import RevealText from "./RevealText";
+import CountUp from "./CountUp";
 
 const ease = [0.16, 1, 0.3, 1] as const;
+
+const audiences = ["Décideurs", "Managers", "Entrepreneurs francophones"];
+
+const zones = [
+  { flag: "🇫🇷", name: "France" },
+  { flag: "🇪🇸", name: "Espagne" },
+  { flag: "🇮🇹", name: "Italie" },
+  { flag: "🇮🇩", name: "Bali" },
+  { flag: "🇲🇽", name: "Mexique" },
+];
+
+const stats = [
+  { value: "20", prefix: "+", label: "ans d'expérience terrain" },
+  { value: "100+", prefix: "+", label: "entreprises accompagnées" },
+  { value: "6", prefix: "", label: "marques bâties" },
+];
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -39,9 +56,9 @@ export default function Hero() {
       ref={ref}
       id="accueil"
       onMouseMove={onMove}
-      className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
+      className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden pt-28 sm:pt-24"
     >
-      {/* Premium gold glow (replaces the 3D bubbles) */}
+      {/* Premium gold glow */}
       <motion.div style={{ y: glowY }} className="absolute inset-0 z-0">
         <motion.div style={{ x: px, y: py }} className="absolute inset-0">
           <span className="hero-glow" />
@@ -55,36 +72,52 @@ export default function Hero() {
       {/* Content */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-20 flex flex-col items-center px-6 text-center"
+        className="relative z-20 flex flex-col items-center px-6 pb-16 text-center"
       >
         <motion.span
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease }}
-          className="mb-9 text-[0.66rem] font-light uppercase tracking-[0.5em] text-gold/90"
+          className="mb-8 text-[0.66rem] font-light uppercase tracking-[0.5em] text-gold/90"
         >
-          Fabien · LS Consulting
+          LS Consulting · Conseil stratégique
         </motion.span>
 
-        <h1 className="mx-auto max-w-4xl font-display text-[clamp(2.3rem,6vw,4.6rem)] leading-[1.06]">
-          <RevealText text="Le consulting qui fait passer votre marque" />{" "}
-          <RevealText text="au niveau supérieur." accent />
+        <h1 className="mx-auto max-w-4xl font-display text-[clamp(2.2rem,5.6vw,4.3rem)] leading-[1.06]">
+          <RevealText text="Le consulting qui transforme votre business" />{" "}
+          <RevealText text="en résultats durables." accent />
         </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.75, ease }}
-          className="mt-7 max-w-md text-base font-light leading-relaxed text-muted"
+          transition={{ duration: 1, delay: 0.7, ease }}
+          className="mt-6 max-w-lg text-base font-light leading-relaxed text-muted"
         >
-          21 ans de terrain. 6 marques bâties. Une méthode.
+          Un écosystème de cinq marques intégrées au service de votre
+          croissance.
         </motion.p>
 
+        {/* Audiences */}
+        <motion.ul
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.85, ease }}
+          className="mt-7 flex flex-wrap items-center justify-center gap-2.5"
+        >
+          {audiences.map((a) => (
+            <li key={a} className="tag-badge">
+              {a}
+            </li>
+          ))}
+        </motion.ul>
+
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.95, ease }}
-          className="mt-10 flex flex-col items-center gap-5 sm:flex-row sm:gap-8"
+          transition={{ duration: 1, delay: 1, ease }}
+          className="mt-9 flex flex-col items-center gap-5 sm:flex-row sm:gap-8"
         >
           <Magnetic>
             <a
@@ -96,36 +129,51 @@ export default function Hero() {
               {CTA_LABEL}
             </a>
           </Magnetic>
-          <a
-            href="#offres"
-            className="link-gold text-sm font-medium"
-          >
+          <a href="#offres" className="link-gold text-sm font-medium">
             Découvrir les offres
           </a>
         </motion.div>
 
-        <motion.p
+        {/* Presence */}
+        <motion.ul
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.15, ease }}
-          className="mt-10 text-[0.68rem] uppercase tracking-[0.22em] text-muted"
+          className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
         >
-          21 ans d&apos;expérience <span className="text-gold/60">·</span> +100
-          entreprises accompagnées <span className="text-gold/60">·</span>{" "}
-          Montpellier
-        </motion.p>
-      </motion.div>
+          {zones.map((z) => (
+            <li
+              key={z.name}
+              className="flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.18em] text-muted"
+            >
+              <span className="text-sm">{z.flag}</span>
+              {z.name}
+            </li>
+          ))}
+        </motion.ul>
 
-      {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.3 }}
-        className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2"
-      >
-        <span className="relative h-10 w-px overflow-hidden bg-ink/15">
-          <span className="animate-scrollcue absolute left-0 top-0 h-1/2 w-full bg-gold" />
-        </span>
+        {/* Stats — Mindeo-style row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.3, ease }}
+          className="mt-12 grid w-full max-w-2xl grid-cols-3 gap-4"
+        >
+          {stats.map((s) => (
+            <div
+              key={s.label}
+              className="flex flex-col items-center border-l border-gold/30 first:border-l-0"
+            >
+              <span className="font-display text-3xl text-ink sm:text-4xl">
+                {s.prefix === "+" && !s.value.endsWith("+") ? "+" : ""}
+                <CountUp value={s.value} />
+              </span>
+              <span className="mt-1 max-w-[9rem] text-[0.62rem] uppercase leading-snug tracking-[0.16em] text-muted">
+                {s.label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
       </motion.div>
     </section>
   );

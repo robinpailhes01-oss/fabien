@@ -1,4 +1,10 @@
-import { CONTACT_EMAIL, CONTACT_PHONE } from "./site-config";
+import Link from "next/link";
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  INSTAGRAM_URL,
+  WHATSAPP_URL,
+} from "./site-config";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -6,12 +12,16 @@ export default function Footer() {
     <footer className="border-t border-[color:var(--hairline)] px-6 py-16">
       <div className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
-          <a href="#accueil" className="font-logo text-2xl font-medium tracking-wide">
-            Fabien<span className="text-gold">.</span>
+          <a href="#accueil" className="inline-block">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logos/ls.png"
+              alt="LS Consulting"
+              className="dark-invertible h-14 w-auto"
+            />
           </a>
-          <p className="mt-4 max-w-sm text-sm font-light leading-relaxed text-muted">
-            Fondateur de six marques. 21 ans de terrain. Aujourd&apos;hui, je
-            construis la vôtre.
+          <p className="mt-4 text-[0.65rem] uppercase tracking-[0.3em] text-muted">
+            Stratégie · Impact · Croissance
           </p>
         </div>
 
@@ -46,7 +56,7 @@ export default function Footer() {
           </a>
           <div className="mt-4 flex gap-5 text-xs uppercase tracking-[0.18em] text-muted">
             <a
-              href="https://www.instagram.com/"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="link-gold"
@@ -54,12 +64,12 @@ export default function Footer() {
               Instagram
             </a>
             <a
-              href="https://www.linkedin.com/"
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="link-gold"
             >
-              LinkedIn
+              WhatsApp
             </a>
           </div>
         </div>
@@ -67,7 +77,12 @@ export default function Footer() {
 
       <div className="mx-auto mt-14 flex max-w-7xl flex-col items-start justify-between gap-3 border-t border-[color:var(--hairline)] pt-8 text-[0.7rem] tracking-wide text-muted sm:flex-row sm:items-center">
         <p>© {year} Fabien Quetel — LS Consulting</p>
-        <p>SARL Layonn Style Holding · SIRET 880 325 949</p>
+        <div className="flex flex-wrap gap-x-5 gap-y-1">
+          <p>SARL Layonn Style Holding · SIRET 880 325 949</p>
+          <Link href="/mentions-legales" className="link-gold">
+            Mentions légales & confidentialité
+          </Link>
+        </div>
       </div>
     </footer>
   );

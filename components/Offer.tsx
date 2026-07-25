@@ -24,12 +24,13 @@ const offers: Offer[] = [
     n: "01",
     name: "Clarity Session",
     tagline: "Prendre du recul, clarifier vos priorités.",
-    format: "2h · En présentiel",
-    price: "150 €",
+    format: "2h · Présentiel ou visio",
+    price: "250 €",
     priceNote: "TTC",
     points: [
-      "Analyse de votre business",
+      "Analyse du business",
       "3 à 5 priorités à fort impact",
+      "Carte mentale",
       "Feuille de route personnalisée",
     ],
     cta: "Réserver ma session",
@@ -37,30 +38,34 @@ const offers: Offer[] = [
   },
   {
     n: "02",
-    name: "Business 360°",
+    name: "Immersion 360",
     tagline: "Une immersion complète au cœur de votre entreprise.",
     format: "2 jours · Sur site",
-    price: "650 €",
+    price: "890 €",
     priceNote: "TTC",
     points: [
-      "Audit 360° de votre organisation",
-      "Analyse des process, outils & performance",
-      "Plan d'actions priorisé",
+      "Audit 360 de l'entreprise",
+      "Analyse CA, marges & objectifs",
+      "Analyse des process, outils & performances",
+      "Accompagnement managérial si nécessaire",
+      "Plan d'action priorisé",
     ],
-    cta: "Réserver mon audit",
+    cta: "Réserver mon immersion",
     href: CALENDLY_BUSINESS360,
     featured: true,
   },
   {
     n: "03",
-    name: "Accompagnement",
-    tagline: "Mettre en œuvre, piloter, accélérer vos résultats.",
-    format: "Sur mesure · 1 semaine à 3 mois+",
+    name: "Accompagnement sur mesure",
+    tagline: "Mettre en œuvre, piloter et accélérer les résultats.",
+    format: "1 semaine à 3 mois+",
     price: "Sur mesure",
     points: [
+      "Intégration dans l'entreprise selon les besoins",
       "Pilotage stratégique",
-      "Mise en place & suivi des actions",
-      "Coaching & résultats mesurables",
+      "Mise en œuvre des actions",
+      "Coaching",
+      "Résultats mesurables",
     ],
     cta: "Prendre rendez-vous",
     href: BOOKING_URL,
@@ -93,9 +98,9 @@ export default function Offer() {
       <div className="mx-auto max-w-7xl">
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">Travailler ensemble</span>
-          <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.5rem)] font-light leading-[1.08] tracking-tight">
-            <RevealText text="Trois façons" />{" "}
-            <RevealText text="d'avancer avec moi." accent />
+          <h2 className="mt-5 font-display text-[clamp(2.2rem,6vw,4.2rem)] font-light leading-[1.08] tracking-tight">
+            <RevealText text="3 piliers" />{" "}
+            <RevealText text="d'accompagnement." accent />
           </h2>
         </Reveal>
 
@@ -104,12 +109,14 @@ export default function Offer() {
             <Reveal key={o.n} className="h-full">
               <div
                 className={`card-lift panel relative flex h-full flex-col rounded-3xl p-8 sm:p-10 ${
-                  o.featured ? "ring-1 ring-gold/40" : ""
+                  o.featured
+                    ? "ring-2 ring-gold/60 shadow-[0_36px_80px_-40px_rgba(169,130,63,0.5)] lg:-my-4 lg:scale-[1.03]"
+                    : ""
                 }`}
               >
                 {o.featured && (
                   <span className="absolute right-6 top-6 tag-badge">
-                    Le plus complet
+                    Offre principale
                   </span>
                 )}
                 <span className="font-display text-sm text-gold">{o.n}</span>

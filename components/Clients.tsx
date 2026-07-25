@@ -5,10 +5,9 @@ import Reveal from "./Reveal";
 
 type Logo = { name: string; src?: string; fallbackWordmark?: boolean };
 
-// Brand + client logos.
-// LS Consulting: drop the real file at /public/logos/ls.png and it appears
-// automatically (until then, a styled "LS / CONSULTING" wordmark shows).
+// Companies Fabien has worked with — logos shown without chips ("sans fond").
 const logos: Logo[] = [
+  { name: "GIFI", src: "/logos/gifi.svg" },
   { name: "Sparta Académie", src: "/logos/sparta.png" },
   { name: "Champagne Perla", src: "/logos/perla.png" },
   { name: "Layonn", src: "/logos/layonn.png" },
@@ -20,23 +19,23 @@ const logos: Logo[] = [
 
 function Wordmark() {
   return (
-    <span className="flex flex-col items-center leading-none text-[#262626]">
-      <span className="font-display text-[2rem] font-black tracking-[-0.05em]">
+    <span className="flex flex-col items-center leading-none text-ink/80">
+      <span className="font-display text-[1.7rem] font-black tracking-[-0.05em]">
         LS
       </span>
-      <span className="mt-1.5 text-[0.5rem] font-normal uppercase tracking-[0.42em]">
+      <span className="mt-1 text-[0.45rem] font-normal uppercase tracking-[0.42em]">
         Consulting
       </span>
     </span>
   );
 }
 
-function LogoChip({ logo }: { logo: Logo }) {
+function LogoItem({ logo }: { logo: Logo }) {
   const [errored, setErrored] = useState(false);
   const showWordmark = !logo.src || (logo.fallbackWordmark && errored);
 
   return (
-    <div className="mr-6 flex h-20 w-44 shrink-0 items-center justify-center rounded-2xl border border-[color:var(--panel-border)] bg-white px-6 shadow-[0_10px_28px_-18px_rgba(70,52,22,0.25)] sm:mr-8 sm:h-24 sm:w-52">
+    <span className="mr-16 flex h-14 shrink-0 items-center sm:mr-24">
       {showWordmark ? (
         <Wordmark />
       ) : (
@@ -46,10 +45,10 @@ function LogoChip({ logo }: { logo: Logo }) {
           alt={logo.name}
           loading="lazy"
           onError={() => setErrored(true)}
-          className="max-h-11 w-auto max-w-full object-contain sm:max-h-14"
+          className="max-h-11 w-auto max-w-[10rem] object-contain opacity-85 transition-opacity duration-500 hover:opacity-100 sm:max-h-12 sm:max-w-[12rem]"
         />
       )}
-    </div>
+    </span>
   );
 }
 
@@ -60,12 +59,12 @@ export default function Clients() {
     <section className="relative border-y border-[color:var(--hairline)] py-12 sm:py-16">
       <Reveal className="mx-auto max-w-7xl">
         <p className="px-6 text-center text-xs uppercase tracking-[0.28em] text-muted">
-          Ils me font <span className="text-gold">confiance</span>
+          Entreprises <span className="text-gold">accompagnées</span>
         </p>
         <div className="marquee-mask mt-8 overflow-hidden">
           <div className="marquee-track flex w-max items-center">
             {doubled.map((l, i) => (
-              <LogoChip key={`${l.name}-${i}`} logo={l} />
+              <LogoItem key={`${l.name}-${i}`} logo={l} />
             ))}
           </div>
         </div>

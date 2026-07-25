@@ -15,6 +15,8 @@
   --gold: #a9823f;
   --gold-soft: #c9a86a;
   --gold-deep: #7c5c26;
+  --violet: #4e2a5e;
+  --violet-soft: #a79bc8;
   --veil: 248, 245, 239; /* paper, for hero gradients */
 
   --panel-border: rgba(27, 23, 18, 0.07);
@@ -35,6 +37,8 @@
   --gold: #c9a86a;
   --gold-soft: #e4cf9f;
   --gold-deep: #9b7e45;
+  --violet: #a79bc8;
+  --violet-soft: #cfc4e6;
   --veil: 11, 10, 8; /* noir, for hero gradients */
 
   --panel-border: rgba(201, 168, 106, 0.14);
@@ -53,6 +57,8 @@
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-gold-deep: var(--gold-deep);
+  --color-violet: var(--violet);
+  --color-violet-soft: var(--violet-soft);
 
   --font-display: var(--font-cormorant);
   --font-sans: var(--font-inter);
@@ -138,6 +144,28 @@ body {
   );
   border: 1px solid rgba(201, 168, 106, 0.28);
   box-shadow: 0 0 26px -8px rgba(201, 168, 106, 0.5);
+}
+
+/* violet variant of the icon badge (touches violettes) */
+.icon-badge--violet {
+  color: var(--violet);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--violet) 16%, transparent),
+    color-mix(in srgb, var(--violet) 3%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--violet) 32%, transparent);
+  box-shadow: 0 0 26px -8px color-mix(in srgb, var(--violet) 45%, transparent);
+}
+.tag-badge--violet {
+  border-color: color-mix(in srgb, var(--violet) 30%, transparent);
+  background: color-mix(in srgb, var(--violet) 8%, transparent);
+  color: var(--violet);
+}
+
+/* Dark-theme inversion for charcoal logos (LS wordmark) */
+[data-theme="dark"] .dark-invertible {
+  filter: invert(1) brightness(1.4);
 }
 
 /* ---- Small tag / step badge ---- */

@@ -7,7 +7,6 @@ import VSL from "@/components/VSL";
 import Problem from "@/components/Problem";
 import About from "@/components/About";
 import Offer from "@/components/Offer";
-import Process from "@/components/Process";
 import Projects from "@/components/Projects";
 import Testimonials from "@/components/Testimonials";
 import Ebooks from "@/components/Ebooks";
@@ -26,7 +25,6 @@ export default function Home() {
         <Problem />
         <About />
         <Offer />
-        <Process />
         <Projects />
         <Testimonials />
         <Ebooks />
