@@ -6,9 +6,9 @@ export default function VSL() {
     <section id="vsl" className="relative px-6 py-28 sm:py-40">
       <div className="mx-auto max-w-5xl text-center">
         <Reveal>
-          <span className="eyebrow">À regarder</span>
+          <span className="eyebrow">La VSL</span>
           <h2 className="mx-auto mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.05] tracking-tight">
-            La méthode, en quelques minutes.
+            Ma méthode en quelques secondes.
           </h2>
         </Reveal>
 

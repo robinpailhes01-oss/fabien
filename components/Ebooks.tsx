@@ -11,7 +11,7 @@ const ebooks = [
 
 export default function Ebooks() {
   return (
-    <section id="ressources" className="relative px-6 py-24 sm:py-32">
+    <section id="ebooks" className="relative px-6 py-24 sm:py-32">
       <div className="mx-auto max-w-5xl">
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="eyebrow">Mes e-books</span>

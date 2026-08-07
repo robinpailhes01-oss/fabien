@@ -5,20 +5,26 @@ export const BOOKING_URL =
   "https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit";
 
 // Per-offer Calendly links.
+// TODO: Fabien must send the correct Clarity Session event link — until then
+// this points to his Calendly profile so visitors pick the right event type.
 export const CALENDLY_CLARITY =
-  "https://calendly.com/fabienquetel_lsconsulting/rdv-clarity-session-clone";
+  "https://calendly.com/fabienquetel_lsconsulting";
 export const CALENDLY_BUSINESS360 =
   "https://calendly.com/fabienquetel_lsconsulting/nouvelle-reunion";
 
-export const CONTACT_EMAIL = "fabienquetel@lionstyle.com";
-export const CONTACT_PHONE = "06 50 71 03 65";
+export const CONTACT_EMAIL = "fabienquetel@layonnstyle.com";
+export const CONTACT_PHONE = "06 25 24 48 78";
 
-// WhatsApp direct (derive du numero ci-dessus — a confirmer par Fabien).
-export const WHATSAPP_URL = "https://wa.me/33650710365";
+// WhatsApp direct.
+export const WHATSAPP_URL = "https://wa.me/33625244878";
 
-export const INSTAGRAM_URL = "https://www.instagram.com/";
+export const INSTAGRAM_URL =
+  "https://www.instagram.com/ls_consulting_fr?igsh=N3M0bDdteHFvb3Zt";
 
 export const VSL_YOUTUBE_ID = "K79PwZ5USZA";
+
+// WhatsApp-style voice note from Fabien (drop the file at this path).
+export const VOICE_NOTE_SRC = "/audio/fabien-message.mp3";
 
 export const CTA_LABEL = "Réserver mon appel découverte offert";
 export const CTA_LABEL_SHORT = "Appel découverte offert";

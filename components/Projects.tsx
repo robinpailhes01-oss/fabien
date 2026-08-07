@@ -54,11 +54,11 @@ export default function Projects() {
   const doubled = [...brands, ...brands];
   return (
     <section
-      id="marques"
+      id="ecosysteme"
       className="relative border-y border-[color:var(--hairline)] px-0 py-20 sm:py-24"
     >
       <Reveal className="mx-auto max-w-3xl px-6 text-center">
-        <span className="eyebrow">Mon univers de marques</span>
+        <span className="eyebrow">Mon écosystème</span>
         <h2 className="mt-5 font-display text-[clamp(1.9rem,4.5vw,3.2rem)] leading-[1.1]">
           <RevealText text="Un écosystème au service" />{" "}
           <RevealText text="de votre entreprise." accent />

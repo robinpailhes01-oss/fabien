@@ -7,8 +7,8 @@ import { BOOKING_URL, CTA_LABEL_SHORT, WHATSAPP_URL } from "./site-config";
 
 const links = [
   { label: "Offres", href: "#offres" },
-  { label: "Mes marques", href: "#marques" },
-  { label: "Ressources", href: "#ressources" },
+  { label: "Mon écosystème", href: "#ecosysteme" },
+  { label: "E-books", href: "#ebooks" },
   { label: "Contact", href: "#contact" },
 ];
 

@@ -36,10 +36,14 @@ export default function About() {
         </Reveal>
 
         <Reveal delay={140}>
-          <p className="mx-auto mt-6 max-w-2xl text-base font-light leading-relaxed text-muted">
-            Après plus de 20 ans comme décideur dans le retail et après avoir
-            créé plusieurs entreprises, j&apos;accompagne aujourd&apos;hui les
-            dirigeants à structurer, développer et accélérer leur activité.
+          <blockquote className="mx-auto mt-7 max-w-2xl font-logo text-[1.35rem] italic leading-relaxed text-ink-soft sm:text-[1.6rem]">
+            «&nbsp;Après plus de 20 ans comme décideur dans le retail et après
+            avoir créé plusieurs entreprises, j&apos;accompagne aujourd&apos;hui
+            les dirigeants à structurer, développer et accélérer leur
+            activité.&nbsp;»
+          </blockquote>
+          <p className="mt-5 text-[0.65rem] uppercase tracking-[0.25em] text-gold">
+            Fabien Quetel · Fondateur
           </p>
         </Reveal>
 
