@@ -4,14 +4,14 @@ import StickyCTA from "@/components/StickyCTA";
 import Hero from "@/components/Hero";
 import Clients from "@/components/Clients";
 import VSL from "@/components/VSL";
-import VoiceNote from "@/components/VoiceNote";
 import Problem from "@/components/Problem";
-import About from "@/components/About";
+import VoiceNote from "@/components/VoiceNote";
 import Offer from "@/components/Offer";
 import Projects from "@/components/Projects";
 import Testimonials from "@/components/Testimonials";
 import Ebooks from "@/components/Ebooks";
 import Contact from "@/components/Contact";
+import About from "@/components/About";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -23,14 +23,14 @@ export default function Home() {
         <Hero />
         <Clients />
         <VSL />
-        <VoiceNote />
         <Problem />
-        <About />
+        <VoiceNote />
         <Offer />
         <Projects />
         <Testimonials />
         <Ebooks />
         <Contact />
+        <About />
       </main>
       <Footer />
       <StickyCTA />

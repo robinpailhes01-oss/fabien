@@ -77,7 +77,7 @@ export default function VoiceNote() {
           {/* Avatar */}
           <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full ring-2 ring-white/70 sm:h-12 sm:w-12">
             <Image
-              src="/images/fabien.jpg"
+              src="/images/fabien-avatar.jpg"
               alt="Fabien Quetel"
               fill
               sizes="48px"

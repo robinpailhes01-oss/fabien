@@ -17,7 +17,7 @@ export default function About() {
         <Reveal className="flex justify-center">
           <div className="relative h-36 w-36 overflow-hidden rounded-full border-2 border-gold/40 shadow-[0_18px_44px_-18px_rgba(70,52,22,0.4)] sm:h-44 sm:w-44">
             <Image
-              src="/images/fabien.jpg"
+              src="/images/fabien-avatar.jpg"
               alt="Fabien Quetel, fondateur de LS Consulting"
               fill
               sizes="176px"

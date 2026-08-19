@@ -12,12 +12,9 @@ export default function Contact() {
         </Reveal>
 
         <Reveal delay={80}>
-          <h2 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(2rem,5vw,3.8rem)] font-light leading-[1.1] tracking-tight">
-            <RevealText text="Votre entreprise mérite une attention particulière et un investissement de chaque instant." />
-          </h2>
-          <p className="mt-6 font-display text-[clamp(1.5rem,3.5vw,2.4rem)]">
+          <h2 className="mx-auto mt-7 max-w-3xl font-display text-[clamp(2.4rem,7vw,5rem)] leading-[1.05]">
             <RevealText text="Commençons dès maintenant." accent />
-          </p>
+          </h2>
         </Reveal>
 
         <Reveal delay={220}>
