@@ -23,8 +23,8 @@ export const INSTAGRAM_URL =
 
 export const VSL_YOUTUBE_ID = "K79PwZ5USZA";
 
-// WhatsApp-style voice note from Fabien (drop the file at this path).
-export const VOICE_NOTE_SRC = "/audio/fabien-message.mp3";
+// WhatsApp-style voice note from Fabien.
+export const VOICE_NOTE_SRC = "/audio/fabien-message.m4a";
 
 export const CTA_LABEL = "Réserver mon appel découverte offert";
 export const CTA_LABEL_SHORT = "Appel découverte offert";

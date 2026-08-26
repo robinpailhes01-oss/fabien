@@ -21,8 +21,8 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Clients />
         <VSL />
+        <Clients />
         <Problem />
         <VoiceNote />
         <Offer />

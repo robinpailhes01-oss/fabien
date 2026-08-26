@@ -84,8 +84,7 @@ export default function Hero() {
         </motion.span>
 
         <h1 className="mx-auto max-w-4xl font-display text-[clamp(2.2rem,5.6vw,4.3rem)] leading-[1.06]">
-          <RevealText text="Le consulting qui transforme votre business" />{" "}
-          <RevealText text="en résultats durables." accent />
+          <RevealText text="Ma méthode en quelques secondes." accent />
         </h1>
 
         <motion.p
