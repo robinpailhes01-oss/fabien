@@ -8,7 +8,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { BOOKING_URL, CTA_LABEL } from "./site-config";
+import { BOOKING_URL, CTA_LABEL, VSL_YOUTUBE_ID } from "./site-config";
 import Magnetic from "./Magnetic";
 import RevealText from "./RevealText";
 import CountUp from "./CountUp";
@@ -87,11 +87,31 @@ export default function Hero() {
           <RevealText text="Ma méthode en quelques secondes." accent />
         </h1>
 
+        {/* VSL — right under the headline */}
+        <motion.div
+          id="vsl"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.55, ease }}
+          className="mt-8 w-full max-w-2xl"
+        >
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/20 bg-paper-soft shadow-[0_30px_70px_-40px_rgba(70,52,22,0.45)]">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${VSL_YOUTUBE_ID}?rel=0&modestbranding=1`}
+              title="LS Consulting — la méthode de Fabien Quetel"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+              className="absolute inset-0 h-full w-full"
+            />
+          </div>
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.7, ease }}
-          className="mt-6 max-w-lg text-base font-light leading-relaxed text-muted"
+          transition={{ duration: 1, delay: 0.8, ease }}
+          className="mt-8 max-w-lg text-base font-light leading-relaxed text-muted"
         >
           Un écosystème de cinq marques intégrées au service de votre
           croissance.
@@ -101,7 +121,7 @@ export default function Hero() {
         <motion.ul
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.85, ease }}
+          transition={{ duration: 1, delay: 0.95, ease }}
           className="mt-7 flex flex-wrap items-center justify-center gap-2.5"
         >
           {audiences.map((a) => (
@@ -115,7 +135,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1, ease }}
+          transition={{ duration: 1, delay: 1.1, ease }}
           className="mt-9 flex flex-col items-center gap-5 sm:flex-row sm:gap-8"
         >
           <Magnetic>
@@ -137,7 +157,7 @@ export default function Hero() {
         <motion.ul
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.15, ease }}
+          transition={{ duration: 1, delay: 1.25, ease }}
           className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
         >
           {zones.map((z) => (
@@ -155,7 +175,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.3, ease }}
+          transition={{ duration: 1, delay: 1.4, ease }}
           className="mt-12 grid w-full max-w-2xl grid-cols-3 gap-4"
         >
           {stats.map((s) => (

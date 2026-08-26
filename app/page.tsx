@@ -3,7 +3,6 @@ import ScrollProgress from "@/components/ScrollProgress";
 import StickyCTA from "@/components/StickyCTA";
 import Hero from "@/components/Hero";
 import Clients from "@/components/Clients";
-import VSL from "@/components/VSL";
 import Problem from "@/components/Problem";
 import VoiceNote from "@/components/VoiceNote";
 import Offer from "@/components/Offer";
@@ -21,7 +20,6 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <VSL />
         <Clients />
         <Problem />
         <VoiceNote />
