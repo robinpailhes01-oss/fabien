@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import StickyCTA from "@/components/StickyCTA";
+import NewsletterPopup from "@/components/NewsletterPopup";
 import Hero from "@/components/Hero";
 import Clients from "@/components/Clients";
 import Problem from "@/components/Problem";
@@ -32,6 +33,7 @@ export default function Home() {
       </main>
       <Footer />
       <StickyCTA />
+      <NewsletterPopup />
     </>
   );
 }
