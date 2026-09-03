@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="fr" class="static">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fabien Quetel · Vous décidez seul, ou accompagné</title>
+<meta name="description" content="20 ans de terrain, 6 marques bâties, 100+ entreprises accompagnées. Fabien Quetel, LS Consulting, Montpellier. Appel découverte offert.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230E0C0A'/><rect x='16' width='16' height='32' fill='%23F4EFE6'/></svg>">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  /* ---------------------------------------------------------- tokens -- */
+  :root {
+    /* Le fond « Vous » : encre chaude. */
+    --sc-canvas:      #0E0C0A;
+    --sc-surface:     #16120F;
+    --sc-ink:         #F3EFE6;
+    --sc-ink-soft:    #A79C8C;
+    --sc-accent:      #C9A86A;
+    --sc-accent-ink:  #0E0C0A;
+    --sc-font-display: "Archivo", system-ui, sans-serif;
+    --sc-font-text:    "Instrument Sans", system-ui, sans-serif;
+    --sc-font-mono:    "Instrument Sans", system-ui, sans-serif;
+    --sc-shadow-color: 30 20% 4%;
+
+    /* Le fond « Fabien » : papier. Même teinte d'accent, autre luminosité. */
+    --paper:        #F4EFE6;
+    --paper-ink:    #1B1712;
+    --paper-soft:   #5E554A;
+    --paper-accent: #7C5C26;
+
+    --cut: 50vw;   /* position de la ligne, en px, écrite par le script */
+    --prog: 0;     /* progression de la page, 0..1 */
+    --w-you: min(34rem, calc(40vw - 2 * var(--sc-gutter)));
+    --w-him: min(40rem, calc(50vw - 2 * var(--sc-gutter)));
+  }
+  .him {
+    --sc-canvas: var(--paper);
+    --sc-ink: var(--paper-ink);
+    --sc-ink-soft: var(--paper-soft);
+    --sc-accent: var(--paper-accent);
+    --sc-accent-ink: #F4EFE6;
+    --sc-shadow-color: 35 25% 20%;
+    color: var(--sc-ink);
+  }
+
+  html { scroll-behavior: auto; }
+  body { background: var(--sc-canvas); }
+  .dragging, .dragging * { cursor: grabbing !important; user-select: none; }
+
+  /* ----------------------------------------------------------- stage -- */
+  .stage {
+    position: fixed; inset: 0;
+    overflow: clip;
+    background: var(--sc-canvas);
+    z-index: 1;
+  }
+  .ground--him {
+    position: absolute; inset: 0;
+    background: var(--paper);
+    clip-path: inset(0 0 0 var(--cut));
+    z-index: 2;
+    will-change: clip-path;
+  }
+  .act { display: contents; }
+
+  .blk {
+    position: absolute;
+    left: var(--sc-gutter);
+    top: 50%;
+    width: var(--w-you);
+    translate: 0 -50%;
+    z-index: 3;
+  }
+  .blk--him {
+    z-index: 4;
+    width: var(--w-him);
+    transform: translate3d(var(--cut), 0, 0);
+    will-change: transform;
+  }
+  .blk__in {
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+  .blk--foot {
+    top: auto; bottom: var(--sc-gutter); translate: none;
+    width: min(38rem, calc(60vw - 2 * var(--sc-gutter)));
+  }
+
+  /* ---------------------------------------------------------- chrome -- */
+  .toplinks {
+    position: absolute;
+    top: var(--sc-gutter); right: var(--sc-gutter);
+    z-index: 5;
+    display: flex; align-items: baseline; gap: var(--sc-5);
+    font-size: var(--sc-t-sm);
+  }
+  .toplinks .mark {
+    font-family: var(--sc-font-display);
+    font-weight: 700;
+    letter-spacing: var(--sc-track-snug);
+    color: var(--sc-ink);
+  }
+  .toplinks a.cta-link {
+    color: var(--sc-ink);
+    font-weight: 500;
+    text-decoration-color: var(--sc-accent);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.3em;
+  }
+  .toplinks a.cta-link:hover { text-decoration-thickness: 2px; }
+  .toplinks .short { display: none; }
+
+  .divider {
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 0;
+    z-index: 6;
+    transform: translate3d(var(--cut), 0, 0);
+    will-change: transform;
+  }
+  .divider__line {
+    position: absolute; top: 0; bottom: 0; left: -0.5px; width: 1px;
+    background: color-mix(in oklab, #C9A86A 55%, transparent);
+  }
+  .divider__fill {
+    position: absolute; top: 0; left: -1px; width: 2px; height: 100%;
+    background: #C9A86A;
+    transform-origin: 50% 0;
+    transform: scaleY(var(--prog));
+    will-change: transform;
+  }
+  .divider__hit {
+    position: absolute; top: 0; bottom: 0; left: -14px; width: 28px;
+    cursor: ew-resize;
+    touch-action: none;
+  }
+  .divider__grip {
+    position: absolute; top: 50%; left: var(--grip-shift, 0px);
+    translate: -50% -50%;
+    width: 2.75rem; height: 2.75rem;
+    border-radius: var(--sc-r-pill);
+    border: 1px solid var(--paper-accent);
+    background: var(--paper);
+    color: var(--paper-ink);
+    display: grid; place-items: center;
+    cursor: ew-resize;
+    touch-action: none;
+    padding: 0;
+    box-shadow: var(--sc-e2);
+    transition: transform var(--sc-d-fast) var(--sc-ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .divider__grip:hover { transform: scale(1.08); }
+  }
+  .divider__grip:active { transform: scale(0.97); }
+  .divider__grip svg { width: 18px; height: 18px; }
+  .divider__grip .v { display: none; }
+  .divider__label {
+    position: absolute;
+    top: var(--sc-gutter);
+    font-size: var(--sc-t-xs);
+    font-weight: 600;
+    letter-spacing: var(--sc-track-wide);
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .divider__label--you { right: 0.9rem; color: var(--sc-ink-soft); }
+  .divider__label--him { left: 0.9rem; color: var(--paper-soft); }
+
+  /* ------------------------------------------------------------ type -- */
+  .h {
+    font-family: var(--sc-font-display);
+    font-weight: 800;
+    font-size: var(--sc-t-2xl);
+    line-height: var(--sc-leading-none);
+    letter-spacing: var(--sc-track-tight);
+    text-wrap: balance;
+    margin: 0;
+  }
+  .h--xl {
+    font-size: var(--sc-t-xl);
+    font-weight: 700;
+    line-height: var(--sc-leading-tight);
+    letter-spacing: var(--sc-track-snug);
+  }
+  .sub {
+    margin: var(--sc-4) 0 0;
+    max-width: 38ch;
+    color: var(--sc-ink-soft);
+    font-size: var(--sc-t-base);
+    text-wrap: pretty;
+  }
+  .blk--you .sub { line-height: 1.68; letter-spacing: 0; }
+  .label {
+    font-size: var(--sc-t-xs);
+    font-weight: 600;
+    letter-spacing: var(--sc-track-wide);
+    text-transform: uppercase;
+    color: var(--sc-ink-soft);
+    margin: 0;
+  }
+  .line { /* une phrase de l'argument */
+    font-family: var(--sc-font-display);
+    font-weight: 700;
+    font-size: var(--sc-t-xl);
+    line-height: var(--sc-leading-tight);
+    letter-spacing: var(--sc-track-snug);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  /* --------------------------------------------------- acte 3 : preuve -- */
+  .strip {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sc-2);
+    margin: 0 0 var(--sc-6);
+  }
+  .strip figure { margin: 0; aspect-ratio: 4 / 3; overflow: clip; will-change: clip-path; }
+  .strip img { width: 100%; height: 100%; object-fit: cover; }
+  .brands {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-4) var(--sc-6);
+    margin: var(--sc-6) 0 0;
+    border-top: 1px solid var(--sc-hairline-strong);
+    padding-top: var(--sc-5);
+  }
+  .brands div { display: flex; flex-direction: column; gap: 0.15rem; }
+  .brands dt { font-weight: 600; font-size: var(--sc-t-sm); }
+  .brands dd { margin: 0; color: var(--sc-ink-soft); font-size: var(--sc-t-xs); letter-spacing: 0.01em; }
+  .before { margin: var(--sc-5) 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+
+  /* --------------------------------------------------- acte 4 : offres -- */
+  .offer__name { font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-xl); letter-spacing: var(--sc-track-snug); line-height: 1.05; margin: 0; }
+  .offer__meta { margin: var(--sc-2) 0 0; }
+  .offer__price {
+    font-family: var(--sc-font-display); font-weight: 800;
+    font-size: var(--sc-t-2xl); letter-spacing: var(--sc-track-tight); line-height: 1;
+    margin: var(--sc-5) 0 0; font-variant-numeric: tabular-nums;
+  }
+  .offer__price small { font-family: var(--sc-font-text); font-weight: 500; font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; margin-left: 0.4rem; color: var(--sc-ink-soft); }
+  .offer__list { margin: var(--sc-4) 0 0; max-width: 42ch; color: var(--sc-ink-soft); text-wrap: pretty; }
+  .offer__link { display: inline-block; margin-top: var(--sc-4); font-weight: 500; text-decoration-color: var(--sc-accent); text-decoration-thickness: 1.5px; text-underline-offset: 0.3em; }
+
+  /* ----------------------------------------------------- acte 5 : avis -- */
+  .quote { margin: 0; font-size: var(--sc-t-lg); line-height: 1.42; letter-spacing: var(--sc-track-snug); text-wrap: pretty; max-width: 34ch; }
+  .quote + .label { margin-top: var(--sc-5); }
+  .score { font-family: var(--sc-font-display); font-weight: 800; font-size: var(--sc-t-3xl); letter-spacing: var(--sc-track-tight); line-height: 0.9; margin: 0; font-variant-numeric: tabular-nums; }
+  .score-note { margin: var(--sc-3) 0 0; color: var(--sc-ink-soft); }
+  .stars { display: inline-flex; gap: 2px; color: var(--sc-accent); vertical-align: -2px; margin-right: 0.5rem; }
+  .stars svg { width: 14px; height: 14px; }
+  .mini { margin: var(--sc-6) 0 0; padding-top: var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); display: grid; gap: var(--sc-4); }
+  .mini p { margin: 0; max-width: 40ch; text-wrap: pretty; }
+  .mini p span { display: block; margin-top: 0.25rem; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+
+  /* ------------------------------------------------------ acte 6 : fin -- */
+  .blk--close { width: min(36rem, calc(100vw - 2 * var(--sc-gutter) - 34vw)); }
+  .cap { margin: var(--sc-5) 0 0; color: var(--sc-ink-soft); max-width: 40ch; text-wrap: pretty; }
+  .cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-top: var(--sc-6);
+    padding: 1.05rem 1.9rem;
+    border-radius: var(--sc-r-pill);
+    background: var(--paper-accent);
+    color: #F4EFE6;
+    font-weight: 600;
+    font-size: var(--sc-t-base);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform var(--sc-d-fast) var(--sc-ease-out), background-color var(--sc-d-fast) var(--sc-ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) { .cta:hover { background: #6A4D1E; transform: translateY(-1px); } }
+  .cta:active { transform: translateY(1px); }
+  .alt { margin: var(--sc-4) 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+  .alt a { text-decoration-color: var(--sc-accent); text-underline-offset: 0.3em; }
+  .foot { margin: 0; color: var(--sc-ink-soft); font-size: var(--sc-t-xs); letter-spacing: 0.01em; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; }
+  .foot a { color: inherit; text-decoration-color: var(--sc-accent); text-underline-offset: 0.3em; }
+
+  .portrait {
+    position: absolute;
+    right: var(--sc-gutter); bottom: 0;
+    width: 30vw; height: 80vh; height: 80dvh;
+    margin: 0;
+    z-index: 4;
+    clip-path: inset(100% 0 0 0);
+    will-change: clip-path;
+  }
+  .portrait img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 0;
+    border: 1px solid color-mix(in oklab, var(--paper-ink) 22%, transparent);
+    box-shadow: var(--sc-e3);
+  }
+
+  /* ---------------------------------------------------------- track -- */
+  .track { position: relative; z-index: 0; pointer-events: none; }
+  .mk { height: 100vh; }
+
+  /* ---------------------------------------------------------- mobile -- */
+  @media (max-width: 860px) {
+    :root {
+      --cut: 50vh;
+      --w-you: calc(100vw - 2 * var(--sc-gutter));
+      --w-him: calc(100vw - 2 * var(--sc-gutter));
+    }
+    .ground--him { clip-path: inset(var(--cut) 0 0 0); }
+    .blk { top: 0; translate: none; padding-top: calc(var(--sc-gutter) + 2.5rem); }
+    .blk--him { transform: translate3d(0, var(--cut), 0); padding-top: calc(var(--sc-gutter) + 2.25rem); }
+    .blk--foot { top: auto; bottom: var(--sc-gutter); padding-top: 0; width: calc(52vw - var(--sc-gutter)); }
+    .blk--close { width: calc(100vw - 2 * var(--sc-gutter)); padding-top: calc(var(--sc-gutter) + 2.25rem); }
+    .h { font-size: var(--sc-t-2xl); }
+    .divider { transform: translate3d(0, var(--cut), 0); top: 0; bottom: auto; left: 0; right: 0; width: auto; height: 0; }
+    .divider__line { top: -0.5px; bottom: auto; left: 0; right: 0; width: auto; height: 1px; }
+    .divider__fill { top: -1px; left: 0; width: 100%; height: 2px; transform-origin: 0 50%; transform: scaleX(var(--prog)); }
+    .divider__hit { top: -14px; bottom: auto; left: 0; width: 100%; height: 28px; cursor: ns-resize; }
+    .divider__grip { top: var(--grip-shift, 0px); left: auto; right: var(--sc-gutter); translate: 0 -50%; cursor: ns-resize; }
+    .divider__grip .v { display: block; }
+    .divider__grip .hz { display: none; }
+    .divider__label { top: auto; }
+    .divider__label--you { right: auto; left: var(--sc-gutter); bottom: 0.85rem; }
+    .divider__label--him { left: var(--sc-gutter); top: 0.85rem; }
+    /* En portrait le haut de l'écran est le fond « Vous ». */
+    .toplinks { --sc-ink: #F3EFE6; --sc-accent: #C9A86A; color: var(--sc-ink); gap: var(--sc-4); }
+    .toplinks .mark { display: none; }
+    .toplinks .long { display: none; }
+    .toplinks .short { display: inline; }
+    .strip { margin-bottom: var(--sc-4); }
+    .strip figure { aspect-ratio: 16 / 10; }
+    .brands { grid-template-columns: 1fr 1fr; gap: var(--sc-2) var(--sc-4); margin-top: var(--sc-4); padding-top: var(--sc-3); }
+    .before { display: none; }
+    .mini { display: none; }
+    .quote { font-size: var(--sc-t-base); max-width: none; }
+    .portrait { width: 44vw; height: 42vh; height: 42dvh; right: var(--sc-gutter); }
+    .cta { margin-top: var(--sc-5); padding: 0.95rem 1.5rem; font-size: var(--sc-t-sm); }
+  }
+  @media (max-width: 860px) and (max-height: 700px) {
+    .strip { display: none; }
+  }
+
+  /* ----------------------------------- reduced motion / no JS : statique -- */
+  .static .stage { position: relative; overflow: visible; }
+  .static .ground--him, .static .divider, .static .track { display: none; }
+  .static .act { display: grid; grid-template-columns: 1fr 1fr; }
+  .static .blk, .static .blk--him, .static .blk--foot, .static .blk--close {
+    position: static; translate: none; transform: none; width: auto;
+    padding: var(--sc-section) var(--sc-gutter);
+  }
+  .static .blk--him { background: var(--paper); }
+  .static .blk__in { opacity: 1 !important; transform: none !important; }
+  .static .portrait { position: static; clip-path: none; width: min(100%, 22rem); height: auto; aspect-ratio: 3 / 4; padding: 0 var(--sc-gutter) var(--sc-section); background: var(--paper); box-sizing: content-box; grid-column: 2; }
+  .static .strip figure { clip-path: none !important; }
+  .static .act[data-act="6"] { grid-template-columns: 1fr; }
+  .static .act[data-act="6"] .portrait { grid-column: 1; padding-top: 0; }
+  .static .toplinks { position: absolute; }
+  @media (max-width: 860px) { .static .act { grid-template-columns: 1fr; } .static .portrait { grid-column: 1; } .static .toplinks { --sc-ink: #F3EFE6; } }
+</style>
+</head>
+<body>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<div class="stage" id="stage" data-sc-verify-state="">
+  <div class="ground--him" aria-hidden="true"></div>
+
+  <div class="toplinks him">
+    <span class="mark">LS Consulting</span>
+    <a class="cta-link" href="https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit" target="_blank" rel="noopener"><span class="long">Réserver mon appel découverte offert</span><span class="short">Appel découverte offert</span></a>
+  </div>
+
+  <main>
+
+  <!-- 1 · RECONNAISSANCE -->
+  <article class="act" data-act="1">
+    <div class="blk blk--you"><div class="blk__in" data-win="0 1 0 0.08">
+      <p class="h">Vous décidez seul.</p>
+      <p class="sub">Les mêmes arbitrages chaque semaine, et personne pour les partager.</p>
+    </div></div>
+    <div class="blk blk--him him"><div class="blk__in" data-win="0 1 0 0.08">
+      <h1 class="h">Vous décidez accompagné.</h1>
+      <p class="sub">Vingt ans de terrain assis à côté de vous. Pas un rapport.</p>
+    </div></div>
+  </article>
+
+  <!-- 2 · TENSION -->
+  <article class="act" data-act="2">
+    <div class="blk blk--you"><div class="blk__in" data-win="0 0.34 0 0.08">
+      <p class="line">Les priorités changent chaque semaine.</p>
+    </div></div>
+    <div class="blk blk--him him"><div class="blk__in" data-win="0.04 0.34 0.08 0.08">
+      <p class="line">Trois à cinq priorités. Écrites. Tenues.</p>
+    </div></div>
+
+    <div class="blk blk--you"><div class="blk__in" data-win="0.36 0.66 0.08 0.08">
+      <p class="line">L'équipe attend vos réponses.</p>
+    </div></div>
+    <div class="blk blk--him him"><div class="blk__in" data-win="0.40 0.66 0.08 0.08">
+      <p class="line">Un plan que l'équipe suit sans vous attendre.</p>
+    </div></div>
+
+    <div class="blk blk--you"><div class="blk__in" data-win="0.68 1 0.08 0.05">
+      <p class="line">Les chiffres arrivent trop tard pour décider.</p>
+    </div></div>
+    <div class="blk blk--him him"><div class="blk__in" data-win="0.72 1 0.08 0.05">
+      <p class="line">Chiffre d'affaires, marges, objectifs : lus ensemble, à temps.</p>
+    </div></div>
+  </article>
+
+  <!-- 3 · POIDS -->
+  <article class="act" data-act="3">
+    <div class="blk blk--you"><div class="blk__in" data-win="0 1 0 0.05">
+      <p class="h h--xl">Le conseil que vous connaissez.</p>
+      <p class="sub">Un rapport. Des slides. Une théorie jamais testée dans une entreprise.</p>
+    </div></div>
+    <div class="blk blk--him him"><div class="blk__in" data-win="0.03 1 0.08 0.05">
+      <div class="strip" aria-hidden="true">
+        <figure data-wipe="0.06 0.30"><img src="assets/champagne.jpg" width="1400" height="934" alt=""></figure>
+        <figure data-wipe="0.14 0.38"><img src="assets/mode.jpg" width="1400" height="933" alt=""></figure>
+        <figure data-wipe="0.22 0.46"><img src="assets/studio.jpg" width="1400" height="933" alt=""></figure>
+      </div>
+      <h2 class="h h--xl">Il a construit avant de conseiller.</h2>
+      <dl class="brands">
+        <div><dt>Perla</dt><dd>Champagne de prestige, 2020</dd></div>
+        <div><dt>Layonn</dt><dd>Mode éco-responsable, 2022</dd></div>
+        <div><dt>Dream Studio</dt><dd>Studio créatif et production, 2023</dd></div>
+        <div><dt>Lovexplorers</dt><dd>Plateforme de lieux d'exception, 2023</dd></div>
+        <div><dt>Infinité Agency</dt><dd>Croissance digitale, 2024</dd></div>
+        <div><dt>Vision'R Media</dt><dd>Média et podcast, 2024</dd></div>
+      </dl>
+      <p class="before">Avant ça, plus de vingt ans comme décideur dans le retail.</p>
+    </div></div>
+  </article>
+
+  <!-- 4 · CLARTÉ -->
+  <article class="act" data-act="4">
+    <div class="blk blk--you"><div class="blk__in" data-win="0 0.33 0 0.08">
+      <p class="line">Deux heures. Vos chiffres sur la table.</p>
+    </div></div>
+    <div class="blk blk--him him"><div class="blk__in" data-win="0.03 0.33 0.08 0.08">
+      <p class="offer__name">Clarity Session</p>
+      <p class="label offer__meta">2 h · présentiel ou visio</p>
+      <p class="offer__price">250 €<small>TTC</small></p>
+      <p class="offer__list">Analyse du business, trois à cinq priorités à fort impact, carte mentale, feuille de route personnalisée.</p>
+      <a class="offer__link" href="https://calendly.com/fabienquetel_lsconsulting" target="_blank" rel="noopener">Réserver</a>
+    </div></div>
+
+    <div class="blk blk--you"><div class="blk__in" data-win="0.35 0.66 0.08 0.08">
+      <p class="line">Deux jours dans vos murs.</p>
+    </div></div>
+    <div class="blk blk--him him"><div class="blk__in" data-win="0.38 0.66 0.08 0.08">
+      <p class="offer__name">Immersion 360</p>
+      <p class="label offer__meta">2 jours · sur site</p>
+      <p class="offer__price">890 €<small>TTC</small></p>
+      <p class="offer__list">Audit 360, chiffre d'affaires, marges et objectifs, process et outils, management si nécessaire, plan d'action priorisé.</p>
+      <a class="offer__link" href="https://calendly.com/fabienquetel_lsconsulting/nouvelle-reunion" target="_blank" rel="noopener">Réserver</a>
+    </div></div>
+
+    <div class="blk blk--you"><div class="blk__in" data-win="0.68 1 0.08 0.05">
+      <p class="line">D'une semaine à trois mois, à vos côtés.</p>
+    </div></div>
+    <div class="blk blk--him him"><div class="blk__in" data-win="0.71 1 0.08 0.05">
+      <p class="offer__name">Accompagnement sur mesure</p>
+      <p class="label offer__meta">1 semaine à 3 mois et plus</p>
+      <p class="offer__price">Sur devis</p>
+      <p class="offer__list">Intégration dans l'entreprise, pilotage stratégique, mise en œuvre des actions, coaching, résultats mesurés.</p>
+      <a class="offer__link" href="https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit" target="_blank" rel="noopener">Réserver</a>
+    </div></div>
+  </article>
+
+  <!-- 5 · CALME (silence autorisé : la ligne ne bouge pas) -->
+  <article class="act" data-act="5">
+    <div class="blk blk--you"><div class="blk__in" data-win="0 1 0 0.05">
+      <blockquote class="quote">« [...] Fabien ne se contente pas de donner des conseils génériques ; il a pris le temps de s'immerger dans mon positionnement et mes aspirations pour m'offrir un accompagnement sur mesure. [...] Foncez les yeux fermés ! »</blockquote>
+      <p class="label">Léa · avis Google</p>
+    </div></div>
+    <div class="blk blk--him him"><div class="blk__in" data-win="0.04 1 0.1 0.05">
+      <p class="score">5,0</p>
+      <p class="score-note"><span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg></span>sur Google, avis vérifiés.</p>
+      <div class="mini">
+        <p>« Super expérience avec Fabien, je recommande. »<span>Thomas Sanchez</span></p>
+        <p>« De vrais conseils pertinents et une approche humaine, nous recommandons vivement les services de Fabien et son équipe. »<span>toyotomihideyoshi34</span></p>
+      </div>
+    </div></div>
+  </article>
+
+  <!-- 6 · RÉSOLUTION : la ligne file au bord, le papier prend tout -->
+  <article class="act" data-act="6">
+    <div class="blk blk--you"><div class="blk__in" data-win="0 0.5 0 0.3">
+      <p class="h">Vous décidez seul.</p>
+    </div></div>
+    <div class="blk blk--him blk--close him"><div class="blk__in" data-win="0.16">
+      <h2 class="h">Je ne théorise pas la croissance. Je l'exécute.</h2>
+      <p class="cap">Fabien Quetel, fondateur de LS Consulting. Montpellier, et en visio depuis la France, l'Espagne, l'Italie, Bali et le Mexique.</p>
+      <a class="cta" href="https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit" target="_blank" rel="noopener">Réserver mon appel découverte offert</a>
+      <p class="alt">30 minutes, sans engagement. Ou sur WhatsApp au <a href="https://wa.me/33625244878">06 25 24 48 78</a>.</p>
+    </div></div>
+    <figure class="portrait him" data-wipe="0.22 0.6" data-wipe-dir="up">
+      <img src="assets/fabien.jpg" width="1152" height="1536" alt="Fabien Quetel, portrait en noir et blanc, chemise blanche, lunettes rondes.">
+    </figure>
+    <div class="blk blk--him blk--foot him"><div class="blk__in" data-win="0.5">
+      <p class="foot">
+        <span>LS Consulting</span>
+        <a href="mailto:fabienquetel@layonnstyle.com">fabienquetel@layonnstyle.com</a>
+        <a href="https://www.instagram.com/ls_consulting_fr" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtu.be/K79PwZ5USZA" target="_blank" rel="noopener">La méthode en vidéo</a>
+        <a href="/mentions-legales">Mentions légales</a>
+      </p>
+    </div></div>
+  </article>
+
+  </main>
+
+  <div class="divider" id="divider">
+    <div class="divider__line" aria-hidden="true"></div>
+    <div class="divider__fill" aria-hidden="true"></div>
+    <div class="divider__hit" aria-hidden="true"></div>
+    <span class="divider__label divider__label--you" aria-hidden="true">Vous</span>
+    <span class="divider__label divider__label--him" aria-hidden="true">Fabien</span>
+    <button class="divider__grip" id="grip" type="button" role="slider" aria-label="Tirer la ligne pour avancer dans la page" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-orientation="horizontal">
+      <svg class="hz" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg>
+      <svg class="v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6-5 6 5M6 15l6 5 6-5"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Le document. Six marqueurs vides : le scroll est le seul input, la scène est fixe. -->
+<div class="track" aria-hidden="true">
+  <div class="mk" data-sc-act="flow" data-act="1" data-span="1.4" data-from="50" data-to="50"></div>
+  <div class="mk" data-sc-act="flow" data-act="2" data-span="2.2" data-from="50" data-to="46"></div>
+  <div class="mk" data-sc-act="flow" data-act="3" data-span="2.0" data-from="46" data-to="42"></div>
+  <div class="mk" data-sc-act="flow" data-act="4" data-span="2.4" data-from="42" data-to="40"></div>
+  <div class="mk" data-sc-act="flow" data-act="5" data-span="1.0" data-from="40" data-to="40"></div>
+  <div class="mk" data-sc-act="flow" data-act="6" data-span="3.0" data-from="40" data-to="0" data-ease="collapse" data-last="1"></div>
+</div>
+
+<script src="scrollcraft.js"></script>
+<script>
+(function () {
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  ScrollCraft.mount(document.body);
+  if (reduce) return;
+  root.classList.remove('static');
+
+  var clamp01 = function (x) { return x < 0 ? 0 : x > 1 ? 1 : x; };
+  var smooth = function (x) { x = clamp01(x); return x * x * (3 - 2 * x); };
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
+
+  var stage = document.getElementById('stage');
+  var grip = document.getElementById('grip');
+  var divider = document.getElementById('divider');
+  var smallMQ = matchMedia('(max-width: 860px)');
+
+  // ---- les actes : marqueurs vides, chacun possède une tranche de scroll et
+  //      une position de ligne de départ et d'arrivée.
+  var acts = Array.prototype.map.call(document.querySelectorAll('.mk'), function (m) {
+    return {
+      el: m, i: +m.dataset.act, span: +m.dataset.span,
+      from: +m.dataset.from, to: +m.dataset.to,
+      collapse: m.dataset.ease === 'collapse', last: !!m.dataset.last,
+      top: 0, px: 0, p: 0
+    };
+  });
+  var byAct = {};
+  acts.forEach(function (a) { byAct[a.i] = a; });
+
+  // ---- les blocs cués, tous dans la scène fixe.
+  var blocks = Array.prototype.map.call(document.querySelectorAll('[data-win]'), function (el, k) {
+    var w = el.dataset.win.trim().split(/\s+/).map(parseFloat);
+    var from = w[0], to = w.length > 1 ? w[1] : 1;
+    var hold = w.length < 2;
+    var rIn = w.length > 2 ? w[2] : (hold ? Math.min(0.12, (1 - from) * 0.3) : (to - from) * 0.3);
+    var rOut = w.length > 3 ? w[3] : (hold ? 0 : (to - from) * 0.3);
+    return { el: el, id: 'b' + k, act: +el.closest('.act').dataset.act, from: from, to: to, hold: hold, rIn: rIn, rOut: rOut, o: -1 };
+  });
+  var wipes = Array.prototype.map.call(document.querySelectorAll('[data-wipe]'), function (el, k) {
+    var w = el.dataset.wipe.trim().split(/\s+/).map(parseFloat);
+    return { el: el, id: 'w' + k, act: +el.closest('.act').dataset.act, from: w[0], to: w[1], dir: el.dataset.wipeDir || 'right', t: -1 };
+  });
+
+  var W = 0, H = 0, vertical = false, travel = 1;
+  function measure() {
+    W = innerWidth; H = innerHeight; vertical = smallMQ.matches;
+    var y = 0;
+    acts.forEach(function (a) {
+      a.px = Math.round(a.span * H);
+      a.el.style.height = (a.px + (a.last ? H : 0)) + 'px';
+      a.top = y; y += a.px;
+    });
+    travel = y; // = scrollHeight - H, par construction
+  }
+
+  // Position de la ligne pour un acte et une progression donnés.
+  function splitFor(a, p) {
+    if (a.collapse) return lerp(a.from, a.to, smooth(p / 0.55));
+    return lerp(a.from, a.to, smooth(p));
+  }
+  function current(y) {
+    var cur = acts[acts.length - 1];
+    for (var k = 0; k < acts.length; k++) {
+      var a = acts[k];
+      a.p = clamp01((y - a.top) / a.px);
+      if (y >= a.top && y < a.top + a.px) cur = a;
+    }
+    if (y < 0) cur = acts[0];
+    return cur;
+  }
+  function cue(b, p) {
+    var oIn = b.rIn <= 0 ? (p >= b.from ? 1 : 0) : smooth((p - b.from) / b.rIn);
+    var oOut = b.hold ? 1 : (b.rOut <= 0 ? (p <= b.to ? 1 : 0) : smooth((b.to - p) / b.rOut));
+    var o = Math.min(oIn, oOut);
+    var rise = (1 - oIn) * 18 - (1 - oOut) * 10;
+    return { o: o, y: rise };
+  }
+  function clipFor(t, dir) {
+    var r = ((1 - t) * 100).toFixed(2) + '%';
+    if (dir === 'up') return 'inset(' + r + ' 0 0 0)';
+    return 'inset(0 ' + r + ' 0 0)';
+  }
+
+  var lastY = -1, holdFlag = false;
+  function frame() {
+    var y = Math.max(0, Math.min(scrollY, travel));
+    var cur = current(y);
+    var split = splitFor(cur, cur.p);
+    var cut = split / 100 * (vertical ? H : W);
+    stage.style.setProperty('--cut', cut.toFixed(2) + 'px');
+    stage.style.setProperty('--grip-shift', Math.max(0, 24 - cut).toFixed(1) + 'px');
+    var prog = travel > 0 ? y / travel : 0;
+    root.style.setProperty('--prog', prog.toFixed(4));
+    grip.setAttribute('aria-valuenow', Math.round(prog * 100));
+
+    var state = ['s' + split.toFixed(1), 'a' + cur.i + ':' + cur.p.toFixed(2)];
+    blocks.forEach(function (b) {
+      var c = b.act === cur.i ? cue(b, cur.p) : { o: 0, y: 0 };
+      if (c.o !== b.o) {
+        b.el.style.opacity = c.o.toFixed(3);
+        b.el.style.transform = 'translate3d(0,' + c.y.toFixed(2) + 'px,0)';
+        b.el.style.pointerEvents = c.o > 0.5 ? '' : 'none';
+        b.o = c.o;
+      }
+      if (c.o > 0.02) state.push(b.id + ':' + c.o.toFixed(2));
+    });
+    wipes.forEach(function (w) {
+      var t = w.act === cur.i ? smooth((cur.p - w.from) / (w.to - w.from)) : (cur.i > w.act ? 1 : 0);
+      if (t !== w.t) { w.el.style.clipPath = clipFor(t, w.dir); w.t = t; }
+      if (t > 0 && t < 1) state.push(w.id + ':' + t.toFixed(2));
+    });
+    // La fin tient : tout est posé, la page a fini. Déclaré pour le harnais.
+    var hold = cur.last && cur.p >= 0.7;
+    if (hold !== holdFlag) {
+      holdFlag = hold;
+      if (hold) stage.setAttribute('data-sc-verify-hold', 'true');
+      else stage.removeAttribute('data-sc-verify-hold');
+    }
+    stage.setAttribute('data-sc-verify-state', state.join('|'));
+  }
+
+  var queued = false;
+  function onScroll() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; frame(); });
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', function () { measure(); frame(); });
+  smallMQ.addEventListener('change', function () { measure(); frame(); });
+
+  // ---- Signature : la ligne se tire. Inverse de split(scroll).
+  function scrollForSplit(target) {
+    if (target >= 50) return 0;
+    var last = acts[acts.length - 1];
+    for (var k = 0; k < acts.length; k++) {
+      var a = acts[k];
+      if (a.from === a.to) continue;
+      if (target <= a.from && target >= a.to) {
+        var lo = 0, hi = 1;
+        for (var n = 0; n < 22; n++) {
+          var mid = (lo + hi) / 2;
+          if (splitFor(a, mid) > target) lo = mid; else hi = mid;
+        }
+        return a.top + hi * a.px;
+      }
+    }
+    return last.top + last.px * 0.56;
+  }
+  var dragging = false;
+  function dragTo(e) {
+    var pos = vertical ? e.clientY : e.clientX;
+    var target = pos / (vertical ? H : W) * 100;
+    scrollTo({ top: scrollForSplit(target), left: 0, behavior: 'instant' });
+  }
+  function startDrag(e) {
+    if (e.button !== undefined && e.button !== 0) return;
+    dragging = true;
+    document.body.classList.add('dragging');
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {}
+    dragTo(e);
+    e.preventDefault();
+  }
+  function moveDrag(e) { if (dragging) { dragTo(e); e.preventDefault(); } }
+  function endDrag() { dragging = false; document.body.classList.remove('dragging'); }
+  [grip, divider.querySelector('.divider__hit')].forEach(function (el) {
+    el.addEventListener('pointerdown', startDrag);
+    el.addEventListener('pointermove', moveDrag);
+    el.addEventListener('pointerup', endDrag);
+    el.addEventListener('pointercancel', endDrag);
+  });
+  grip.addEventListener('keydown', function (e) {
+    var step = H * 0.5, d = 0;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') d = step;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') d = -step;
+    if (e.key === 'Home') d = -scrollY;
+    if (e.key === 'End') d = travel - scrollY;
+    if (!d) return;
+    e.preventDefault();
+    scrollTo({ top: scrollY + d, left: 0, behavior: 'smooth' });
+  });
+  grip.setAttribute('aria-orientation', vertical ? 'vertical' : 'horizontal');
+
+  measure();
+  frame();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); frame(); });
+})();
+</script>
+</body>
+</html>
