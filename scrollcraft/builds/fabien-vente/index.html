@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LS Consulting · Fabien Quetel</title>
+<meta name="description" content="Le consulting qui transforme votre business en résultats durables. +20 ans d'expérience terrain, +100 entreprises accompagnées. Clarity Session, Immersion 360, accompagnement sur mesure.">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+/* =========================================================== tokens ===== */
+:root {
+  --paper: #F8F5EF;
+  --paper-soft: #F1ECE2;
+  --panel: #FFFDF9;
+  --ink: #1B1712;
+  --ink-soft: #4A4238;
+  --muted: #8A8072;
+  --gold: #A9823F;
+  --gold-soft: #C9A86A;
+  --gold-deep: #7C5C26;
+  --violet: #4E2A5E;
+  --hairline: rgba(27, 23, 18, 0.10);
+  --panel-border: rgba(27, 23, 18, 0.07);
+  --shadow-ink: 70 52 22;
+  --e1: 0 1px 2px rgba(var(--shadow-ink), 0.06), 0 8px 24px -12px rgba(var(--shadow-ink), 0.18);
+  --e2: 0 2px 4px rgba(var(--shadow-ink), 0.06), 0 26px 60px -36px rgba(var(--shadow-ink), 0.30);
+  --e3: 0 4px 8px rgba(var(--shadow-ink), 0.06), 0 40px 90px -40px rgba(var(--shadow-ink), 0.40);
+  --glass: rgba(248, 245, 239, 0.72);
+
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-text: "Instrument Sans", system-ui, sans-serif;
+
+  --t-xs: clamp(0.72rem, 0.7rem + 0.1vw, 0.78rem);
+  --t-sm: clamp(0.875rem, 0.85rem + 0.15vw, 0.95rem);
+  --t-base: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --t-lg: clamp(1.15rem, 1.05rem + 0.5vw, 1.45rem);
+  --t-xl: clamp(1.5rem, 1.25rem + 1.2vw, 2.1rem);
+  --t-2xl: clamp(2rem, 1.5rem + 2.4vw, 3.3rem);
+  --t-3xl: clamp(2.5rem, 1.7rem + 4vw, 4.6rem);
+
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --section: clamp(4.5rem, 9vw, 8.5rem);
+  --maxw: 74rem;
+  --r-pill: 999px;
+  --r-lg: 22px;
+  --r-md: 14px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0B0A08; --paper-soft: #17140F; --panel: #17130D;
+    --ink: #F3EFE6; --ink-soft: #D2CCBD; --muted: #948B78;
+    --gold: #C9A86A; --gold-soft: #E4CF9F; --gold-deep: #9B7E45; --violet: #A79BC8;
+    --hairline: rgba(255,255,255,0.09); --panel-border: rgba(201,168,106,0.14);
+    --shadow-ink: 0 0 0;
+    --glass: rgba(11, 10, 8, 0.72);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0B0A08; --paper-soft: #17140F; --panel: #17130D;
+  --ink: #F3EFE6; --ink-soft: #D2CCBD; --muted: #948B78;
+  --gold: #C9A86A; --gold-soft: #E4CF9F; --gold-deep: #9B7E45; --violet: #A79BC8;
+  --hairline: rgba(255,255,255,0.09); --panel-border: rgba(201,168,106,0.14);
+  --shadow-ink: 0 0 0;
+  --glass: rgba(11, 10, 8, 0.72);
+  color-scheme: dark;
+}
+
+/* ============================================================ base ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 6rem; overflow-x: hidden; }
+body {
+  margin: 0;
+  background: var(--paper);
+  background-image: radial-gradient(120% 50% at 50% -8%, rgba(201,168,106,0.12), transparent 60%);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--t-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+img, svg, video { display: block; max-width: 100%; }
+button, input { font: inherit; color: inherit; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+::selection { background: var(--gold-soft); color: #1B1712; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3, p, ul, dl, figure, blockquote { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section); position: relative; }
+.center { text-align: center; }
+.eyebrow {
+  display: inline-block;
+  font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--gold);
+}
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+.display--3xl { font-size: var(--t-3xl); }
+.display--2xl { font-size: var(--t-2xl); }
+.display--xl  { font-size: var(--t-xl); letter-spacing: -0.025em; line-height: 1.1; }
+.accent { color: var(--gold); }
+.lede { color: var(--ink-soft); font-size: var(--t-lg); line-height: 1.5; text-wrap: pretty; max-width: 40ch; }
+.body { color: var(--ink-soft); max-width: 60ch; text-wrap: pretty; }
+.muted { color: var(--muted); }
+.stack > * + * { margin-top: 1rem; }
+.head { max-width: 42rem; margin-inline: auto; }
+.head .display { margin-top: 1.1rem; }
+.head .lede { margin: 1.25rem auto 0; }
+
+/* ========================================================== buttons ===== */
+.btn {
+  --btn-y: 0px;
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  padding: 1rem 1.6rem;
+  border-radius: var(--r-pill);
+  font-weight: 600; font-size: var(--t-sm);
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transform: translate3d(var(--mx, 0px), calc(var(--my, 0px) + var(--btn-y)), 0);
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), background-color 200ms var(--ease), color 200ms var(--ease), filter 200ms var(--ease);
+  will-change: transform;
+}
+.btn svg { width: 1.05em; height: 1.05em; flex: none; transition: transform 260ms var(--ease); }
+.btn--primary {
+  color: #fff;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold) 55%, var(--gold-deep) 130%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.35),
+    0 1px 2px rgba(80, 58, 20, 0.18),
+    0 14px 34px -14px rgba(169, 130, 63, 0.7);
+}
+.btn--primary:hover { --btn-y: -2px; filter: brightness(1.05); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 2px 4px rgba(80,58,20,0.16), 0 24px 48px -16px rgba(169,130,63,0.85); }
+.btn--primary:hover svg { transform: translateX(3px); }
+.btn--primary:active { --btn-y: 1px; filter: brightness(0.98); box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(80,58,20,0.2), 0 8px 18px -12px rgba(169,130,63,0.6); }
+.btn--secondary {
+  color: var(--ink);
+  background: transparent;
+  border-color: color-mix(in oklab, var(--ink) 22%, transparent);
+}
+.btn--secondary:hover { --btn-y: -1px; background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn--secondary:active { --btn-y: 1px; }
+.btn--lg { padding: 1.15rem 2rem; font-size: var(--t-base); }
+.btn--sm { padding: 0.72rem 1.15rem; font-size: var(--t-xs); letter-spacing: 0.01em; }
+.link-gold {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  color: var(--ink); font-weight: 500; text-decoration: none;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-size: 100% 1.5px; background-repeat: no-repeat; background-position: 0 100%;
+  padding-bottom: 2px;
+  transition: background-size 220ms var(--ease), color 200ms var(--ease);
+}
+.link-gold svg { width: 0.9em; height: 0.9em; transition: transform 220ms var(--ease); }
+.link-gold:hover { color: var(--gold-deep); }
+.link-gold:hover svg { transform: translateX(3px); }
+
+/* ============================================================== nav ===== */
+.progress { position: fixed; inset: 0 0 auto 0; height: 2px; z-index: 60; background: linear-gradient(90deg, var(--gold-soft), var(--gold)); transform-origin: 0 50%; transform: scaleX(0); will-change: transform; }
+.nav {
+  position: fixed; top: 0.9rem; left: 50%; z-index: 50;
+  translate: -50% 0;
+  width: min(calc(100% - 2 * var(--gutter)), 70rem);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.55rem 0.55rem 0.55rem 1.25rem;
+  border-radius: var(--r-pill);
+  background: var(--glass);
+  backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--e1);
+  transition: box-shadow 300ms var(--ease), translate 300ms var(--ease);
+}
+.nav.is-scrolled { box-shadow: var(--e2); }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; text-decoration: none; }
+.brand b { color: var(--gold); }
+.nav__links { display: flex; gap: 1.6rem; font-size: var(--t-sm); font-weight: 500; }
+.nav__links a { text-decoration: none; color: var(--ink-soft); transition: color 160ms var(--ease); }
+.nav__links a:hover { color: var(--ink); }
+.nav__cta { display: flex; align-items: center; gap: 0.5rem; }
+.icon-btn { display: inline-grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 1px solid var(--panel-border); background: transparent; color: var(--ink); text-decoration: none; transition: background-color 160ms var(--ease), color 160ms var(--ease); }
+.icon-btn:hover { background: var(--ink); color: var(--paper); }
+.icon-btn svg { width: 1.05rem; height: 1.05rem; }
+.nav .short { display: none; }
+.menu-btn { display: none; }
+@media (max-width: 860px) {
+  .nav { top: 0.6rem; padding-left: 1rem; }
+  .nav__links { display: none; }
+  .nav .long { display: none; } .nav .short { display: inline; }
+  .nav .icon-btn { display: none; }
+}
+
+/* ============================================================= hero ===== */
+.hero { position: relative; padding-top: clamp(7.5rem, 16vh, 11rem); padding-bottom: clamp(3rem, 6vw, 5rem); overflow: clip; }
+.hero__glow { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.hero__glow::before {
+  content: ""; position: absolute; left: 50%; top: 10%; width: 60vw; height: 40vh; max-width: 900px;
+  translate: -50% 0;
+  background: radial-gradient(closest-side, rgba(201,168,106,0.28), transparent 70%);
+  filter: blur(30px);
+  transform: translate3d(var(--gx, 0px), var(--gy, 0px), 0);
+  transition: transform 900ms var(--ease);
+}
+.hero__inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.hero h1 { margin-top: 1.4rem; max-width: 16ch; }
+.vsl {
+  position: relative; width: min(100%, 52rem); margin-top: 2.2rem;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-lg);
+  overflow: clip;
+  background: var(--paper-soft);
+  border: 1px solid rgba(201,168,106,0.35);
+  box-shadow: var(--e3), inset 0 1px 0 rgba(255,255,255,0.5);
+  transform: translate3d(0, var(--vy, 0px), 0) scale(var(--vs, 1));
+  will-change: transform;
+}
+.vsl::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18); }
+.vsl__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; filter: saturate(0.9); transform: scale(1.02); transition: transform 1200ms var(--ease); }
+.vsl:hover .vsl__poster { transform: scale(1.05); }
+.vsl__scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(27,23,18,0.72), rgba(27,23,18,0.15) 45%, transparent 70%); }
+.vsl__play {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  width: 100%; background: none; border: 0; cursor: pointer; color: #fff;
+}
+.vsl__ring {
+  display: grid; place-items: center; width: 5.25rem; height: 5.25rem; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+  box-shadow: 0 18px 40px -14px rgba(169,130,63,0.9), inset 0 1px 0 rgba(255,255,255,0.4);
+  transition: transform 260ms var(--ease);
+}
+.vsl__ring svg { width: 1.6rem; height: 1.6rem; margin-left: 4px; }
+.vsl__play:hover .vsl__ring { transform: scale(1.08); }
+.vsl__play span { font-size: var(--t-sm); font-weight: 600; letter-spacing: 0.02em; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+.vsl__meta { position: absolute; left: 1.25rem; bottom: 1.1rem; z-index: 3; color: rgba(255,255,255,0.85); font-size: var(--t-xs); letter-spacing: 0.2em; text-transform: uppercase; }
+.vsl iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; z-index: 4; }
+.hero .lede { margin-top: 1.9rem; max-width: 34ch; }
+.tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 1.4rem; }
+.tag {
+  display: inline-flex; align-items: center; padding: 0.38rem 0.8rem; border-radius: var(--r-pill);
+  border: 1px solid rgba(201,168,106,0.32); background: rgba(201,168,106,0.07);
+  font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep);
+}
+:root[data-theme="dark"] .tag, :root:not([data-theme="light"]) .tag { color: var(--gold); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .tag { color: var(--gold-deep); } }
+.hero__ctas { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem 1.6rem; margin-top: 2rem; }
+.zones { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.4rem; margin-top: 2rem; font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.zones li::before { content: ""; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-right: 0.6rem; vertical-align: 2px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; width: min(100%, 44rem); margin-top: 3rem; }
+.stat { display: flex; flex-direction: column; align-items: center; border-left: 1px solid rgba(201,168,106,0.35); }
+.stat:first-child { border-left: 0; }
+.stat b { font-family: var(--font-display); font-weight: 800; font-size: var(--t-2xl); letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat b span { font: inherit; letter-spacing: inherit; color: inherit; margin: 0; }
+.stat > span { margin-top: 0.5rem; max-width: 10rem; font-size: var(--t-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); line-height: 1.35; }
+@media (max-width: 640px) {
+  .hero__ctas { flex-direction: column; }
+  .hero__ctas .btn { width: 100%; }
+  .stats { gap: 0.5rem; }
+  .stat > span { max-width: 7rem; }
+}
+
+/* ========================================================== clients ===== */
+.clients { padding-block: 3rem 3.5rem; border-block: 1px solid var(--hairline); }
+.clients p { text-align: center; }
+.marquee { position: relative; overflow: clip; margin-top: 2rem; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.marquee__track { display: flex; align-items: center; width: max-content; gap: clamp(3rem, 6vw, 6rem); animation: marquee 38s linear infinite; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee__track img { height: 2.6rem; width: auto; max-width: 11rem; object-fit: contain; opacity: 0.85; transition: opacity 300ms var(--ease); }
+.marquee__track img:hover { opacity: 1; }
+:root[data-theme="dark"] .marquee__track img.invertible { filter: invert(1) brightness(1.4); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .marquee__track img.invertible { filter: invert(1) brightness(1.4); } }
+@keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
+
+/* ========================================================== méthode ===== */
+.method { padding-block: var(--section) 0; }
+.method__pin { position: relative; height: 260vh; }
+.method__stage { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+.steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+.steps::before { content: ""; position: absolute; left: 0; right: 0; top: 1.4rem; height: 1px; background: var(--hairline); }
+.steps__line { position: absolute; left: 0; right: 0; top: 1.4rem; height: 2px; margin-top: -0.5px; background: linear-gradient(90deg, var(--gold-soft), var(--gold)); transform-origin: 0 50%; transform: scaleX(var(--line, 0)); will-change: transform; }
+.step { position: relative; padding-top: 3.2rem; transition: opacity 500ms var(--ease), transform 500ms var(--ease); opacity: 0.35; transform: translate3d(0, 10px, 0); }
+.step.is-on { opacity: 1; transform: none; }
+.step__dot {
+  position: absolute; top: 0.9rem; left: 0; width: 1rem; height: 1rem; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--gold);
+  box-shadow: 0 0 0 6px var(--paper);
+  transition: background-color 400ms var(--ease), transform 400ms var(--ease);
+}
+.step.is-on .step__dot { background: var(--gold); transform: scale(1.15); }
+.step__n { font-family: var(--font-display); font-weight: 800; font-size: var(--t-xs); letter-spacing: 0.2em; color: var(--gold); }
+.step h3 { margin-top: 0.6rem; font-family: var(--font-display); font-weight: 800; font-size: var(--t-xl); letter-spacing: -0.025em; line-height: 1.05; }
+.step__sub { margin-top: 0.35rem; font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.step.step--violet .step__sub { color: var(--violet); }
+.step p:last-child { margin-top: 0.8rem; color: var(--ink-soft); max-width: 30ch; text-wrap: pretty; }
+@media (max-width: 860px) {
+  .method__pin { height: auto; }
+  .method__stage { position: static; height: auto; }
+  .steps { grid-template-columns: 1fr; gap: 2.2rem; margin-top: 2.5rem; padding-left: 2rem; }
+  .steps::before, .steps__line { left: 0.45rem; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .steps__line { width: 2px; transform-origin: 50% 0; transform: scaleY(var(--line, 0)); }
+  .step { padding-top: 0; }
+  .step__dot { left: -2rem; top: 0.25rem; }
+}
+
+/* ============================================================ vocal ===== */
+.voice { padding-block: 3rem 2rem; }
+.voice__card {
+  margin: 1rem auto 0; width: min(100%, 34rem);
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: 20px 20px 20px 6px;
+  background: #DCF8C6; color: #1B1712;
+  box-shadow: var(--e2);
+}
+:root[data-theme="dark"] .voice__card { background: #163d34; color: #F3EFE6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .voice__card { background: #163d34; color: #F3EFE6; } }
+.voice__avatar { width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.7); }
+.voice__play { flex: none; width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 0; background: #25D366; color: #fff; display: grid; place-items: center; cursor: pointer; transition: transform 200ms var(--ease); }
+.voice__play:hover { transform: scale(1.06); }
+.voice__play:active { transform: scale(0.96); }
+.voice__play svg { width: 0.9rem; height: 0.9rem; }
+.voice__wave { flex: 1; min-width: 0; }
+.bars { display: flex; align-items: center; gap: 2px; height: 2rem; }
+.bars i { display: block; width: 2px; border-radius: 2px; background: rgba(0,0,0,0.28); flex: none; transition: background-color 120ms linear; }
+:root[data-theme="dark"] .bars i { background: rgba(255,255,255,0.3); }
+.bars i.on { background: #25D366; }
+.voice__time { display: flex; justify-content: space-between; margin-top: 0.2rem; font-size: 0.68rem; opacity: 0.75; font-variant-numeric: tabular-nums; }
+
+/* =========================================================== offres ===== */
+.offers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3.5rem; align-items: stretch; }
+.offer {
+  position: relative; display: flex; flex-direction: column;
+  padding: 2rem;
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--e2);
+  transition: transform 400ms var(--ease), box-shadow 400ms var(--ease);
+}
+.offer::before { content: ""; position: absolute; left: 14%; right: 14%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.5; }
+@media (hover: hover) and (pointer: fine) { .offer:hover { transform: translateY(-4px); box-shadow: var(--e3); } }
+.offer--featured { border-color: rgba(201,168,106,0.6); box-shadow: 0 0 0 1px rgba(201,168,106,0.35), var(--e3); }
+.offer__badge { position: absolute; top: 1.25rem; right: 1.25rem; }
+.offer__n { font-family: var(--font-display); font-weight: 800; font-size: var(--t-xs); letter-spacing: 0.2em; color: var(--gold); }
+.offer h3 { margin-top: 0.8rem; font-family: var(--font-display); font-weight: 800; font-size: var(--t-xl); letter-spacing: -0.025em; line-height: 1.05; }
+.offer__format { margin-top: 0.4rem; font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.offer__tag { margin-top: 1.1rem; color: var(--ink-soft); text-wrap: pretty; }
+.offer__price { margin-top: 1.4rem; display: flex; align-items: baseline; gap: 0.5rem; }
+.offer__price b { font-family: var(--font-display); font-weight: 800; font-size: var(--t-2xl); letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.offer__price span { font-size: var(--t-xs); letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.offer ul { margin-top: 1.4rem; padding-top: 1.4rem; border-top: 1px solid var(--hairline); display: grid; gap: 0.7rem; flex: 1; }
+.offer li { display: flex; gap: 0.7rem; font-size: var(--t-sm); color: var(--ink-soft); }
+.offer li svg { width: 1rem; height: 1rem; flex: none; margin-top: 0.2rem; color: var(--gold); }
+.offer .btn { margin-top: 1.8rem; width: 100%; }
+.offers__note { margin-top: 2rem; text-align: center; color: var(--muted); font-size: var(--t-sm); }
+@media (max-width: 960px) { .offers { grid-template-columns: 1fr; max-width: 32rem; margin-inline: auto; } }
+
+/* ========================================================== projets ===== */
+.projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3.5rem; }
+.project { position: relative; display: block; border-radius: var(--r-md); overflow: clip; aspect-ratio: 4 / 5; text-decoration: none; color: #fff; background: var(--paper-soft); isolation: isolate; }
+.project img { position: absolute; inset: -6% 0; width: 100%; height: 112%; object-fit: cover; transform: translate3d(0, var(--py, 0px), 0) scale(1.001); transition: filter 500ms var(--ease); will-change: transform; }
+.project::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,15,10,0.85), rgba(20,15,10,0.15) 55%, transparent); z-index: 1; }
+.project__body { position: absolute; inset: auto 0 0 0; z-index: 2; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.25rem; }
+.project__idx { font-family: var(--font-display); font-weight: 800; font-size: var(--t-xs); letter-spacing: 0.2em; color: var(--gold-soft); }
+.project h3 { font-family: var(--font-display); font-weight: 800; font-size: var(--t-xl); letter-spacing: -0.025em; line-height: 1.05; }
+.project__cat { font-size: var(--t-sm); opacity: 0.85; }
+.project__go { position: absolute; top: 1rem; right: 1rem; z-index: 2; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: rgba(255,255,255,0.14); backdrop-filter: blur(8px); color: #fff; opacity: 0; transform: translate3d(0, -4px, 0); transition: opacity 300ms var(--ease), transform 300ms var(--ease); }
+.project__go svg { width: 1rem; height: 1rem; }
+.project:hover .project__go, .project:focus-visible .project__go { opacity: 1; transform: none; }
+.project:hover img { filter: saturate(1.1); }
+.project span.year { position: absolute; top: 1.1rem; left: 1.25rem; z-index: 2; font-size: var(--t-xs); letter-spacing: 0.2em; color: rgba(255,255,255,0.8); }
+@media (max-width: 860px) { .projects { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; } .project { aspect-ratio: 4 / 5; } }
+@media (max-width: 520px) { .projects { grid-template-columns: 1fr; } .project { aspect-ratio: 16 / 11; } }
+
+/* ============================================================ avis ===== */
+.reviews { background: var(--paper-soft); border-block: 1px solid var(--hairline); }
+.google-line { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.2rem; font-size: var(--t-sm); color: var(--ink-soft); }
+.stars { display: inline-flex; gap: 2px; color: #F4A322; }
+.stars svg { width: 0.9rem; height: 0.9rem; }
+.g { width: 1.1rem; height: 1.1rem; }
+.testis { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.25rem; margin-top: 3rem; }
+.testi { display: flex; flex-direction: column; padding: 2rem; border-radius: var(--r-lg); background: var(--panel); border: 1px solid var(--panel-border); box-shadow: var(--e1); }
+.testi--lead { grid-row: span 2; }
+.testi--lead blockquote { font-size: var(--t-lg); line-height: 1.45; }
+.testi__top { display: flex; justify-content: space-between; align-items: center; }
+.testi blockquote { margin-top: 1.2rem; flex: 1; color: var(--ink-soft); text-wrap: pretty; }
+.testi figcaption { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--hairline); display: flex; align-items: center; gap: 0.75rem; }
+.avatar { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; color: #fff; font-weight: 600; font-size: var(--t-sm); }
+.testi figcaption b { display: block; font-family: var(--font-display); font-weight: 700; font-size: var(--t-sm); }
+.testi figcaption span { font-size: var(--t-xs); color: var(--muted); }
+@media (max-width: 860px) { .testis { grid-template-columns: 1fr; } .testi--lead { grid-row: auto; } }
+
+/* =========================================================== ebooks ===== */
+.ebooks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3rem; }
+.ebook {
+  position: relative; display: flex; flex-direction: column; gap: 1rem;
+  padding: 1.6rem; border-radius: var(--r-md);
+  background: var(--panel); border: 1px solid var(--panel-border); box-shadow: var(--e1);
+  text-decoration: none; overflow: clip;
+  transition: transform 400ms var(--ease), box-shadow 400ms var(--ease);
+}
+.ebook::after { content: ""; position: absolute; right: -2rem; bottom: -2.5rem; width: 9rem; height: 11rem; border-radius: 6px; background: linear-gradient(160deg, rgba(201,168,106,0.22), rgba(201,168,106,0.04)); border: 1px solid rgba(201,168,106,0.3); transform: rotate(-8deg); transition: transform 500ms var(--ease); }
+.ebook:hover { transform: translateY(-3px); box-shadow: var(--e2); }
+.ebook:hover::after { transform: rotate(-4deg) translate3d(-4px, -6px, 0); }
+.ebook__top { display: flex; justify-content: space-between; align-items: center; }
+.ebook h3 { font-family: var(--font-display); font-weight: 800; font-size: var(--t-xl); letter-spacing: -0.025em; line-height: 1.05; position: relative; z-index: 1; }
+.ebook .link-gold { margin-top: auto; align-self: flex-start; font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase; position: relative; z-index: 1; }
+@media (max-width: 860px) { .ebooks { grid-template-columns: 1fr; max-width: 28rem; margin-inline: auto; } }
+
+/* ========================================================== contact ===== */
+.contact { padding-block: calc(var(--section) * 1.2); }
+.contact .display { margin-top: 1.4rem; margin-inline: auto; max-width: 14ch; }
+.contact .btn { margin-top: 2.4rem; }
+.contact__alt { margin-top: 1.2rem; font-size: var(--t-sm); color: var(--muted); }
+
+/* ============================================================ about ===== */
+.about { border-top: 1px solid var(--hairline); }
+.about__grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.about__photo { position: relative; border-radius: var(--r-lg); overflow: clip; aspect-ratio: 3 / 4; box-shadow: var(--e3); }
+.about__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; transform: translate3d(0, var(--py, 0px), 0) scale(1.08); will-change: transform; }
+.about__photo::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(201,168,106,0.35); }
+.about blockquote { margin-top: 1.5rem; font-size: var(--t-lg); line-height: 1.5; color: var(--ink-soft); text-wrap: pretty; }
+.about__sig { margin-top: 1.2rem; font-size: var(--t-xs); letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+.about .stats { margin-top: 2.4rem; padding-top: 2rem; border-top: 1px solid var(--hairline); width: 100%; }
+.about .stat { align-items: flex-start; }
+.about .stat > span { text-align: left; }
+@media (max-width: 860px) { .about__grid { grid-template-columns: 1fr; } .about__photo { max-width: 22rem; aspect-ratio: 4 / 5; } }
+
+/* =========================================================== footer ===== */
+.footer { padding-block: 3.5rem 7rem; border-top: 1px solid var(--hairline); font-size: var(--t-sm); color: var(--muted); }
+.footer__grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem 3rem; }
+.footer__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; }
+.footer a { text-decoration-color: rgba(201,168,106,0.6); }
+.footer__bottom { margin-top: 2rem; padding-top: 1.4rem; border-top: 1px solid var(--hairline); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem; font-size: var(--t-xs); }
+@media (min-width: 861px) { .footer { padding-bottom: 3.5rem; } }
+
+/* ======================================================= sticky CTA ===== */
+.sticky-cta {
+  position: fixed; left: 0.75rem; right: 0.75rem; bottom: max(0.75rem, env(safe-area-inset-bottom)); z-index: 40;
+  display: none;
+  transform: translate3d(0, calc(100% + 1.5rem), 0); transition: transform 400ms var(--ease);
+}
+.sticky-cta.is-on { transform: none; }
+.sticky-cta .btn { width: 100%; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 12px 30px -8px rgba(60,40,10,0.45); }
+@media (max-width: 860px) { .sticky-cta { display: block; } }
+
+/* ========================================================= reveals ===== */
+[data-reveal] { opacity: 0; transform: translate3d(0, 22px, 0); transition: opacity 800ms var(--ease), transform 800ms var(--ease); transition-delay: var(--d, 0ms); }
+[data-reveal].in { opacity: 1; transform: none; }
+[data-stagger] > * { opacity: 0; transform: translate3d(0, 18px, 0); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+[data-stagger].in > * { opacity: 1; transform: none; }
+.grain { position: fixed; inset: 0; pointer-events: none; z-index: 70; opacity: 0.035; mix-blend-mode: multiply; }
+.grain::before { content: ""; position: absolute; inset: -50%; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>"); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal], [data-stagger] > * { opacity: 1; transform: none; transition: none; }
+  .marquee__track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; gap: 2rem; }
+  .marquee { mask-image: none; -webkit-mask-image: none; }
+  .method__pin { height: auto; } .method__stage { position: static; height: auto; }
+  .step { opacity: 1; transform: none; } .steps__line { transform: none; }
+  .btn, .vsl, .project img, .about__photo img { transition: none; transform: none !important; }
+  .hero__glow::before { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav" id="nav" aria-label="Navigation principale">
+  <a class="brand" href="#accueil">Fabien<b>.</b></a>
+  <ul class="nav__links">
+    <li><a href="#methode">Méthode</a></li>
+    <li><a href="#offres">Offres</a></li>
+    <li><a href="#ecosysteme">Mon écosystème</a></li>
+    <li><a href="#temoignages">Avis</a></li>
+    <li><a href="#ebooks">E-books</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav__cta">
+    <a class="icon-btn" href="https://wa.me/33625244878" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3 1 2.6 1.1 2.8.1.2 1.9 3 4.7 4.2 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3z"/></svg>
+    </a>
+    <a class="btn btn--primary btn--sm" data-magnet href="https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit" target="_blank" rel="noopener"><span class="long">Réserver mon appel découverte offert</span><span class="short">Appel offert</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ================================================================ HERO -->
+<section class="hero" id="accueil">
+  <div class="hero__glow" id="glow" aria-hidden="true"></div>
+  <div class="wrap hero__inner">
+    <span class="eyebrow" data-reveal>LS Consulting · Conseil stratégique</span>
+    <h1 class="display display--3xl" data-reveal style="--d:80ms">Ma méthode <span class="accent">en quelques secondes.</span></h1>
+
+    <div class="vsl" id="vsl" data-reveal style="--d:180ms">
+      <img class="vsl__poster" src="assets/fabien.jpg" width="1152" height="1536" alt="">
+      <div class="vsl__scrim" aria-hidden="true"></div>
+      <button class="vsl__play" id="vslPlay" type="button" aria-label="Lire la vidéo : la méthode de Fabien Quetel">
+        <span class="vsl__ring"><svg viewBox="0 0 22 26" fill="currentColor"><path d="M21 13L0 25.99V0L21 13Z"/></svg></span>
+        <span>Regarder la vidéo</span>
+      </button>
+      <span class="vsl__meta">La méthode · Fabien Quetel</span>
+    </div>
+
+    <p class="lede" data-reveal style="--d:260ms">Un écosystème de cinq marques intégrées au service de votre croissance.</p>
+
+    <ul class="tags" data-stagger>
+      <li class="tag">Décideurs</li>
+      <li class="tag">Managers</li>
+      <li class="tag">Entrepreneurs francophones</li>
+    </ul>
+
+    <div class="hero__ctas" data-reveal style="--d:340ms">
+      <a class="btn btn--primary btn--lg" data-magnet href="https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit" target="_blank" rel="noopener">Réserver mon appel découverte offert <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="link-gold" href="#offres">Découvrir les offres <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <ul class="zones" data-stagger>
+      <li>France</li><li>Espagne</li><li>Italie</li><li>Bali</li><li>Mexique</li>
+    </ul>
+
+    <div class="stats" data-stagger>
+      <div class="stat"><b><span data-count="20">0</span>+</b><span>ans d'expérience terrain</span></div>
+      <div class="stat"><b>+<span data-count="100">0</span></b><span>entreprises accompagnées</span></div>
+      <div class="stat"><b><span data-count="6">0</span></b><span>marques bâties</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= CLIENTS -->
+<section class="clients" aria-label="Entreprises accompagnées">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Entreprises accompagnées</p>
+    <div class="marquee" data-reveal style="--d:120ms">
+      <div class="marquee__track" id="marquee">
+        <img src="assets/logos/gifi.svg" alt="GIFI">
+        <img src="assets/logos/sparta.png" alt="Sparta Académie">
+        <img src="assets/logos/perla.png" alt="Champagne Perla">
+        <img src="assets/logos/layonn.png" alt="Layonn">
+        <img src="assets/logos/lovexplorers.png" alt="Love Explorers">
+        <img src="assets/logos/biwiz.svg" alt="Biwiz">
+        <img src="assets/logos/bonnaire.png" alt="Maison Bonnaire">
+        <img class="invertible" src="assets/logos/ls.png" alt="LS Consulting">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= MÉTHODE -->
+<section class="method" id="methode">
+  <div class="method__pin" id="methodPin">
+    <div class="method__stage">
+      <div class="wrap">
+        <div class="head center" data-reveal>
+          <span class="eyebrow">La méthode</span>
+          <h2 class="display display--2xl">Une méthode simple. <span class="accent">Des résultats concrets.</span></h2>
+        </div>
+        <ol class="steps" id="steps">
+          <span class="steps__line" aria-hidden="true"></span>
+          <li class="step is-on">
+            <span class="step__dot" aria-hidden="true"></span>
+            <span class="step__n">Étape 01</span>
+            <h3>Clarté</h3>
+            <p class="step__sub">Appel découverte + Clarity Session</p>
+            <p>Clarté, alignement, priorités définies.</p>
+          </li>
+          <li class="step step--violet">
+            <span class="step__dot" aria-hidden="true"></span>
+            <span class="step__n">Étape 02</span>
+            <h3>Exécution</h3>
+            <p class="step__sub">Accompagnement 360</p>
+            <p>Mise en œuvre étape par étape, sur le terrain.</p>
+          </li>
+          <li class="step">
+            <span class="step__dot" aria-hidden="true"></span>
+            <span class="step__n">Étape 03</span>
+            <h3>Croissance</h3>
+            <p class="step__sub">Résultats suivis et mesurés</p>
+            <p>Pilotage, optimisation, accélération.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== VOCAL -->
+<section class="voice" aria-label="Un mot de Fabien">
+  <div class="wrap">
+    <p class="eyebrow center" style="display:block" data-reveal>Un mot de Fabien</p>
+    <div class="voice__card" data-reveal style="--d:100ms">
+      <img class="voice__avatar" src="assets/fabien-avatar.jpg" width="96" height="96" alt="Fabien Quetel">
+      <button class="voice__play" id="voicePlay" type="button" aria-label="Écouter le message vocal">
+        <svg class="ic-play" viewBox="0 0 22 26" fill="currentColor"><path d="M21 13L0 25.99V0L21 13Z"/></svg>
+        <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" hidden><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+      </button>
+      <div class="voice__wave">
+        <div class="bars" id="bars" aria-hidden="true"></div>
+        <div class="voice__time"><span id="voiceTime">0:00</span><span>Message vocal</span></div>
+      </div>
+      <audio id="voice" src="assets/fabien-message.m4a" preload="metadata"></audio>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== OFFRES -->
+<section class="section" id="offres">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Travailler ensemble</span>
+      <h2 class="display display--2xl">3 piliers <span class="accent">d'accompagnement.</span></h2>
+    </div>
+    <div class="offers" data-stagger>
+      <article class="offer">
+        <span class="offer__n">01</span>
+        <h3>Clarity Session</h3>
+        <p class="offer__format">2 h · présentiel ou visio</p>
+        <p class="offer__tag">Prendre du recul, clarifier vos priorités.</p>
+        <p class="offer__price"><b>250 €</b><span>TTC</span></p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Analyse du business</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>3 à 5 priorités à fort impact</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Carte mentale</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Feuille de route personnalisée</li>
+        </ul>
+        <a class="btn btn--secondary" href="https://calendly.com/fabienquetel_lsconsulting" target="_blank" rel="noopener">Réserver ma session</a>
+      </article>
+      <article class="offer offer--featured">
+        <span class="tag offer__badge">Offre principale</span>
+        <span class="offer__n">02</span>
+        <h3>Immersion 360</h3>
+        <p class="offer__format">2 jours · sur site</p>
+        <p class="offer__tag">Une immersion complète au cœur de votre entreprise.</p>
+        <p class="offer__price"><b>890 €</b><span>TTC</span></p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Audit 360 de l'entreprise</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Analyse CA, marges et objectifs</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Analyse des process, outils et performances</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Accompagnement managérial si nécessaire</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Plan d'action priorisé</li>
+        </ul>
+        <a class="btn btn--primary" data-magnet href="https://calendly.com/fabienquetel_lsconsulting/nouvelle-reunion" target="_blank" rel="noopener">Réserver mon immersion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="offer">
+        <span class="offer__n">03</span>
+        <h3>Accompagnement sur mesure</h3>
+        <p class="offer__format">1 semaine à 3 mois et plus</p>
+        <p class="offer__tag">Mettre en œuvre, piloter et accélérer les résultats.</p>
+        <p class="offer__price"><b>Sur mesure</b></p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Intégration dans l'entreprise selon les besoins</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Pilotage stratégique</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Mise en œuvre des actions</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Coaching</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4L19 7"/></svg>Résultats mesurables</li>
+        </ul>
+        <a class="btn btn--secondary" href="https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit" target="_blank" rel="noopener">Prendre rendez-vous</a>
+      </article>
+    </div>
+    <p class="offers__note" data-reveal>Pas encore sûr ? <a class="link-gold" href="https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit" target="_blank" rel="noopener">Commencez par un appel découverte offert de 30 min</a>, sans engagement.</p>
+  </div>
+</section>
+
+<!-- ============================================================= PROJETS -->
+<section class="section" id="ecosysteme">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Mon écosystème</span>
+      <h2 class="display display--2xl">Je construis <span class="accent">avant de conseiller.</span></h2>
+      <p class="lede">Six marques bâties de zéro. C'est le terrain qui nourrit la méthode.</p>
+    </div>
+    <div class="projects" data-stagger>
+      <a class="project" href="https://maisonperla.com/" target="_blank" rel="noopener"><img src="assets/champagne.jpg" width="1400" height="934" alt="" data-parallax="0.6"><span class="year">2020</span><span class="project__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span><div class="project__body"><span class="project__idx">01</span><h3>Perla</h3><span class="project__cat">Champagne de prestige</span></div></a>
+      <a class="project" href="https://layonnstyle.com/" target="_blank" rel="noopener"><img src="assets/mode.jpg" width="1400" height="933" alt="" data-parallax="0.6"><span class="year">2022</span><span class="project__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span><div class="project__body"><span class="project__idx">02</span><h3>Layonn</h3><span class="project__cat">Mode éco-responsable</span></div></a>
+      <div class="project"><img src="assets/studio.jpg" width="1400" height="933" alt="" data-parallax="0.6"><span class="year">2023</span><div class="project__body"><span class="project__idx">03</span><h3>Dream Studio</h3><span class="project__cat">Studio créatif et production</span></div></div>
+      <a class="project" href="https://www.lovexplorers.com/" target="_blank" rel="noopener"><img src="assets/romance.jpg" width="1400" height="933" alt="" data-parallax="0.6"><span class="year">2023</span><span class="project__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span><div class="project__body"><span class="project__idx">04</span><h3>Lovexplorers</h3><span class="project__cat">Plateforme, romance</span></div></a>
+      <div class="project"><img src="assets/consulting.jpg" width="1400" height="933" alt="" data-parallax="0.6"><span class="year">2024</span><div class="project__body"><span class="project__idx">05</span><h3>Infinité Agency</h3><span class="project__cat">Agence, croissance digitale</span></div></div>
+      <div class="project"><img src="assets/podcast.jpg" width="1400" height="2100" alt="" data-parallax="0.6"><span class="year">2024</span><div class="project__body"><span class="project__idx">06</span><h3>Vision'R Media</h3><span class="project__cat">Média et podcast</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ AVIS -->
+<section class="section reviews" id="temoignages">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Témoignages</span>
+      <h2 class="display display--2xl">Des décideurs. <span class="accent">Des résultats.</span></h2>
+      <p class="google-line"><svg class="g" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.07 5.07 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.6 6.6 0 0 1 5.5 12c0-.73.13-1.44.34-2.09V7.06H2.18A11 11 0 0 0 1 12c0 1.77.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg><span class="stars" aria-label="5 étoiles sur 5"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg></span><b>5,0</b><span class="muted">avis Google vérifiés</span></p>
+    </div>
+    <div class="testis" data-stagger>
+      <figure class="testi testi--lead">
+        <div class="testi__top"><span class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg></span><svg class="g" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.07 5.07 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.6 6.6 0 0 1 5.5 12c0-.73.13-1.44.34-2.09V7.06H2.18A11 11 0 0 0 1 12c0 1.77.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg></div>
+        <blockquote>J'ai fait appel à Fabien pour clarifier la structure de mon entreprise et affiner ma vision de développement. Ce fut une révélation. [...] Fabien ne se contente pas de donner des conseils génériques ; il a pris le temps de s'immerger dans mon positionnement et mes aspirations pour m'offrir un accompagnement sur mesure. [...] Foncez les yeux fermés !</blockquote>
+        <figcaption><span class="avatar" style="background:#4285F4">L</span><div><b>Léa</b><span>Local Guide · 20 avis</span></div></figcaption>
+      </figure>
+      <figure class="testi">
+        <div class="testi__top"><span class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg></span></div>
+        <blockquote>Super expérience avec Fabien, je recommande.</blockquote>
+        <figcaption><span class="avatar" style="background:#EA4C89">T</span><div><b>Thomas Sanchez</b><span>Local Guide · 17 avis</span></div></figcaption>
+      </figure>
+      <figure class="testi">
+        <div class="testi__top"><span class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.7-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.7z"/></svg></span></div>
+        <blockquote>De vrais conseils pertinents et une approche humaine, nous recommandons vivement les services de Fabien et son équipe.</blockquote>
+        <figcaption><span class="avatar" style="background:#F4A322">T</span><div><b>toyotomihideyoshi34</b><span>Local Guide · 24 avis</span></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== EBOOKS -->
+<section class="section" id="ebooks">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow">Mes e-books</span>
+      <h2 class="display display--2xl">Des guides concrets, <span class="accent">issus du terrain.</span></h2>
+    </div>
+    <div class="ebooks" data-stagger>
+      <a class="ebook" href="https://www.dream-studio.fr/products/guide-pdf-creer-son-setup-podcast" target="_blank" rel="noopener">
+        <div class="ebook__top"><span class="tag">Mindset</span></div>
+        <h3>Clarté Mentale</h3>
+        <span class="link-gold">Obtenir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg></span>
+      </a>
+      <a class="ebook" href="mailto:fabienquetel@layonnstyle.com?subject=E-book%20Carte%20Mentale">
+        <div class="ebook__top"><span class="tag">Méthode</span></div>
+        <h3>Carte Mentale</h3>
+        <span class="link-gold">Obtenir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg></span>
+      </a>
+      <a class="ebook" href="https://www.dream-studio.fr/products/guide-pdf-monter-son-podcast-simplement" target="_blank" rel="noopener">
+        <div class="ebook__top"><span class="tag">Média</span></div>
+        <h3>Lancer son podcast</h3>
+        <span class="link-gold">Obtenir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= CONTACT -->
+<section class="contact center" id="contact">
+  <div class="wrap" data-reveal>
+    <span class="eyebrow">Passons à l'action</span>
+    <h2 class="display display--3xl accent">Commençons dès maintenant.</h2>
+    <a class="btn btn--primary btn--lg" data-magnet href="https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit" target="_blank" rel="noopener">Réserver mon appel découverte offert <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <p class="contact__alt">30 minutes, sans engagement. Ou directement sur <a href="https://wa.me/33625244878" target="_blank" rel="noopener">WhatsApp</a>.</p>
+  </div>
+</section>
+
+<!-- =============================================================== ABOUT -->
+<section class="section about" id="apropos">
+  <div class="wrap about__grid">
+    <figure class="about__photo" data-reveal>
+      <img src="assets/fabien.jpg" width="1152" height="1536" alt="Fabien Quetel, fondateur de LS Consulting" data-parallax="0.5">
+    </figure>
+    <div data-reveal style="--d:120ms">
+      <span class="eyebrow">À propos</span>
+      <h2 class="display display--2xl" style="margin-top:1rem">Je ne théorise pas la croissance. <span class="accent">Je l'exécute.</span></h2>
+      <blockquote>« Après plus de 20 ans comme décideur dans le retail et après avoir créé plusieurs entreprises, j'accompagne aujourd'hui les dirigeants à structurer, développer et accélérer leur activité. »</blockquote>
+      <p class="about__sig">Fabien Quetel · Fondateur</p>
+      <div class="stats">
+        <div class="stat"><b><span data-count="20">0</span>+</b><span>années d'expérience</span></div>
+        <div class="stat"><b><span data-count="5">0</span></b><span>marques bâties</span></div>
+        <div class="stat"><b><span data-count="100">0</span>+</b><span>entreprises accompagnées</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="brand" href="#accueil">Fabien<b>.</b></a>
+        <p style="margin-top:0.5rem">LS Consulting · Conseil stratégique · Montpellier</p>
+      </div>
+      <ul class="footer__links">
+        <li><a href="mailto:fabienquetel@layonnstyle.com">fabienquetel@layonnstyle.com</a></li>
+        <li><a href="tel:+33625244878">06 25 24 48 78</a></li>
+        <li><a href="https://wa.me/33625244878" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/ls_consulting_fr" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 Fabien Quetel · LS Consulting</p>
+      <a href="/mentions-legales">Mentions légales et confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn--primary btn--lg" href="https://calendly.com/fabienquetel_lsconsulting/appel-decouverte-gratuit" target="_blank" rel="noopener">Réserver mon appel découverte offert <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var clamp01 = function (x) { return x < 0 ? 0 : x > 1 ? 1 : x; };
+  var ease = function (x) { return 1 - Math.pow(1 - x, 3); };
+
+  // ---- reveals (once, on entry) --------------------------------------------
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      $$('[data-count]', e.target).concat(e.target.matches('[data-count]') ? [e.target] : []).forEach(count);
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+  $$('[data-reveal], [data-stagger]').forEach(function (el) {
+    if (el.hasAttribute('data-stagger')) {
+      Array.prototype.forEach.call(el.children, function (kid, i) { kid.style.transitionDelay = (i * 70) + 'ms'; });
+    }
+    io.observe(el);
+  });
+
+  // ---- count-up ------------------------------------------------------------
+  function count(el) {
+    if (el.dataset.done) return; el.dataset.done = '1';
+    var target = parseFloat(el.dataset.count), t0 = null, dur = reduce ? 0 : 1400;
+    if (!dur) { el.textContent = target; return; }
+    (function tick(ts) {
+      if (!t0) t0 = ts;
+      var p = clamp01((ts - t0) / dur);
+      el.textContent = Math.round(target * ease(p));
+      if (p < 1) requestAnimationFrame(tick);
+    })(performance.now());
+  }
+
+  // ---- scroll-driven: progress, nav, sticky CTA, hero VSL, method line, parallax
+  var progress = $('#progress'), nav = $('#nav'), sticky = $('#stickyCta');
+  var hero = $('#accueil'), vsl = $('#vsl'), pin = $('#methodPin'), steps = $$('#steps .step'), stepsEl = $('#steps');
+  var plx = $$('[data-parallax]');
+  var vh = innerHeight;
+  addEventListener('resize', function () { vh = innerHeight; }, { passive: true });
+
+  function frame() {
+    var y = scrollY, max = document.documentElement.scrollHeight - vh;
+    progress.style.transform = 'scaleX(' + (max > 0 ? clamp01(y / max) : 0) + ')';
+    nav.classList.toggle('is-scrolled', y > 24);
+    sticky.classList.toggle('is-on', y > hero.offsetHeight * 0.7 && y < max - vh * 0.6);
+
+    if (!reduce) {
+      // the video frame settles back as the hero leaves: a small lift, nothing more
+      var hp = clamp01(y / (hero.offsetHeight * 0.9));
+      vsl.style.setProperty('--vy', (hp * 40).toFixed(1) + 'px');
+      vsl.style.setProperty('--vs', (1 - hp * 0.04).toFixed(3));
+
+      // method: the gold line draws through the three steps while the stage holds
+      var r = pin.getBoundingClientRect();
+      var travel = r.height - vh;
+      if (travel > 40) {
+        var p = clamp01(-r.top / travel);
+        var line = clamp01((p - 0.1) / 0.75);
+        stepsEl.style.setProperty('--line', line.toFixed(3));
+        steps.forEach(function (s, i) { s.classList.toggle('is-on', line >= i / (steps.length - 1) - 0.02); });
+      } else {
+        stepsEl.style.setProperty('--line', '1');
+        steps.forEach(function (s) { s.classList.add('is-on'); });
+      }
+
+      // gentle parallax on project and portrait images: transform only
+      plx.forEach(function (img) {
+        var b = img.getBoundingClientRect();
+        if (b.bottom < 0 || b.top > vh) return;
+        var t = (b.top + b.height / 2 - vh / 2) / vh; // -1..1
+        img.style.setProperty('--py', (t * -40 * parseFloat(img.dataset.parallax)).toFixed(1) + 'px');
+      });
+    } else {
+      stepsEl.style.setProperty('--line', '1');
+      steps.forEach(function (s) { s.classList.add('is-on'); });
+    }
+  }
+  var queued = false;
+  addEventListener('scroll', function () {
+    if (queued) return; queued = true;
+    requestAnimationFrame(function () { queued = false; frame(); });
+  }, { passive: true });
+  frame();
+
+  // ---- hero glow follows the pointer, slowly --------------------------------
+  if (fine && !reduce) {
+    hero.addEventListener('pointermove', function (e) {
+      var b = hero.getBoundingClientRect();
+      $('#glow').style.setProperty('--gx', (((e.clientX - b.left) / b.width - 0.5) * 120).toFixed(0) + 'px');
+      $('#glow').style.setProperty('--gy', (((e.clientY - b.top) / b.height - 0.5) * 60).toFixed(0) + 'px');
+    });
+  }
+
+  // ---- magnetic primary buttons --------------------------------------------
+  if (fine && !reduce) {
+    $$('[data-magnet]').forEach(function (btn) {
+      var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+      function loop() {
+        cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
+        btn.style.setProperty('--mx', cx.toFixed(2) + 'px');
+        btn.style.setProperty('--my', cy.toFixed(2) + 'px');
+        if (Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1) raf = requestAnimationFrame(loop); else raf = null;
+      }
+      btn.addEventListener('pointermove', function (e) {
+        var b = btn.getBoundingClientRect();
+        tx = (e.clientX - (b.left + b.width / 2)) * 0.22;
+        ty = (e.clientY - (b.top + b.height / 2)) * 0.22;
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
+      btn.addEventListener('pointerleave', function () { tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(loop); });
+    });
+  }
+
+  // ---- VSL: click to play (YouTube) ----------------------------------------
+  $('#vslPlay').addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/K79PwZ5USZA?rel=0&modestbranding=1&autoplay=1';
+    f.title = 'LS Consulting, la méthode de Fabien Quetel';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.allowFullscreen = true;
+    vsl.appendChild(f);
+    this.hidden = true;
+  });
+
+  // ---- voice note ----------------------------------------------------------
+  var BARS = [8,14,10,18,24,16,28,34,22,30,18,26,36,28,20,32,24,14,22,30,26,18,28,34,20,12,24,30,16,22,28,18,10,20,26,14,24,16,10,8];
+  var bars = $('#bars'), audio = $('#voice'), vbtn = $('#voicePlay'), vtime = $('#voiceTime');
+  bars.innerHTML = BARS.map(function (h) { return '<i style="height:' + h + '%"></i>'; }).join('');
+  var bi = $$('i', bars);
+  function fmt(s) { if (!isFinite(s)) return '0:00'; var m = Math.floor(s / 60), r = Math.floor(s % 60); return m + ':' + (r < 10 ? '0' : '') + r; }
+  audio.addEventListener('loadedmetadata', function () { vtime.textContent = fmt(audio.duration); });
+  audio.addEventListener('timeupdate', function () {
+    var p = audio.duration ? audio.currentTime / audio.duration : 0;
+    var n = Math.round(p * bi.length);
+    bi.forEach(function (b, i) { b.classList.toggle('on', i < n); });
+    vtime.textContent = fmt(audio.currentTime);
+  });
+  function setPlaying(on) {
+    $('.ic-play', vbtn).hidden = on; $('.ic-pause', vbtn).hidden = !on;
+    vbtn.setAttribute('aria-label', on ? 'Pause' : 'Écouter le message vocal');
+  }
+  audio.addEventListener('ended', function () { setPlaying(false); bi.forEach(function (b) { b.classList.remove('on'); }); vtime.textContent = fmt(audio.duration); });
+  audio.addEventListener('pause', function () { setPlaying(false); });
+  audio.addEventListener('play', function () { setPlaying(true); });
+  vbtn.addEventListener('click', function () { if (audio.paused) audio.play().catch(function () {}); else audio.pause(); });
+
+  // ---- marquee: duplicate the set once for a seamless loop ---------------
+  var mq = $('#marquee');
+  mq.innerHTML += mq.innerHTML;
+})();
+</script>
+</body>
+</html>
