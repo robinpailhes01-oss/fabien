@@ -8,6 +8,10 @@ const STORAGE_KEY = "newsletter-popup";
 const SNOOZE_DAYS = 14; // re-offer after a dismiss, but not after a signup
 const DELAY_MS = 16000;
 
+// Dispatched by the small "Newsletter" link (see NewsletterButton) so
+// visitors can open the popup on demand, not just via auto-triggers.
+export const OPEN_NEWSLETTER_EVENT = "ls:newsletter:open";
+
 // Web3Forms delivers straight to Fabien's inbox (the email he verified
 // there). Their free tier only accepts submissions made from a real
 // visitor's browser — not from a server — so this call happens client-side
@@ -49,7 +53,18 @@ export default function NewsletterPopup() {
   const shownRef = useRef(false);
 
   useEffect(() => {
-    if (alreadyHandled()) return;
+    // Manual open (small footer link) always works, regardless of any
+    // previous dismiss/subscribe state — it's a deliberate click.
+    const openManually = () => {
+      shownRef.current = true;
+      setStatus("idle");
+      setOpen(true);
+    };
+    window.addEventListener(OPEN_NEWSLETTER_EVENT, openManually);
+
+    if (alreadyHandled()) {
+      return () => window.removeEventListener(OPEN_NEWSLETTER_EVENT, openManually);
+    }
 
     const reveal = () => {
       if (shownRef.current) return;
@@ -68,6 +83,7 @@ export default function NewsletterPopup() {
     return () => {
       clearTimeout(timer);
       window.removeEventListener("mouseout", onLeave);
+      window.removeEventListener(OPEN_NEWSLETTER_EVENT, openManually);
     };
   }, []);
 

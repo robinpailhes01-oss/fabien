@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NewsletterButton from "./NewsletterButton";
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
@@ -71,6 +72,7 @@ export default function Footer() {
             >
               WhatsApp
             </a>
+            <NewsletterButton className="link-gold uppercase" />
           </div>
         </div>
       </div>
