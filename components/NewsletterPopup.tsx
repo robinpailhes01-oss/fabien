@@ -8,6 +8,13 @@ const STORAGE_KEY = "newsletter-popup";
 const SNOOZE_DAYS = 14; // re-offer after a dismiss, but not after a signup
 const DELAY_MS = 16000;
 
+// Web3Forms delivers straight to Fabien's inbox (the email he verified
+// there). Their free tier only accepts submissions made from a real
+// visitor's browser — not from a server — so this call happens client-side
+// on purpose. The access key is meant to be public (it's normally embedded
+// in a plain HTML form), so shipping it here is expected and safe.
+const WEB3FORMS_ACCESS_KEY = "ec4d17c4-b128-4c90-9188-f4b319da9923";
+
 type Status = "idle" | "loading" | "success" | "error";
 
 function alreadyHandled() {
@@ -38,6 +45,7 @@ export default function NewsletterPopup() {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState(""); // bots fill this, humans don't
   const shownRef = useRef(false);
 
   useEffect(() => {
@@ -71,15 +79,28 @@ export default function NewsletterPopup() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (status === "loading") return;
+    if (honeypot) {
+      // Bot filled the hidden field — pretend success, send nothing.
+      setStatus("success");
+      remember("subscribed");
+      setTimeout(() => setOpen(false), 2200);
+      return;
+    }
     setStatus("loading");
     try {
-      const res = await fetch("/api/newsletter", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, company: "" }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "Nouvel inscrit — Newsletter LS Consulting",
+          from_name: "Site LS Consulting",
+          email, // lets Fabien hit "reply" to reach the subscriber directly
+          message: `Nouvelle inscription à la newsletter depuis le site : ${email}`,
+        }),
       });
       const data = await res.json();
-      if (data.ok) {
+      if (data.success) {
         setStatus("success");
         remember("subscribed");
         setTimeout(() => setOpen(false), 2200);
@@ -157,6 +178,16 @@ export default function NewsletterPopup() {
                 </p>
 
                 <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-3">
+                  <input
+                    type="text"
+                    name="company"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="absolute -left-[9999px] h-0 w-0 opacity-0"
+                  />
                   <input
                     type="email"
                     required
